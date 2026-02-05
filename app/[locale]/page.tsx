@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/layout';
 import { Button, Card, CardBody, Container } from '@/components/ui';
+import { AnimatedWatermark } from '@/components/ui/AnimatedWatermark';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
@@ -14,18 +15,29 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
     return (
         <>
             <Header />
+            <AnimatedWatermark />
             <main>
                 {/* Hero Section */}
                 <section className="relative bg-[var(--primary)] text-white overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center">
-                    {/* Image de fond avec opacité réduite */}
+                    {/* Vidéo de fond avec opacité réduite */}
                     <div className="absolute inset-0 z-0">
-                        <Image 
-                            src="/images site/Whisk_01d70897174239db91a4cbdb45a0eb4bdr.jpeg"
-                            alt="Hero background"
-                            fill
-                            className="object-cover object-center"
-                            priority
-                        />
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover object-center"
+                        >
+                            <source src="/video-hero.mp4" type="video/mp4" />
+                            {/* Fallback image si la vidéo ne charge pas */}
+                            <Image 
+                                src="/images site/Whisk_01d70897174239db91a4cbdb45a0eb4bdr.jpeg"
+                                alt="Hero background"
+                                fill
+                                className="object-cover object-center"
+                                priority
+                            />
+                        </video>
                         <div className="absolute inset-0 bg-[var(--primary)]/90"></div>
                     </div>
 
