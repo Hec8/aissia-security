@@ -7,6 +7,7 @@ export const translations = {
             training: 'Nos Formations',
             products: 'Nos offres de Sécurité',
             contact: 'Contact',
+            news: 'Actualités',
         },
         common: {
             learnMore: 'En savoir plus',
