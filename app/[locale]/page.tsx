@@ -18,7 +18,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <AnimatedWatermark />
             <main className="overflow-x-hidden">
                 {/* Hero Section */}
-                <section className="relative bg-[var(--primary)] text-white overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center">
+                <section className="relative bg-[var(--primary)] text-white overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center pt-20 md:pt-0">
                     {/* Vidéo de fond avec opacité réduite */}
                     <div className="absolute inset-0 z-0">
                         <video
@@ -62,14 +62,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.8}>
                                     <div className="flex flex-wrap gap-4 pt-4 justify-center">
-                                        <Link href={`/${locale}/services`}>
+                                        <Link href={`/${locale}/contact`}>
                                             <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none">
-                                                Découvrir nos services
+                                                {t.home.hero.ctaPrimary}
                                             </Button>
                                         </Link>
-                                        <Link href={`/${locale}/training`}>
+                                        <Link href={`/${locale}/services`}>
                                             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
-                                                Voir nos formations
+                                                {t.home.hero.ctaSecondary}
                                             </Button>
                                         </Link>
                                     </div>

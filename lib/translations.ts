@@ -21,10 +21,12 @@ export const translations = {
         },
         home: {
             hero: {
-                title: 'AISSIA SÉCURITÉ',
+                title: 'Votre sécurité, notre responsabilité',
                 subtitle: 'Excellence et Professionnalisme en Sécurité Privée',
-                description: 'Votre partenaire de confiance pour tous vos besoins en sécurité privée et formation professionnelle.',
+                description: 'Aissia Security accompagne entreprises, institutions et particuliers avec des solutions de sécurité fiables, humaines et efficaces.',
                 cta: 'Découvrir nos services',
+                ctaPrimary: 'Demander un devis',
+                ctaSecondary: 'Découvrir nos solutions',
             },
             services: {
                 viewAll: 'Voir tous nos services',
@@ -153,6 +155,8 @@ export const translations = {
                 subtitle: 'Excellence and Professionalism in Private Security',
                 description: 'Your trusted partner for all your private security and professional training needs.',
                 cta: 'Discover our services',
+                ctaPrimary: 'Request a quote',
+                ctaSecondary: 'Discover our solutions',
             },
             services: {
                 viewAll: 'View all our services',
