@@ -27,7 +27,7 @@ export const RotateAnimation = ({
             initial={{ opacity: 0, rotate: degrees, scale: 0.95 }}
             animate={isInView ? { opacity: 1, rotate: 0, scale: 1 } : { opacity: 0, rotate: degrees, scale: 0.95 }}
             transition={{
-                duration: 0.8,
+                duration: 1.2,
                 delay,
                 ease: [0.25, 0.4, 0.25, 1]
             }}

@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 
 export const AnimatedWatermark = () => {
     const watermarks = [
-        { top: '10%', left: '5%', delay: 0, duration: 25 },
-        { top: '25%', right: '8%', delay: 2, duration: 30 },
-        { top: '45%', left: '3%', delay: 4, duration: 28 },
-        { top: '65%', right: '5%', delay: 1, duration: 32 },
-        { top: '80%', left: '10%', delay: 3, duration: 27 },
-        { top: '15%', right: '15%', delay: 5, duration: 29 },
-        { top: '55%', left: '12%', delay: 2.5, duration: 26 },
-        { top: '75%', right: '12%', delay: 4.5, duration: 31 },
+        { top: '10%', left: '5%', delay: 0, duration: 14 },
+        { top: '25%', right: '8%', delay: 2, duration: 16 },
+        { top: '45%', left: '3%', delay: 4, duration: 15 },
+        { top: '65%', right: '5%', delay: 1, duration: 17 },
+        { top: '80%', left: '10%', delay: 3, duration: 14 },
+        { top: '15%', right: '15%', delay: 5, duration: 16 },
+        { top: '55%', left: '12%', delay: 2.5, duration: 15 },
+        { top: '75%', right: '12%', delay: 4.5, duration: 17 },
     ];
 
     return (
@@ -27,10 +27,11 @@ export const AnimatedWatermark = () => {
                     }}
                     initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                     animate={{
-                        opacity: [0.03, 0.06, 0.03],
+                        opacity: [0.06, 0.10, 0.06],
                         scale: [0.8, 1, 0.8],
                         rotate: [-10, 10, -10],
                         y: [0, -30, 0],
+                        x: [0, 15, 0],
                     }}
                     transition={{
                         duration: position.duration,
@@ -41,7 +42,7 @@ export const AnimatedWatermark = () => {
                 >
                     {/* Shield icon */}
                     <svg
-                        className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 text-[var(--primary)]"
+                        className="w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 text-[var(--primary)]"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +58,10 @@ export const AnimatedWatermark = () => {
 
             {/* Additional lock icons for variety */}
             {[
-                { top: '20%', left: '50%', delay: 1.5, duration: 24 },
-                { top: '40%', right: '20%', delay: 3.5, duration: 26 },
-                { top: '70%', left: '40%', delay: 2.2, duration: 28 },
-                { top: '35%', left: '25%', delay: 4.8, duration: 30 },
+                { top: '20%', left: '50%', delay: 1.5, duration: 12 },
+                { top: '40%', right: '20%', delay: 3.5, duration: 14 },
+                { top: '70%', left: '40%', delay: 2.2, duration: 13 },
+                { top: '35%', left: '25%', delay: 4.8, duration: 15 },
             ].map((position, index) => (
                 <motion.div
                     key={`lock-${index}`}
@@ -72,10 +73,11 @@ export const AnimatedWatermark = () => {
                     }}
                     initial={{ opacity: 0, scale: 0.9, rotate: 15 }}
                     animate={{
-                        opacity: [0.02, 0.05, 0.02],
+                        opacity: [0.06, 0.10, 0.06],
                         scale: [0.9, 1.1, 0.9],
                         rotate: [15, -15, 15],
                         x: [0, 20, 0],
+                        y: [0, 10, 0],
                     }}
                     transition={{
                         duration: position.duration,
@@ -86,7 +88,7 @@ export const AnimatedWatermark = () => {
                 >
                     {/* Lock icon */}
                     <svg
-                        className="w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 text-[var(--secondary)]"
+                        className="w-14 h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 text-[var(--secondary)]"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"

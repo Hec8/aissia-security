@@ -51,7 +51,7 @@ export const AnimatedSection = ({
             animate={isInView ? 'visible' : 'hidden'}
             variants={directionVariants[direction]}
             transition={{
-                duration: 0.6,
+                duration: 1,
                 delay,
                 ease: [0.25, 0.4, 0.25, 1]
             }}
@@ -139,7 +139,7 @@ export const StaggerItem = ({
     return (
         <motion.div
             variants={itemVariants[direction]}
-            transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
             className={className}
         >
             {children}
@@ -171,7 +171,7 @@ export const ScaleAnimation = ({
             initial={{ opacity: 0, scale }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
             transition={{
-                duration: 0.7,
+                duration: 1.1,
                 delay,
                 ease: [0.25, 0.4, 0.25, 1]
             }}

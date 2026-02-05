@@ -16,7 +16,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <>
             <Header />
             <AnimatedWatermark />
-            <main>
+            <main className="overflow-x-hidden">
                 {/* Hero Section */}
                 <section className="relative bg-[var(--primary)] text-white overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center">
                     {/* Vidéo de fond avec opacité réduite */}
@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 priority
                             />
                         </video>
-                        <div className="absolute inset-0 bg-[var(--primary)]/90"></div>
+                        <div className="absolute inset-0 bg-[#061525]/75"></div>
                     </div>
 
                     <Container>
@@ -46,7 +46,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             {/* Contenu texte centré */}
                             <div className="space-y-6 max-w-4xl mx-auto">
                                 <ScaleAnimation delay={0.2} scale={0.8}>
-                                    <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-bold mb-4 text-[var(--primary)]">
+                                    <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-bold mb-4 text-white">
                                         {t.home.hero.subtitle || "Bienvenue chez AISSIA"}
                                     </div>
                                 </ScaleAnimation>
