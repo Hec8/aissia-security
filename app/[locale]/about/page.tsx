@@ -76,7 +76,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <AnimatedSection>
                 <PageHeader
                     title={t.about.title}
-                    subtitle={t.about.description}
+                    subtitle={t.about.subtitle}
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.about },
