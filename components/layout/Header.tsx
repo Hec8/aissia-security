@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 
@@ -204,28 +205,54 @@ export const Header = () => {
                 </div>
 
                 {/* Mobile Navigation */}
-                {isMenuOpen && (
-                    <nav className={`lg:hidden py-4 border-t ${isScrolled ? 'border-[var(--border)]' : 'border-white/20'}`}>
-                        {navigation.map((item) => (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-smooth ${
-                                    isActive(item.href)
-                                        ? isScrolled 
-                                            ? 'bg-[var(--primary)] text-white' 
-                                            : 'bg-white/20 text-white'
-                                        : isScrolled
-                                            ? 'text-[var(--text-primary)] hover:bg-[var(--accent)]'
-                                            : 'text-white hover:bg-white/10'
-                                }`}
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.nav 
+                            initial={{ opacity: 0, height: 0, y: -20 }}
+                            animate={{ opacity: 1, height: 'auto', y: 0 }}
+                            exit={{ opacity: 0, height: 0, y: -20 }}
+                            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                            className={`lg:hidden overflow-hidden border-t ${isScrolled ? 'border-[var(--border)]' : 'border-white/20'}`}
+                        >
+                            <motion.div 
+                                className="py-4"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.1, duration: 0.3 }}
                             >
-                                {item.name}
-                            </Link>
-                        ))}
-                    </nav>
-                )}
+                                {navigation.map((item, index) => (
+                                    <motion.div
+                                        key={item.href}
+                                        initial={{ opacity: 0, x: -30 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -30 }}
+                                        transition={{ 
+                                            delay: index * 0.08,
+                                            duration: 0.4,
+                                            ease: [0.04, 0.62, 0.23, 0.98]
+                                        }}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                                isActive(item.href)
+                                                    ? isScrolled 
+                                                        ? 'bg-[var(--primary)] text-white' 
+                                                        : 'bg-white/20 text-white'
+                                                    : isScrolled
+                                                        ? 'text-[var(--text-primary)] hover:bg-[var(--accent)]'
+                                                        : 'text-white hover:bg-white/10'
+                                            }`}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
             </Container>
         </header>
     );
