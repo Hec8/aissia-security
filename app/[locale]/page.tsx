@@ -1,18 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/layout';
-import { Button, Container } from '@/components/ui';
+import { Button, Card, CardBody, Container } from '@/components/ui';
 import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 import { RotateAnimation } from '@/components/animations/RotateAnimation';
-import { HeroTypewriter } from '@/components/animations/HeroTypewriter';
-import { AnimatedCounter } from '@/components/animations/AnimatedCounter';
-import { ProgressBar } from '@/components/animations/ProgressBar';
-import { MagneticButton } from '@/components/animations/MagneticButton';
-import { GlowServiceCard } from '@/components/animations/GlowServiceCard';
-import { FloatingBadge } from '@/components/animations/FloatingBadge';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -63,29 +57,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.6}>
                                     <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed">
-                                        <HeroTypewriter texts={[
-                                            t.home.hero.description,
-                                            t.home.solutions.title,
-                                            t.home.expertise.description,
-                                        ]} />
+                                        {t.home.hero.description || "Solutions de sécurité complètes et sur mesure pour protéger vos biens et vos personnes."}
                                     </p>
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.8}>
                                     <div className="flex flex-wrap gap-4 pt-4 justify-center">
-                                        <MagneticButton>
-                                            <Link href={`/${locale}/contact`}>
-                                                <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none animate-pulse-glow">
-                                                    {t.home.hero.ctaPrimary}
-                                                </Button>
-                                            </Link>
-                                        </MagneticButton>
-                                        <MagneticButton>
-                                            <Link href={`/${locale}/services`}>
-                                                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
-                                                    {t.home.hero.ctaSecondary}
-                                                </Button>
-                                            </Link>
-                                        </MagneticButton>
+                                        <Link href={`/${locale}/contact`}>
+                                            <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none">
+                                                {t.home.hero.ctaPrimary}
+                                            </Button>
+                                        </Link>
+                                        <Link href={`/${locale}/services`}>
+                                            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
+                                                {t.home.hero.ctaSecondary}
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </AnimatedSection>
                             </div>
@@ -159,9 +145,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div className="grid grid-cols-2 gap-6 pt-4">
                                         <ScaleAnimation delay={0.3}>
                                             <div className="text-center p-6 bg-[var(--accent)] rounded-lg">
-                                                <div className="text-4xl font-bold text-[var(--secondary)] mb-2">
-                                                    <AnimatedCounter target={4} suffix=".7+" />
-                                                </div>
+                                                <div className="text-4xl font-bold text-[var(--secondary)] mb-2">4.7+</div>
                                                 <div className="flex justify-center mb-1">
                                                     {[...Array(5)].map((_, i) => (
                                                         <svg key={i} className="w-5 h-5 text-[var(--secondary)]" fill="currentColor" viewBox="0 0 20 20">
@@ -196,12 +180,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative group">
                                         <Image src="/team.jpeg" alt="Équipe AISSIA Sécurité" fill className="object-cover" />
                                         {/* Badge 15+ ans */}
-                                        <FloatingBadge amplitude={8} duration={3.5}>
+                                        <ScaleAnimation delay={0.7} scale={0.7}>
                                             <div className="absolute bottom-6 right-6 bg-[var(--secondary)] text-white px-6 py-3 rounded-lg shadow-lg z-10">
-                                                <div className="text-3xl font-bold"><AnimatedCounter target={15} suffix="+" /></div>
+                                                <div className="text-3xl font-bold">15+</div>
                                                 <div className="text-sm">{t.home.team.yearsExp}</div>
                                             </div>
-                                        </FloatingBadge>
+                                        </ScaleAnimation>
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -230,50 +214,50 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Service 1 - Surveillance de site */}
                                 <RotateAnimation degrees={-3} delay={0.1}>
-                                    <GlowServiceCard>
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
-                                            <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt="Surveillance de site" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
+                                            <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt="Surveillance de site" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
                                                 <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.surveillance.title}</h3>
                                             </div>
                                         </div>
-                                        <div className="p-6">
+                                        <CardBody className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                                 {t.home.servicesDetail.surveillance.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
                                                 {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </div>
-                                    </GlowServiceCard>
+                                        </CardBody>
+                                    </Card>
                                 </RotateAnimation>
 
                                 {/* Service 2 - Audit et Conseil */}
                                 <RotateAnimation degrees={3} delay={0.2}>
-                                    <GlowServiceCard>
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
-                                            <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt="Audit et Conseil" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
+                                            <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt="Audit et Conseil" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
                                                 <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.audit.title}</h3>
                                             </div>
                                         </div>
-                                        <div className="p-6">
+                                        <CardBody className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                                 {t.home.servicesDetail.audit.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
                                                 {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </div>
-                                    </GlowServiceCard>
+                                        </CardBody>
+                                    </Card>
                                 </RotateAnimation>
                             </div>
 
@@ -281,50 +265,50 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Service 3 - Gestion des risques */}
                                 <RotateAnimation degrees={3} delay={0.3}>
-                                    <GlowServiceCard>
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
-                                            <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt="Gestion des risques" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
+                                            <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt="Gestion des risques" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
                                                 <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.risk.title}</h3>
                                             </div>
                                         </div>
-                                        <div className="p-6">
+                                        <CardBody className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                                 {t.home.servicesDetail.risk.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
                                                 {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </div>
-                                    </GlowServiceCard>
+                                        </CardBody>
+                                    </Card>
                                 </RotateAnimation>
 
                                 {/* Service 4 - Protection rapprochée et Assistance */}
                                 <RotateAnimation degrees={-3} delay={0.4}>
-                                    <GlowServiceCard>
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
-                                            <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt="Protection rapprochée" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
+                                            <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt="Protection rapprochée" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
                                                 <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.protection.title}</h3>
                                             </div>
                                         </div>
-                                        <div className="p-6">
+                                        <CardBody className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                                 {t.home.servicesDetail.protection.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
                                                 {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </div>
-                                    </GlowServiceCard>
+                                        </CardBody>
+                                    </Card>
                                 </RotateAnimation>
                             </div>
                         </div>
@@ -344,13 +328,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <p className="text-lg text-white/95 mb-8 leading-relaxed">
                                         {t.home.solutions.description}
                                     </p>
-                                    <MagneticButton>
-                                        <Link href={`/${locale}/contact`}>
-                                            <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none shadow-lg font-bold uppercase">
-                                                {t.home.solutions.cta}
-                                            </Button>
-                                        </Link>
-                                    </MagneticButton>
+                                    <Link href={`/${locale}/contact`}>
+                                        <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none shadow-lg font-bold uppercase">
+                                            {t.home.solutions.cta}
+                                        </Button>
+                                    </Link>
                                 </div>
                             </AnimatedSection>
 
@@ -536,21 +518,41 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
                                     {/* Progress bars / Stats */}
                                     <div className="space-y-6">
-                                        <ProgressBar
-                                            percentage={93}
-                                            label={t.home.expertise.surveillance}
-                                            className=""
-                                        />
-                                        <ProgressBar
-                                            percentage={80}
-                                            label={t.home.expertise.risk}
-                                            className=""
-                                        />
-                                        <ProgressBar
-                                            percentage={95}
-                                            label={t.home.expertise.protection}
-                                            className=""
-                                        />
+                                        <AnimatedSection direction="right" delay={0.4}>
+                                            <div>
+                                                <div className="flex justify-between mb-2">
+                                                    <span className="font-semibold text-[var(--text-primary)]">{t.home.expertise.surveillance}</span>
+                                                    <span className="font-bold text-[var(--secondary)]">93%</span>
+                                                </div>
+                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '93%'}}></div>
+                                                </div>
+                                            </div>
+                                        </AnimatedSection>
+
+                                        <AnimatedSection direction="right" delay={0.6}>
+                                            <div>
+                                                <div className="flex justify-between mb-2">
+                                                    <span className="font-semibold text-[var(--text-primary)]">{t.home.expertise.risk}</span>
+                                                    <span className="font-bold text-[var(--secondary)]">80%</span>
+                                                </div>
+                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '80%'}}></div>
+                                                </div>
+                                            </div>
+                                        </AnimatedSection>
+
+                                        <AnimatedSection direction="right" delay={0.8}>
+                                            <div>
+                                                <div className="flex justify-between mb-2">
+                                                    <span className="font-semibold text-[var(--text-primary)]">{t.home.expertise.protection}</span>
+                                                    <span className="font-bold text-[var(--secondary)]">95%</span>
+                                                </div>
+                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '95%'}}></div>
+                                                </div>
+                                            </div>
+                                        </AnimatedSection>
                                     </div>
                                 </div>
                             </AnimatedSection>
