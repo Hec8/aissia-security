@@ -1,115 +1,101 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
-import { Card, CardBody, Container } from '@/components/ui';
+import { AnimatedSection, ScaleAnimation, StaggerContainer } from '@/components/ui';
+import { Container } from '@/components/ui';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
+import Link from 'next/link';
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
     const t = translations[locale];
 
-    const products = [
+    const securityServices = [
         {
-            category: 'Équipements de Surveillance',
-            items: [
-                {
-                    name: 'Caméras de surveillance HD',
-                    description: 'Caméras haute définition pour surveillance intérieure et extérieure',
-                },
-                {
-                    name: 'Systèmes d\'enregistrement DVR/NVR',
-                    description: 'Enregistreurs numériques pour stockage vidéo sécurisé',
-                },
-                {
-                    name: 'Moniteurs de surveillance',
-                    description: 'Écrans professionnels pour visualisation en temps réel',
-                },
+            icon: '💼',
+            title: 'Agent de Sécurité (ADS J/N)',
+            badge: 'PLUS DEMANDÉ',
+            features: [
+                '🏆 Surveillance jour et nuit',
+                '🛡️ Protection des sites et des personnes',
+                '📌 Option disponible : Agent de protection armé (ADP J/N)',
             ],
         },
         {
-            category: 'Contrôle d\'Accès',
-            items: [
-                {
-                    name: 'Lecteurs de badges',
-                    description: 'Systèmes de lecture de cartes RFID et badges magnétiques',
-                },
-                {
-                    name: 'Systèmes biométriques',
-                    description: 'Contrôle d\'accès par empreintes digitales et reconnaissance faciale',
-                },
-                {
-                    name: 'Tourniquets de sécurité',
-                    description: 'Barrières physiques pour contrôle des flux de personnes',
-                },
+            icon: '🐕',
+            title: 'Conducteur-Chien',
+            features: [
+                '🏆 Surveillance renforcée avec chien de défense',
+                '📌 Disponible de jour ou de nuit',
             ],
         },
         {
-            category: 'Systèmes d\'Alarme',
-            items: [
-                {
-                    name: 'Centrales d\'alarme',
-                    description: 'Systèmes centraux de gestion et d\'alerte',
-                },
-                {
-                    name: 'Détecteurs de mouvement',
-                    description: 'Capteurs infrarouges et volumétriques',
-                },
-                {
-                    name: 'Sirènes d\'alarme',
-                    description: 'Dispositifs d\'alerte sonore intérieurs et extérieurs',
-                },
+            icon: '🛡️',
+            title: 'Garde du Corps (GDC)',
+            features: [
+                '• Protection rapprochée personnalisée',
+                '📌 Contrats adaptés à vos besoins',
             ],
         },
         {
-            category: 'Équipements Agents',
-            items: [
-                {
-                    name: 'Tenues professionnelles',
-                    description: 'Uniformes et vêtements de service pour agents de sécurité',
-                },
-                {
-                    name: 'Équipements de communication',
-                    description: 'Talkies-walkies et systèmes radio professionnels',
-                },
-                {
-                    name: 'Matériel d\'intervention',
-                    description: 'Lampes tactiques, menottes, gilets pare-balles',
-                },
+            icon: '🚨',
+            title: 'Abonnement Assistance ALERTGUARD',
+            features: [
+                '📌 Assistance en cas d\'urgence',
+            ],
+        },
+    ];
+
+    const additionalServices = [
+        {
+            icon: '✅',
+            title: 'Sécurité avancée',
+            features: [
+                '• Responsable sécurité corporate',
+                '• Inspecteur de magasin',
             ],
         },
         {
-            category: 'Détection Incendie',
-            items: [
-                {
-                    name: 'Détecteurs de fumée',
-                    description: 'Capteurs optiques et ioniques certifiés',
-                },
-                {
-                    name: 'Alarmes incendie',
-                    description: 'Déclencheurs manuels et sirènes d\'évacuation',
-                },
-                {
-                    name: 'Extincteurs',
-                    description: 'Extincteurs portables et sur roues, toutes classes de feu',
-                },
+            icon: '📊',
+            title: 'Audit & études de sécurité',
+            features: [
+                '• Identification et évaluation des risques',
+                '• Plan de gestion des crises et évacuation',
             ],
         },
         {
-            category: 'Solutions Connectées',
-            items: [
-                {
-                    name: 'Systèmes IoT',
-                    description: 'Solutions connectées pour surveillance à distance',
-                },
-                {
-                    name: 'Applications mobiles',
-                    description: 'Gestion de sécurité depuis smartphone et tablette',
-                },
-                {
-                    name: 'Plateformes cloud',
-                    description: 'Stockage et analyse de données sécurisés',
-                },
+            icon: '🚗',
+            title: 'Services d\'intervention & escorte sécurisé',
+            features: [
+                '• Escorte moto ou auto',
+                '• Ramassage de clés de coffres et accès sécurisés',
             ],
+        },
+    ];
+
+    const strategicServices = [
+        {
+            icon: '📄',
+            title: 'Veille et Intelligence Économique',
+            features: [
+                '• Rapports d\'analyses des risques',
+                '• Notes et fiches pays',
+            ],
+        },
+        {
+            icon: '🔔',
+            title: 'Abonnement au Bulletin d\'Information',
+            features: [
+                '📌 Mises à jour régulières sur la sécurité globale',
+            ],
+        },
+    ];
+
+    const annexServices = [
+        {
+            icon: '✈️',
+            title: 'Accompagnement voyage sécurisé',
+            features: [],
         },
     ];
 
@@ -117,6 +103,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         <>
             <Header />
             <main>
+                <AnimatedSection>
                 <PageHeader
                     title={t.products.title}
                     subtitle={t.products.subtitle}
@@ -125,88 +112,172 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         { name: t.nav.products },
                     ]}
                 />
+                </AnimatedSection>
 
+                {/* Sécurité et surveillance */}
                 <section className="py-20 bg-white">
                     <Container>
-                        <div className="mb-12">
-                            <p className="text-lg text-[var(--text-secondary)] max-w-3xl">
-                                AISSIA SÉCURITÉ propose une gamme complète d'équipements et de matériels de sécurité
-                                professionnels répondant aux normes les plus strictes. Nous travaillons avec les meilleurs
-                                fournisseurs pour garantir la qualité et la fiabilité de nos produits.
-                            </p>
-                        </div>
-
-                        <div className="space-y-16">
-                            {products.map((category, catIndex) => (
-                                <div key={catIndex}>
-                                    <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8 pb-3 border-b-2 border-[var(--secondary)]">
-                                        {category.category}
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {category.items.map((item, itemIndex) => (
-                                            <Card key={itemIndex} hover>
-                                                <CardBody>
-                                                    <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-4">
-                                                        <svg className="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                    </div>
-                                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
-                                                        {item.name}
-                                                    </h3>
-                                                    <p className="text-[var(--text-secondary)] text-sm">
-                                                        {item.description}
-                                                    </p>
-                                                </CardBody>
-                                            </Card>
+                        <AnimatedSection>
+                            <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-12 text-center">
+                                Sécurité et surveillance
+                            </h2>
+                        </AnimatedSection>
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {securityServices.map((service, index) => (
+                                <ScaleAnimation key={index} delay={index * 0.1}>
+                                    <div 
+                                        className="relative bg-gray-50 rounded-2xl p-8 border-2 border-gray-200 hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl h-full"
+                                    >
+                                        {service.badge && (
+                                            <div className="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-sm transform rotate-12 shadow-lg">
+                                                {service.badge}
+                                            </div>
+                                        )}
+                                        <div className="flex items-start gap-4 mb-6">
+                                            <div className="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-3xl flex-shrink-0">
+                                                {service.icon}
+                                            </div>
+                                            <h3 className="text-xl font-bold text-[var(--primary)] mt-3">
+                                                {service.title}
+                                            </h3>
+                                        </div>
+                                        <ul className="space-y-3">
+                                        {service.features.map((feature, idx) => (
+                                            <li key={idx} className="text-gray-700 flex items-start gap-2">
+                                                <span className="mt-1">{feature}</span>
+                                            </li>
                                         ))}
+                                    </ul>
+                                    <div className="mt-6">
+                                        <Link 
+                                            href={`/${locale}/contact`}
+                                            className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            📋 Demander un devis
+                                        </Link>
                                     </div>
-                                </div>
+                                    </div>
+                                </ScaleAnimation>
                             ))}
-                        </div>
+                        </StaggerContainer>
                     </Container>
                 </section>
 
-                {/* Features Section */}
-                <section className="py-20 bg-[var(--accent)]">
+                {/* Prestations supplémentaires */}
+                <section className="py-20 bg-gray-50">
                     <Container>
-                        <h2 className="text-3xl font-bold text-[var(--text-primary)] text-center mb-12">
-                            Pourquoi choisir nos produits ?
+                        <AnimatedSection>
+                            <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-12 text-center">
+                                Prestations supplémentaires
+                            </h2>
+                        </AnimatedSection>
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {additionalServices.map((service, index) => (
+                                <ScaleAnimation key={index} delay={index * 0.15}>
+                                    <div 
+                                        className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl h-full"
+                                    >
+                                    <div className="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-3xl mb-6 mx-auto">
+                                        {service.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[var(--primary)] mb-6 text-center">
+                                        {service.title}
+                                    </h3>
+                                    <ul className="space-y-3 mb-6">
+                                        {service.features.map((feature, idx) => (
+                                            <li key={idx} className="text-gray-700 text-sm">
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="text-center">
+                                        <Link 
+                                            href={`/${locale}/contact`}
+                                            className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            📋 Demander un devis
+                                        </Link>
+                                    </div>
+                                    </div>
+                                </ScaleAnimation>
+                            ))}
+                        </StaggerContainer>
+                    </Container>
+                </section>
+
+                {/* Analyses & Notes Stratégiques */}
+                <section className="py-20 bg-white">
+                    <Container>
+                        <AnimatedSection>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-12 text-center">
+                            Analyses & Notes Stratégiques
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                        </AnimatedSection>
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            {strategicServices.map((service, index) => (
+                                <ScaleAnimation key={index} delay={index * 0.1}>
+                                <div 
+                                    className="bg-gray-50 rounded-2xl p-8 border-2 border-gray-200 hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl"
+                                >
+                                    <div className="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-3xl mb-6 mx-auto">
+                                        {service.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[var(--primary)] mb-6 text-center">
+                                        {service.title}
+                                    </h3>
+                                    <ul className="space-y-3 mb-6">
+                                        {service.features.map((feature, idx) => (
+                                            <li key={idx} className="text-gray-700 text-sm">
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="text-center">
+                                        <Link 
+                                            href={`/${locale}/contact`}
+                                            className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            📋 Demander un devis
+                                        </Link>
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">Qualité Certifiée</h3>
-                                <p className="text-[var(--text-secondary)]">
-                                    Tous nos produits sont certifiés et conformes aux normes internationales
-                                </p>
-                            </div>
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
+                                </ScaleAnimation>
+                            ))}
+                        </StaggerContainer>
+                    </Container>
+                </section>
+
+                {/* Prestations annexes */}
+                <section className="py-20 bg-gray-50">
+                    <Container>
+                        <AnimatedSection>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-12 text-center">
+                            Prestations annexes
+                        </h2>
+                        </AnimatedSection>
+                        <div className="max-w-xl mx-auto">
+                            {annexServices.map((service, index) => (
+                                <ScaleAnimation key={index} delay={0.2}>
+                                <div 
+                                    className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl"
+                                >
+                                    <div className="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-3xl mb-6 mx-auto">
+                                        {service.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[var(--primary)] mb-6 text-center">
+                                        {service.title}
+                                    </h3>
+                                    <div className="text-center">
+                                        <Link 
+                                            href={`/${locale}/contact`}
+                                            className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            📋 Demander un devis
+                                        </Link>
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">Support Technique</h3>
-                                <p className="text-[var(--text-secondary)]">
-                                    Assistance et maintenance assurées par nos équipes expertes
-                                </p>
-                            </div>
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">Installation Rapide</h3>
-                                <p className="text-[var(--text-secondary)]">
-                                    Mise en service professionnelle et formation incluse
-                                </p>
-                            </div>
+                                </ScaleAnimation>
+                            ))}
                         </div>
                     </Container>
                 </section>
@@ -214,20 +285,24 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 {/* CTA Section */}
                 <section className="py-20 bg-white">
                     <Container>
-                        <div className="max-w-3xl mx-auto text-center">
-                            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
-                                Intéressé par nos produits ?
+                        <AnimatedSection delay={0.2}>
+                        <div className="max-w-3xl mx-auto text-center bg-[var(--primary)] text-white rounded-2xl p-12">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                                Besoin d&apos;une solution personnalisée ?
                             </h2>
-                            <p className="text-lg text-[var(--text-secondary)] mb-8">
-                                Contactez-nous pour obtenir un devis personnalisé et des conseils d'experts.
+                            <p className="text-lg mb-8 text-white/90">
+                                Contactez-nous pour discuter de vos besoins spécifiques en matière de sécurité.
                             </p>
-                            <a
+                            <ScaleAnimation delay={0.3}>
+                            <Link
                                 href={`/${locale}/contact`}
-                                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-[var(--primary)] rounded-lg hover:bg-[var(--primary-dark)] transition-smooth"
+                                className="inline-block px-12 py-4 bg-[var(--secondary)] text-[var(--primary)] font-bold text-lg rounded-lg hover:scale-105 hover:opacity-90 transition-all shadow-lg"
                             >
-                                Demander un devis
-                            </a>
+                                Contactez-nous
+                            </Link>
+                            </ScaleAnimation>
                         </div>
+                        </AnimatedSection>
                     </Container>
                 </section>
             </main>

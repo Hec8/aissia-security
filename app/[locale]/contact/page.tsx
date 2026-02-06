@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
-import { Button, Card, CardBody, Container, Input, Textarea } from '@/components/ui';
+import { Button, Card, CardBody, Container, Input, Textarea, AnimatedSection, ScaleAnimation } from '@/components/ui';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 import { api } from '@/lib/api';
 
@@ -41,7 +41,7 @@ export default function ContactPage() {
                 subject: '',
                 message: '',
             });
-        } catch (error) {
+        } catch {
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
@@ -52,6 +52,7 @@ export default function ContactPage() {
         <>
             <Header />
             <main>
+                <AnimatedSection>
                 <PageHeader
                     title={t.contact.title}
                     subtitle={t.contact.subtitle}
@@ -60,13 +61,16 @@ export default function ContactPage() {
                         { name: t.nav.contact },
                     ]}
                 />
+                </AnimatedSection>
 
                 <section className="py-20 bg-white">
                     <Container>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                             {/* Contact Information */}
-                            <div className="space-y-8">
-                                <Card>
+                            <AnimatedSection>
+                                <div className="space-y-8">
+                                    <ScaleAnimation delay={0.1}>
+                                        <Card>
                                     <CardBody>
                                         <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-4">
                                             <svg className="w-6 h-6 text-[var(--primary)]" fill="currentColor" viewBox="0 0 20 20">
@@ -78,12 +82,14 @@ export default function ContactPage() {
                                         </h3>
                                         <p className="text-[var(--text-secondary)]">
                                             Adresse du siège social<br />
-                                            Code Postal, Ville<br />
-                                            Pays
+                                            Riviera bonoumin Cité Lauriers 3<br />
+                                            Côte d&apos;Ivoire
                                         </p>
                                     </CardBody>
                                 </Card>
+                                    </ScaleAnimation>
 
+                                    <ScaleAnimation delay={0.2}>
                                 <Card>
                                     <CardBody>
                                         <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-4">
@@ -95,12 +101,13 @@ export default function ContactPage() {
                                             {t.contact.info.phone}
                                         </h3>
                                         <p className="text-[var(--text-secondary)]">
-                                            +XXX XX XX XX XX<br />
-                                            +XXX XX XX XX XX
+                                            +225 2722261328<br />
                                         </p>
                                     </CardBody>
                                 </Card>
+                                    </ScaleAnimation>
 
+                                    <ScaleAnimation delay={0.3}>
                                 <Card>
                                     <CardBody>
                                         <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-4">
@@ -118,7 +125,9 @@ export default function ContactPage() {
                                         </p>
                                     </CardBody>
                                 </Card>
+                                    </ScaleAnimation>
 
+                                    <ScaleAnimation delay={0.4}>
                                 <Card>
                                     <CardBody>
                                         <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-4">
@@ -136,11 +145,14 @@ export default function ContactPage() {
                                         </p>
                                     </CardBody>
                                 </Card>
+                                    </ScaleAnimation>
                             </div>
+                        </AnimatedSection>
 
                             {/* Contact Form */}
-                            <div className="lg:col-span-2">
-                                <Card>
+                            <AnimatedSection delay={0.2}>
+                                <div className="lg:col-span-2">
+                                    <Card>
                                     <CardBody className="p-8">
                                         <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
                                             Envoyez-nous un message
@@ -222,6 +234,7 @@ export default function ContactPage() {
                                     </CardBody>
                                 </Card>
                             </div>
+                        </AnimatedSection>
                         </div>
                     </Container>
                 </section>
@@ -229,18 +242,41 @@ export default function ContactPage() {
                 {/* Map Section */}
                 <section className="py-20 bg-[var(--accent)]">
                     <Container>
+                        <AnimatedSection>
                         <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-8 text-center">
                             Notre Localisation
                         </h2>
-                        <div className="bg-[var(--border)] rounded-lg overflow-hidden h-96 flex items-center justify-center">
-                            {/* Placeholder for map - À remplacer par Google Maps ou autre */}
-                            <div className="text-center text-[var(--text-secondary)]">
-                                <svg className="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                        </AnimatedSection>
+                        <ScaleAnimation delay={0.2}>
+                        <div className="rounded-2xl overflow-hidden shadow-xl border-4">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.3486157719!2d-3.988!3d5.367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjInMDEuMiJOIDPCsDU5JzE2LjgiVw!5e0!3m2!1sfr!2sci!4v1234567890"
+                                width="100%"
+                                height="500"
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Carte de localisation AISSIA Sécurité"
+                                className="w-full"
+                            ></iframe>
+                        </div>
+                        </ScaleAnimation>
+                        <AnimatedSection delay={0.3}>
+                        <div className="mt-8 text-center">
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=Riviera+Bonoumin+Cité+Lauriers+3+Abidjan"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                            >
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                                 </svg>
-                                <p>Carte interactive à intégrer</p>
-                            </div>
+                                Ouvrir dans Google Maps
+                            </a>
                         </div>
+                        </AnimatedSection>
                     </Container>
                 </section>
             </main>
