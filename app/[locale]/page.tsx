@@ -1,12 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/layout';
-import { Button, Card, CardBody, Container } from '@/components/ui';
-import { AnimatedWatermark } from '@/components/ui/AnimatedWatermark';
+import { Button, Container } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 import { RotateAnimation } from '@/components/animations/RotateAnimation';
+import { HeroTypewriter } from '@/components/animations/HeroTypewriter';
+import { AnimatedCounter } from '@/components/animations/AnimatedCounter';
+import { ProgressBar } from '@/components/animations/ProgressBar';
+import { MagneticButton } from '@/components/animations/MagneticButton';
+import { GlowServiceCard } from '@/components/animations/GlowServiceCard';
+import { FloatingBadge } from '@/components/animations/FloatingBadge';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -15,7 +21,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
     return (
         <>
             <Header />
-            <AnimatedWatermark />
+            <ParticleNetwork />
             <main className="overflow-x-hidden">
                 {/* Hero Section */}
                 <section className="relative bg-[var(--primary)] text-white overflow-hidden min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center pt-20 md:pt-0">
@@ -57,21 +63,29 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.6}>
                                     <p className="text-lg md:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed">
-                                        {t.home.hero.description || "Solutions de sécurité complètes et sur mesure pour protéger vos biens et vos personnes."}
+                                        <HeroTypewriter texts={[
+                                            t.home.hero.description,
+                                            t.home.solutions.title,
+                                            t.home.expertise.description,
+                                        ]} />
                                     </p>
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.8}>
                                     <div className="flex flex-wrap gap-4 pt-4 justify-center">
-                                        <Link href={`/${locale}/contact`}>
-                                            <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none">
-                                                {t.home.hero.ctaPrimary}
-                                            </Button>
-                                        </Link>
-                                        <Link href={`/${locale}/services`}>
-                                            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
-                                                {t.home.hero.ctaSecondary}
-                                            </Button>
-                                        </Link>
+                                        <MagneticButton>
+                                            <Link href={`/${locale}/contact`}>
+                                                <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none animate-pulse-glow">
+                                                    {t.home.hero.ctaPrimary}
+                                                </Button>
+                                            </Link>
+                                        </MagneticButton>
+                                        <MagneticButton>
+                                            <Link href={`/${locale}/services`}>
+                                                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
+                                                    {t.home.hero.ctaSecondary}
+                                                </Button>
+                                            </Link>
+                                        </MagneticButton>
                                     </div>
                                 </AnimatedSection>
                             </div>
@@ -91,8 +105,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-[var(--text-primary)]">Gardiennage & Surveillance</h3>
-                                        <p className="text-sm text-[var(--text-secondary)]">Protection 24/7</p>
+                                        <h3 className="font-bold text-[var(--text-primary)]">{t.home.serviceCards.card1.title}</h3>
+                                        <p className="text-sm text-[var(--text-secondary)]">{t.home.serviceCards.card1.subtitle}</p>
                                     </div>
                                 </div>
                             </StaggerItem>
@@ -105,8 +119,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-[var(--text-primary)]">Personnel Qualifié</h3>
-                                        <p className="text-sm text-[var(--text-secondary)]">Agents formés & certifiés</p>
+                                        <h3 className="font-bold text-[var(--text-primary)]">{t.home.serviceCards.card2.title}</h3>
+                                        <p className="text-sm text-[var(--text-secondary)]">{t.home.serviceCards.card2.subtitle}</p>
                                     </div>
                                 </div>
                             </StaggerItem>
@@ -119,8 +133,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-[var(--text-primary)]">Intervention Rapide</h3>
-                                        <p className="text-sm text-[var(--text-secondary)]">Réactivité garantie</p>
+                                        <h3 className="font-bold text-[var(--text-primary)]">{t.home.serviceCards.card3.title}</h3>
+                                        <p className="text-sm text-[var(--text-secondary)]">{t.home.serviceCards.card3.subtitle}</p>
                                     </div>
                                 </div>
                             </StaggerItem>
@@ -136,16 +150,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <AnimatedSection direction="left">
                                 <div className="space-y-6">
                                     <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
-                                        Une équipe dédiée à votre sécurité
+                                        {t.home.team.title}
                                     </h2>
                                     <p className="text-lg text-[var(--text-secondary)]">
-                                        Nous créons une culture de professionnalisme et d&apos;excellence qui nous inspire à travailler intelligemment, ensemble, pour protéger ce qui compte le plus pour vous.
+                                        {t.home.team.description}
                                     </p>
                                     
                                     <div className="grid grid-cols-2 gap-6 pt-4">
                                         <ScaleAnimation delay={0.3}>
                                             <div className="text-center p-6 bg-[var(--accent)] rounded-lg">
-                                                <div className="text-4xl font-bold text-[var(--secondary)] mb-2">4.7+</div>
+                                                <div className="text-4xl font-bold text-[var(--secondary)] mb-2">
+                                                    <AnimatedCounter target={4} suffix=".7+" />
+                                                </div>
                                                 <div className="flex justify-center mb-1">
                                                     {[...Array(5)].map((_, i) => (
                                                         <svg key={i} className="w-5 h-5 text-[var(--secondary)]" fill="currentColor" viewBox="0 0 20 20">
@@ -153,7 +169,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                         </svg>
                                                     ))}
                                                 </div>
-                                                <div className="text-sm text-[var(--text-secondary)]">Satisfaction Client</div>
+                                                <div className="text-sm text-[var(--text-secondary)]">{t.home.team.satisfaction}</div>
                                             </div>
                                         </ScaleAnimation>
 
@@ -167,7 +183,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                         </svg>
                                                     ))}
                                                 </div>
-                                                <div className="text-sm text-[var(--text-secondary)]">Services Pros</div>
+                                                <div className="text-sm text-[var(--text-secondary)]">{t.home.team.servicesPro}</div>
                                             </div>
                                         </ScaleAnimation>
                                     </div>
@@ -180,12 +196,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative group">
                                         <Image src="/team.jpeg" alt="Équipe AISSIA Sécurité" fill className="object-cover" />
                                         {/* Badge 15+ ans */}
-                                        <ScaleAnimation delay={0.7} scale={0.7}>
+                                        <FloatingBadge amplitude={8} duration={3.5}>
                                             <div className="absolute bottom-6 right-6 bg-[var(--secondary)] text-white px-6 py-3 rounded-lg shadow-lg z-10">
-                                                <div className="text-3xl font-bold">15+</div>
-                                                <div className="text-sm">Ans d&apos;expérience</div>
+                                                <div className="text-3xl font-bold"><AnimatedCounter target={15} suffix="+" /></div>
+                                                <div className="text-sm">{t.home.team.yearsExp}</div>
                                             </div>
-                                        </ScaleAnimation>
+                                        </FloatingBadge>
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -200,10 +216,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                         <AnimatedSection direction="up">
                             <div className="text-center mb-16">
                                 <div className="text-[var(--secondary)] font-semibold text-sm uppercase tracking-wide mb-3">
-                                    Nos Services
+                                    {t.home.servicesDetail.label}
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
-                                    Solutions de sécurité professionnelles
+                                    {t.home.servicesDetail.title}
                                 </h2>
                             </div>
                         </AnimatedSection>
@@ -214,50 +230,50 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Service 1 - Surveillance de site */}
                                 <RotateAnimation degrees={-3} delay={0.1}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt="Surveillance de site" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <GlowServiceCard>
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
+                                            <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt="Surveillance de site" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">Surveillance de site</h3>
+                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.surveillance.title}</h3>
                                             </div>
                                         </div>
-                                        <CardBody className="p-6">
+                                        <div className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                Pour la surveillance de vos sites, entreprises, commerces et habitations, AISSIA-SECURITY met à votre disposition des équipes composées d&apos;agents de sécurité, d&apos;agents incendie, et de maîtres-chiens.
+                                                {t.home.servicesDetail.surveillance.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                En savoir plus
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                                {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </CardBody>
-                                    </Card>
+                                        </div>
+                                    </GlowServiceCard>
                                 </RotateAnimation>
 
                                 {/* Service 2 - Audit et Conseil */}
                                 <RotateAnimation degrees={3} delay={0.2}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt="Audit et Conseil" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <GlowServiceCard>
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
+                                            <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt="Audit et Conseil" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">Audit et Conseil</h3>
+                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.audit.title}</h3>
                                             </div>
                                         </div>
-                                        <CardBody className="p-6">
+                                        <div className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                Pour une sécurité adaptée à vos besoins, AISSIA-SECURITY propose des services d&apos;audit et de conseil spécialisés. Nous analysons votre niveau de sécurité et vous conseillons sur les meilleures solutions à adopter.
+                                                {t.home.servicesDetail.audit.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                En savoir plus
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                                {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </CardBody>
-                                    </Card>
+                                        </div>
+                                    </GlowServiceCard>
                                 </RotateAnimation>
                             </div>
 
@@ -265,50 +281,50 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Service 3 - Gestion des risques */}
                                 <RotateAnimation degrees={3} delay={0.3}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt="Gestion des risques" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <GlowServiceCard>
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
+                                            <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt="Gestion des risques" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">Gestion des risques</h3>
+                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.risk.title}</h3>
                                             </div>
                                         </div>
-                                        <CardBody className="p-6">
+                                        <div className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                Nos équipes d&apos;experts en gestion des risques sont disponibles 24h/24 pour intervenir rapidement dans des situations à haut risque. AISSIA-SECURITY vous propose une réponse rapide et coordonnée avec les autorités.
+                                                {t.home.servicesDetail.risk.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                En savoir plus
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                                {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </CardBody>
-                                    </Card>
+                                        </div>
+                                    </GlowServiceCard>
                                 </RotateAnimation>
 
                                 {/* Service 4 - Protection rapprochée et Assistance */}
                                 <RotateAnimation degrees={-3} delay={0.4}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt="Protection rapprochée" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <GlowServiceCard>
+                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden group">
+                                            <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt="Protection rapprochée" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">Protection rapprochée et Assistance</h3>
+                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.protection.title}</h3>
                                             </div>
                                         </div>
-                                        <CardBody className="p-6">
+                                        <div className="p-6">
                                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                Nos agents spécialisés en protection rapprochée vous accompagnent de manière discrète et efficace 24h/24. Nos équipes sont formées pour intervenir dans des situations délicates et réagir immédiatement.
+                                                {t.home.servicesDetail.protection.description}
                                             </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                En savoir plus
+                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2 animated-underline">
+                                                {t.home.servicesDetail.learnMore}
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </button>
-                                        </CardBody>
-                                    </Card>
+                                        </div>
+                                    </GlowServiceCard>
                                 </RotateAnimation>
                             </div>
                         </div>
@@ -323,16 +339,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <AnimatedSection direction="left">
                                 <div>
                                     <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[var(--secondary)]">
-                                        Des solutions de sécurité supérieures en Côte d&apos;Ivoire
+                                        {t.home.solutions.title}
                                     </h2>
                                     <p className="text-lg text-white/95 mb-8 leading-relaxed">
-                                        Nous fournissons des solutions de sécurité complètes et avancées, utilisant les technologies les plus récentes et une approche personnalisée. Nos services couvrent la surveillance sur site, la gestion des accès, et bien plus encore. Nous nous engageons à protéger vos biens et à assurer votre tranquillité d&apos;esprit.
+                                        {t.home.solutions.description}
                                     </p>
-                                    <Link href={`/${locale}/contact`}>
-                                        <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none shadow-lg font-bold uppercase">
-                                            Contactez-nous
-                                        </Button>
-                                    </Link>
+                                    <MagneticButton>
+                                        <Link href={`/${locale}/contact`}>
+                                            <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none shadow-lg font-bold uppercase">
+                                                {t.home.solutions.cta}
+                                            </Button>
+                                        </Link>
+                                    </MagneticButton>
                                 </div>
                             </AnimatedSection>
 
@@ -353,7 +371,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                     <Container>
                         <AnimatedSection direction="up">
                             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--text-primary)]">
-                                Nos Partenaires
+                                {t.home.partners.title}
                             </h2>
                         </AnimatedSection>
                         
@@ -365,7 +383,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div key={`logo-${i}`} className="flex-shrink-0 w-48 h-32 mx-8 bg-gray-100 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[var(--secondary)] transition-colors">
                                         <div className="text-center">
                                             <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                                            <p className="text-xs text-gray-400">Logo partenaire {i + 1}</p>
+                                            <p className="text-xs text-gray-400">{t.home.partners.partnerLogo} {i + 1}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -374,7 +392,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div key={`logo-duplicate-${i}`} className="flex-shrink-0 w-48 h-32 mx-8 bg-gray-100 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[var(--secondary)] transition-colors">
                                         <div className="text-center">
                                             <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                                            <p className="text-xs text-gray-400">Logo partenaire {i + 1}</p>
+                                            <p className="text-xs text-gray-400">{t.home.partners.partnerLogo} {i + 1}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -389,7 +407,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                         <div>
                             <AnimatedSection direction="up">
                                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">
-                                    Qu&apos;est-ce qui nous distingue ?
+                                    {t.home.distinctions.title}
                                 </h2>
                             </AnimatedSection>
 
@@ -402,9 +420,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Professionnalisme à chaque instant</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.professionalism.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Nous assurons des services de sécurité de haute qualité, disponibles en tout temps pour répondre à vos besoins urgents.
+                                            {t.home.distinctions.professionalism.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -417,9 +435,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Communication 24/7</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.communication.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Notre équipe est à votre disposition 24/7, assurant une communication fluide et des interventions rapides.
+                                            {t.home.distinctions.communication.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -432,9 +450,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Notre flotte de véhicules</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.fleet.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Nos véhicules de patrouille sont toujours prêts à intervenir rapidement, offrant une couverture flexible et réactive.
+                                            {t.home.distinctions.fleet.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -447,9 +465,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Agents agréés</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.agents.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.
+                                            {t.home.distinctions.agents.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -462,9 +480,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Technologie avancée</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.technology.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Nous utilisons les dernières technologies pour garantir des solutions de sécurité fiables et performantes.
+                                            {t.home.distinctions.technology.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -477,9 +495,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white">Aide d&apos;urgence</h3>
+                                        <h3 className="text-xl font-bold text-white">{t.home.distinctions.emergency.title}</h3>
                                         <p className="text-white/90 text-sm leading-relaxed">
-                                            Nos agents sont formés pour réagir efficacement à toute situation d&apos;urgence, garantissant votre sécurité à tout moment.
+                                            {t.home.distinctions.emergency.description}
                                         </p>
                                     </div>
                                 </StaggerItem>
@@ -507,52 +525,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <AnimatedSection direction="right" delay={0.2}>
                                 <div>
                                     <div className="inline-block px-4 py-1 bg-[var(--secondary)]/10 text-[var(--secondary)] rounded-full text-sm font-semibold mb-4">
-                                        Notre Expertise
+                                        {t.home.expertise.label}
                                     </div>
                                     <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
-                                        Nous vous aidons à résoudre vos problèmes
+                                        {t.home.expertise.title}
                                     </h2>
                                     <p className="text-lg text-[var(--text-secondary)] mb-8">
-                                        Avec plus de 15 ans d&apos;expérience, nous proposons des solutions de sécurité sur mesure qui répondent à vos besoins spécifiques.
+                                        {t.home.expertise.description}
                                     </p>
 
                                     {/* Progress bars / Stats */}
                                     <div className="space-y-6">
-                                        <AnimatedSection direction="right" delay={0.4}>
-                                            <div>
-                                                <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold text-[var(--text-primary)]">Surveillance sur site</span>
-                                                    <span className="font-bold text-[var(--secondary)]">93%</span>
-                                                </div>
-                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '93%'}}></div>
-                                                </div>
-                                            </div>
-                                        </AnimatedSection>
-
-                                        <AnimatedSection direction="right" delay={0.6}>
-                                            <div>
-                                                <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold text-[var(--text-primary)]">Gestion de risques</span>
-                                                    <span className="font-bold text-[var(--secondary)]">80%</span>
-                                                </div>
-                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '80%'}}></div>
-                                                </div>
-                                            </div>
-                                        </AnimatedSection>
-
-                                        <AnimatedSection direction="right" delay={0.8}>
-                                            <div>
-                                                <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold text-[var(--text-primary)]">Protection rapprochée</span>
-                                                    <span className="font-bold text-[var(--secondary)]">95%</span>
-                                                </div>
-                                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-[var(--secondary)] rounded-full" style={{width: '95%'}}></div>
-                                                </div>
-                                            </div>
-                                        </AnimatedSection>
+                                        <ProgressBar
+                                            percentage={93}
+                                            label={t.home.expertise.surveillance}
+                                            className=""
+                                        />
+                                        <ProgressBar
+                                            percentage={80}
+                                            label={t.home.expertise.risk}
+                                            className=""
+                                        />
+                                        <ProgressBar
+                                            percentage={95}
+                                            label={t.home.expertise.protection}
+                                            className=""
+                                        />
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -569,14 +567,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 <div>
                                     <ScaleAnimation delay={0.2} scale={0.8}>
                                         <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-medium mb-4 text-white">
-                                            24/7 Service
+                                            {t.home.contactSection.badge}
                                         </div>
                                     </ScaleAnimation>
                                     <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                                        Contactez notre équipe commerciale
+                                        {t.home.contactSection.title}
                                     </h2>
                                     <p className="text-lg text-white/95 mb-8 leading-relaxed">
-                                        Nos experts sont disponibles pour répondre à toutes vos questions et vous proposer une solution adaptée.
+                                        {t.home.contactSection.description}
                                     </p>
 
                                     <StaggerContainer className="space-y-4" staggerDelay={0.15}>
@@ -588,8 +586,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                     </svg>
                                                 </div>
                                                 <div>
-                                                    <div className="text-sm text-white/80">Adresse</div>
-                                                    <div className="font-semibold text-white">Riviera bonoumin Cité Lauriers 3</div>
+                                                    <div className="text-sm text-white/80">{t.home.contactSection.addressLabel}</div>
+                                                    <div className="font-semibold text-white">{t.home.contactSection.address}</div>
                                                 </div>
                                             </div>
                                         </StaggerItem>
@@ -602,8 +600,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                     </svg>
                                                 </div>
                                                 <div>
-                                                    <div className="text-sm text-white/80">Téléphone</div>
-                                                    <div className="font-semibold text-white">2722261328</div>
+                                                    <div className="text-sm text-white/80">{t.home.contactSection.phoneLabel}</div>
+                                                    <div className="font-semibold text-white">{t.home.contactSection.phone}</div>
                                                 </div>
                                             </div>
                                         </StaggerItem>
@@ -611,7 +609,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
                                     <ScaleAnimation delay={0.6}>
                                         <button className="mt-8 bg-[var(--secondary)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors shadow-lg">
-                                            Contactez-nous
+                                            {t.home.contactSection.cta}
                                         </button>
                                     </ScaleAnimation>
                                 </div>
@@ -621,33 +619,33 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <ScaleAnimation delay={0.3}>
                                 <div className="bg-white rounded-2xl p-8">
                                     <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
-                                        Obtenir un devis gratuit
+                                        {t.home.contactSection.formTitle}
                                     </h3>
                                     <form className="space-y-4">
                                         <div className="grid grid-cols-2 gap-4">
                                             <input 
                                                 type="text" 
-                                                placeholder="Prénom" 
+                                                placeholder={t.home.contactSection.firstName}
                                                 className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
                                             />
                                             <input 
                                                 type="text" 
-                                                placeholder="Nom" 
+                                                placeholder={t.home.contactSection.lastName}
                                                 className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
                                             />
                                         </div>
                                         <input 
                                             type="email" 
-                                            placeholder="Email" 
+                                            placeholder={t.home.contactSection.email}
                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
                                         />
                                         <input 
                                             type="tel" 
-                                            placeholder="Téléphone" 
+                                            placeholder={t.home.contactSection.phonePlaceholder}
                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
                                         />
                                         <textarea 
-                                            placeholder="Message" 
+                                            placeholder={t.home.contactSection.message} 
                                             rows={4}
                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900 resize-none"
                                         ></textarea>
@@ -655,7 +653,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                             type="submit"
                                             className="w-full bg-[var(--secondary)] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors"
                                         >
-                                            Envoyer le message
+                                            {t.home.contactSection.submit}
                                         </button>
                                     </form>
                                 </div>
@@ -671,20 +669,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                                 <div className="text-white w-full md:w-auto">
                                     <h3 className="text-xl md:text-2xl font-bold mb-2 text-[var(--secondary)]">
-                                        Inscrivez-vous à notre newsletter
+                                        {t.home.newsletter.title}
                                     </h3>
                                     <p className="text-white text-sm md:text-base">
-                                        Recevez les dernières informations, actualités et promotions
+                                        {t.home.newsletter.description}
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
                                     <input 
                                         type="email" 
-                                        placeholder="Votre adresse email" 
+                                        placeholder={t.home.newsletter.placeholder}
                                         className="px-4 md:px-6 py-3 rounded-lg w-full sm:flex-1 md:w-80 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
                                     />
                                     <button className="bg-[var(--secondary)] text-white px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors whitespace-nowrap w-full sm:w-auto">
-                                        S&apos;inscrire
+                                        {t.home.newsletter.subscribe}
                                     </button>
                                 </div>
                             </div>

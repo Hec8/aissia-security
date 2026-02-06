@@ -67,6 +67,106 @@ export const translations = {
                 description: 'Contactez-nous dès aujourd\'hui pour discuter de vos besoins en sécurité et obtenir un devis personnalisé.',
                 learnMore: 'En savoir plus',
             },
+            serviceCards: {
+                card1: { title: 'Gardiennage & Surveillance', subtitle: 'Protection 24/7' },
+                card2: { title: 'Personnel Qualifié', subtitle: 'Agents formés & certifiés' },
+                card3: { title: 'Intervention Rapide', subtitle: 'Réactivité garantie' },
+            },
+            team: {
+                title: 'Une équipe dédiée à votre sécurité',
+                description: 'Nous créons une culture de professionnalisme et d\'excellence qui nous inspire à travailler intelligemment, ensemble, pour protéger ce qui compte le plus pour vous.',
+                satisfaction: 'Satisfaction Client',
+                servicesPro: 'Services Pros',
+                yearsExp: 'Ans d\'expérience',
+            },
+            servicesDetail: {
+                label: 'Nos Services',
+                title: 'Solutions de sécurité professionnelles',
+                learnMore: 'En savoir plus',
+                surveillance: {
+                    title: 'Surveillance de site',
+                    description: 'Pour la surveillance de vos sites, entreprises, commerces et habitations, AISSIA-SECURITY met à votre disposition des équipes composées d\'agents de sécurité, d\'agents incendie, et de maîtres-chiens.',
+                },
+                audit: {
+                    title: 'Audit et Conseil',
+                    description: 'Pour une sécurité adaptée à vos besoins, AISSIA-SECURITY propose des services d\'audit et de conseil spécialisés. Nous analysons votre niveau de sécurité et vous conseillons sur les meilleures solutions à adopter.',
+                },
+                risk: {
+                    title: 'Gestion des risques',
+                    description: 'Nos équipes d\'experts en gestion des risques sont disponibles 24h/24 pour intervenir rapidement dans des situations à haut risque. AISSIA-SECURITY vous propose une réponse rapide et coordonnée avec les autorités.',
+                },
+                protection: {
+                    title: 'Protection rapprochée et Assistance',
+                    description: 'Nos agents spécialisés en protection rapprochée vous accompagnent de manière discrète et efficace 24h/24. Nos équipes sont formées pour intervenir dans des situations délicates et réagir immédiatement.',
+                },
+            },
+            solutions: {
+                title: 'Des solutions de sécurité supérieures en Côte d\'Ivoire',
+                description: 'Nous fournissons des solutions de sécurité complètes et avancées, utilisant les technologies les plus récentes et une approche personnalisée. Nos services couvrent la surveillance sur site, la gestion des accès, et bien plus encore. Nous nous engageons à protéger vos biens et à assurer votre tranquillité d\'esprit.',
+                cta: 'Contactez-nous',
+            },
+            partners: {
+                title: 'Nos Partenaires',
+                partnerLogo: 'Logo partenaire',
+            },
+            distinctions: {
+                title: 'Qu\'est-ce qui nous distingue ?',
+                professionalism: {
+                    title: 'Professionnalisme à chaque instant',
+                    description: 'Nous assurons des services de sécurité de haute qualité, disponibles en tout temps pour répondre à vos besoins urgents.',
+                },
+                communication: {
+                    title: 'Communication 24/7',
+                    description: 'Notre équipe est à votre disposition 24/7, assurant une communication fluide et des interventions rapides.',
+                },
+                fleet: {
+                    title: 'Notre flotte de véhicules',
+                    description: 'Nos véhicules de patrouille sont toujours prêts à intervenir rapidement, offrant une couverture flexible et réactive.',
+                },
+                agents: {
+                    title: 'Agents agréés',
+                    description: 'Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.',
+                },
+                technology: {
+                    title: 'Technologie avancée',
+                    description: 'Nous utilisons les dernières technologies pour garantir des solutions de sécurité fiables et performantes.',
+                },
+                emergency: {
+                    title: 'Aide d\'urgence',
+                    description: 'Nos agents sont formés pour réagir efficacement à toute situation d\'urgence, garantissant votre sécurité à tout moment.',
+                },
+            },
+            expertise: {
+                label: 'Notre Expertise',
+                title: 'Nous vous aidons à résoudre vos problèmes',
+                description: 'Avec plus de 15 ans d\'expérience, nous proposons des solutions de sécurité sur mesure qui répondent à vos besoins spécifiques.',
+                surveillance: 'Surveillance sur site',
+                risk: 'Gestion de risques',
+                protection: 'Protection rapprochée',
+            },
+            contactSection: {
+                badge: '24/7 Service',
+                title: 'Contactez notre équipe commerciale',
+                description: 'Nos experts sont disponibles pour répondre à toutes vos questions et vous proposer une solution adaptée.',
+                addressLabel: 'Adresse',
+                address: 'Riviera bonoumin Cité Lauriers 3',
+                phoneLabel: 'Téléphone',
+                phone: '2722261328',
+                cta: 'Contactez-nous',
+                formTitle: 'Obtenir un devis gratuit',
+                firstName: 'Prénom',
+                lastName: 'Nom',
+                email: 'Email',
+                phonePlaceholder: 'Téléphone',
+                message: 'Message',
+                submit: 'Envoyer le message',
+            },
+            newsletter: {
+                title: 'Inscrivez-vous à notre newsletter',
+                description: 'Recevez les dernières informations, actualités et promotions',
+                placeholder: 'Votre adresse email',
+                subscribe: 'S\'inscrire',
+            },
         },
         about: {
             title: 'Qui sommes-nous',
@@ -196,6 +296,106 @@ export const translations = {
                 title: 'Ready to secure your business?',
                 description: 'Contact us today to discuss your security needs and get a personalized quote.',
                 learnMore: 'Learn more',
+            },
+            serviceCards: {
+                card1: { title: 'Guarding & Surveillance', subtitle: '24/7 Protection' },
+                card2: { title: 'Qualified Personnel', subtitle: 'Trained & certified officers' },
+                card3: { title: 'Rapid Response', subtitle: 'Guaranteed reactivity' },
+            },
+            team: {
+                title: 'A team dedicated to your security',
+                description: 'We create a culture of professionalism and excellence that inspires us to work smartly, together, to protect what matters most to you.',
+                satisfaction: 'Client Satisfaction',
+                servicesPro: 'Pro Services',
+                yearsExp: 'Years of experience',
+            },
+            servicesDetail: {
+                label: 'Our Services',
+                title: 'Professional security solutions',
+                learnMore: 'Learn more',
+                surveillance: {
+                    title: 'Site Surveillance',
+                    description: 'For the surveillance of your sites, businesses, shops and homes, AISSIA-SECURITY provides teams composed of security guards, fire safety officers, and dog handlers.',
+                },
+                audit: {
+                    title: 'Audit and Consulting',
+                    description: 'For security tailored to your needs, AISSIA-SECURITY offers specialized audit and consulting services. We analyze your security level and advise you on the best solutions to adopt.',
+                },
+                risk: {
+                    title: 'Risk Management',
+                    description: 'Our risk management expert teams are available 24/7 to respond quickly in high-risk situations. AISSIA-SECURITY offers a rapid and coordinated response with authorities.',
+                },
+                protection: {
+                    title: 'Close Protection and Assistance',
+                    description: 'Our close protection specialists accompany you discreetly and effectively 24/7. Our teams are trained to intervene in sensitive situations and react immediately.',
+                },
+            },
+            solutions: {
+                title: 'Superior security solutions in Ivory Coast',
+                description: 'We provide comprehensive and advanced security solutions, using the latest technologies and a personalized approach. Our services cover on-site surveillance, access management, and much more. We are committed to protecting your assets and ensuring your peace of mind.',
+                cta: 'Contact us',
+            },
+            partners: {
+                title: 'Our Partners',
+                partnerLogo: 'Partner logo',
+            },
+            distinctions: {
+                title: 'What sets us apart?',
+                professionalism: {
+                    title: 'Professionalism at every moment',
+                    description: 'We deliver high-quality security services, available at all times to meet your urgent needs.',
+                },
+                communication: {
+                    title: '24/7 Communication',
+                    description: 'Our team is at your disposal 24/7, ensuring smooth communication and rapid interventions.',
+                },
+                fleet: {
+                    title: 'Our vehicle fleet',
+                    description: 'Our patrol vehicles are always ready to intervene quickly, offering flexible and responsive coverage.',
+                },
+                agents: {
+                    title: 'Certified agents',
+                    description: 'All our agents are trained in our training center. They are certified to provide superior quality service.',
+                },
+                technology: {
+                    title: 'Advanced technology',
+                    description: 'We use the latest technologies to guarantee reliable and high-performance security solutions.',
+                },
+                emergency: {
+                    title: 'Emergency assistance',
+                    description: 'Our agents are trained to respond effectively to any emergency situation, guaranteeing your safety at all times.',
+                },
+            },
+            expertise: {
+                label: 'Our Expertise',
+                title: 'We help you solve your problems',
+                description: 'With over 15 years of experience, we offer tailored security solutions that meet your specific needs.',
+                surveillance: 'On-site surveillance',
+                risk: 'Risk management',
+                protection: 'Close protection',
+            },
+            contactSection: {
+                badge: '24/7 Service',
+                title: 'Contact our sales team',
+                description: 'Our experts are available to answer all your questions and offer you a tailored solution.',
+                addressLabel: 'Address',
+                address: 'Riviera bonoumin Cité Lauriers 3',
+                phoneLabel: 'Phone',
+                phone: '2722261328',
+                cta: 'Contact us',
+                formTitle: 'Get a free quote',
+                firstName: 'First name',
+                lastName: 'Last name',
+                email: 'Email',
+                phonePlaceholder: 'Phone',
+                message: 'Message',
+                submit: 'Send message',
+            },
+            newsletter: {
+                title: 'Subscribe to our newsletter',
+                description: 'Receive the latest information, news and promotions',
+                placeholder: 'Your email address',
+                subscribe: 'Subscribe',
             },
         },
         about: {
