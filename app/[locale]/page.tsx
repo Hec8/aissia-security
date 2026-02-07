@@ -276,16 +276,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 </div>
                             </StaggerItem>
 
-                            {/* Service 5 - Formation */}
+                            {/* Service 5 - Formation (carte mise en avant) */}
                             <StaggerItem direction="up">
-                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
-                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.formation.title}</h3>
-                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.formation.description}</p>
+                                <div className="bg-[var(--primary)] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-white mb-2">{t.home.servicesDetail.formation.title}</h3>
+                                    <p className="text-sm text-white/80 mb-4 leading-relaxed">{t.home.servicesDetail.formation.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
                                         <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.formation.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
-                                        <Link href={`/${locale}/training`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                        <Link href={`/${locale}/training`} className="w-10 h-10 rounded-full border-2 border-[var(--secondary)] bg-[var(--secondary)] flex items-center justify-center text-[var(--primary)] hover:opacity-90 transition-all">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
                                         </Link>
                                     </div>

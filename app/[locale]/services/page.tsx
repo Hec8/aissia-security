@@ -1,11 +1,11 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
-import { AnimatedSection, ScaleAnimation } from '@/components/ui';
 import { Container } from '@/components/ui';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 
 export default async function ServicesPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -14,43 +14,47 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
     const services = [
         {
             icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
             ),
             title: 'Surveillance de site et Gardiennage',
             description: 'Nous mettons à disposition des agents de sécurité formés pour surveiller vos sites, entreprises, commerces et habitations. Nos équipes veillent à la protection de vos biens, assurant une présence proactive et dissuasive 24h/24.',
             image: '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
+            badge: 'Gardiennage',
         },
         {
             icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
             ),
             title: 'Protection rapprochée',
             description: 'Nos agents spécialisés en protection rapprochée vous accompagnent de manière discrète et efficace 24h/24. Que ce soit pour vos déplacements ou pour votre sécurité quotidienne, nous veillons à votre intégrité avec un service sur mesure.',
             image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+            badge: 'Protection',
         },
         {
             icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
             ),
             title: 'Gestion de risque',
             description: 'Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.',
             image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            badge: 'Analyse',
         },
         {
             icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             title: 'Assistance',
-            description: 'AWAKE assure une assistance rapide et efficace en cas de situation d\'urgence. Nos équipes sont formées pour intervenir avec professionnalisme et rapidité, garantissant une résolution optimale de tout incident.',
+            description: 'AISSIA-SÉCURITÉ assure une assistance rapide et efficace en cas de situation d\'urgence. Nos équipes sont formées pour intervenir avec professionnalisme et rapidité, garantissant une résolution optimale de tout incident.',
             image: '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
+            badge: 'Urgence',
         },
     ];
 
@@ -62,6 +66,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.services.title}
                     subtitle={t.services.subtitle}
+                    image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.services },
@@ -69,50 +74,97 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                 />
                 </AnimatedSection>
 
-                {/* Services Section - Alternating layout */}
-                <section className="py-20 bg-gray-50">
+                {/* Services Section */}
+                <section className="py-20 bg-white">
                     <Container>
-                        <div className="space-y-24">
+                        <AnimatedSection>
+                            <div className="text-center mb-16">
+                                <div className="inline-block bg-[var(--primary)] text-white text-sm font-semibold uppercase tracking-wide px-4 py-1.5 rounded-full mb-4">
+                                    {t.services.title}
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
+                                    {t.services.subtitle}
+                                </h2>
+                                <div className="w-16 h-1 bg-[var(--secondary)] rounded-full mx-auto"></div>
+                            </div>
+                        </AnimatedSection>
+
+                        <div className="space-y-20">
                             {services.map((service, index) => (
-                                <AnimatedSection key={index}>
-                                    <div 
-                                        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                                            index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                                        }`}
-                                    >
-                                        {/* Text Content */}
-                                        <AnimatedSection delay={0.2}>
-                                            <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                                                <div className="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white mb-6">
-                                                    {service.icon}
-                                                </div>
-                                                <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
-                                                    {service.title}
-                                                </h3>
-                                                <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                                    {service.description}
-                                                </p>
-                                            </div>
-                                        </AnimatedSection>
-
+                                <AnimatedSection key={index} direction={index % 2 === 0 ? 'left' : 'right'}>
+                                    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow duration-500 ${index % 2 === 1 ? '' : ''}`}>
+                                        
                                         {/* Image */}
-                                        <ScaleAnimation delay={0.3}>
-                                            <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                                                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-300">
-                                                    <Image 
-
+                                        <div className={`relative min-h-[320px] lg:min-h-[400px] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                                            <Image
                                                 src={service.image}
                                                 alt={service.title}
                                                 fill
                                                 className="object-cover object-top"
                                             />
+                                            {/* Badge sur l'image */}
+                                            <div className="absolute top-4 left-4">
+                                                <span className="bg-[var(--secondary)] text-[var(--primary)] text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">
+                                                    {service.badge}
+                                                </span>
+                                            </div>
+                                            {/* Numéro en overlay */}
+                                            <div className="absolute bottom-4 right-4">
+                                                <span className="text-white/20 text-8xl font-black leading-none">
+                                                    {String(index + 1).padStart(2, '0')}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Contenu texte */}
+                                        <div className={`flex flex-col justify-center p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                                            <div className="w-14 h-14 bg-[var(--primary)] rounded-2xl flex items-center justify-center text-[var(--secondary)] mb-6 shadow-md">
+                                                {service.icon}
+                                            </div>
+                                            <h3 className="text-2xl lg:text-3xl font-bold text-[var(--text-primary)] mb-4 leading-tight">
+                                                {service.title}
+                                            </h3>
+                                            <div className="w-10 h-1 bg-[var(--secondary)] rounded-full mb-5"></div>
+                                            <p className="text-[var(--text-secondary)] leading-relaxed mb-8">
+                                                {service.description}
+                                            </p>
+                                            <div>
+                                                <Link 
+                                                    href={`/${locale}/contact`}
+                                                    className="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:text-[var(--secondary)] transition-colors group"
+                                                >
+                                                    En savoir plus
+                                                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                    </svg>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </ScaleAnimation>
-                                </div>
-                            </AnimatedSection>
+                                </AnimatedSection>
                             ))}
                         </div>
+                    </Container>
+                </section>
+
+                {/* Stats Section */}
+                <section className="py-16 bg-[var(--primary)]">
+                    <Container>
+                        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.1}>
+                            {[
+                                { number: '15+', label: 'Années d\'expérience' },
+                                { number: '500+', label: 'Clients satisfaits' },
+                                { number: '1200+', label: 'Agents formés' },
+                                { number: '24/7', label: 'Disponibilité' },
+                            ].map((stat, index) => (
+                                <StaggerItem key={index} direction="scale">
+                                    <div className="text-center">
+                                        <div className="text-3xl md:text-4xl font-black text-[var(--secondary)] mb-2">{stat.number}</div>
+                                        <div className="text-white/80 text-sm font-medium">{stat.label}</div>
+                                    </div>
+                                </StaggerItem>
+                            ))}
+                        </StaggerContainer>
                     </Container>
                 </section>
 

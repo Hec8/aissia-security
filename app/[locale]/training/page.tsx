@@ -70,6 +70,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.training.title}
                     subtitle={t.training.subtitle}
+                    image="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.training },

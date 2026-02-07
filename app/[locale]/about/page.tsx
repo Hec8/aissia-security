@@ -77,6 +77,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <PageHeader
                     title={t.about.title}
                     subtitle={t.about.subtitle}
+                    image="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.about },
@@ -129,7 +130,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 </AnimatedSection>
 
                 {/* Section "Pour AISSIA SÉCURITÉ, la sécurité c'est quoi ?" */}
-                <section className="py-20 bg-gray-400 relative overflow-hidden">
+                <section className="py-20 bg-[var(--primary)] relative overflow-hidden">
                     {/* Cercles décoratifs en arrière-plan */}
                     <div className="absolute inset-0 opacity-10">
                         <div className="absolute top-10 left-10 w-64 h-64 border-4 border-white rounded-full"></div>
@@ -153,14 +154,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                             {securityValues.map((value, index) => (
                                 <ScaleAnimation key={index} delay={index * 0.1}>
-                                    <div className="bg-[var(--primary)] rounded-lg p-8 text-white h-full hover:scale-105 transition-transform duration-300">
+                                    <div className="bg-white rounded-lg p-8 h-full hover:scale-105 transition-transform duration-300 shadow-lg">
                                         <div className="w-12 h-12 bg-[var(--secondary)] rounded-full flex items-center justify-center mb-4">
                                             {value.icon}
                                         </div>
-                                        <h3 className="text-xl font-bold mb-3 text-[var(--secondary)]">
+                                        <h3 className="text-xl font-bold mb-3 text-[var(--primary)]">
                                             {value.title}
                                         </h3>
-                                        <p className="text-white/90 text-sm leading-relaxed">
+                                        <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
                                             {value.description}
                                         </p>
                                     </div>

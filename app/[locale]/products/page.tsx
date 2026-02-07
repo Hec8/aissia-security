@@ -108,6 +108,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.products.title}
                     subtitle={t.products.subtitle}
+                    image="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.products },

@@ -56,6 +56,7 @@ export default function ContactPage() {
                 <PageHeader
                     title={t.contact.title}
                     subtitle={t.contact.subtitle}
+                    image="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.contact },
