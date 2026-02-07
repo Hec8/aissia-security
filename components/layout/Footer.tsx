@@ -22,6 +22,7 @@ export const Footer = () => {
         { name: t.footer.companyLinks.about, href: `/${locale}/about` },
         { name: t.footer.companyLinks.services, href: `/${locale}/services` },
         { name: t.footer.companyLinks.products, href: `/${locale}/products` },
+        { name: t.footer.companyLinks.technologies, href: `/${locale}/technologies` },
         { name: t.footer.companyLinks.training, href: `/${locale}/training` },
         { name: t.footer.companyLinks.contact, href: `/${locale}/contact` },
     ];

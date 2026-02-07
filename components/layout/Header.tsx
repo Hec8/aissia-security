@@ -66,6 +66,7 @@ export const Header = () => {
         { name: t.nav.services, href: `/${locale}/services` },
         { name: t.nav.training, href: `/${locale}/training` },
         { name: t.nav.products, href: `/${locale}/products` },
+        { name: t.nav.technologies, href: `/${locale}/technologies` },
         { name: t.nav.contact, href: `/${locale}/contact` },
     ];
 

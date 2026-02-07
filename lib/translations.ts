@@ -6,6 +6,7 @@ export const translations = {
             services: 'Nos Services',
             training: 'Nos Formations',
             products: 'Nos offres de Sécurité',
+            technologies: 'Nos Technologies',
             contact: 'Contact',
             news: 'Actualités',
         },
@@ -342,6 +343,7 @@ export const translations = {
                 about: 'À propos',
                 services: 'Nos services',
                 products: 'Nos offres',
+                technologies: 'Nos Technologies',
                 training: 'Formations',
                 contact: 'Contact',
             },
@@ -353,6 +355,51 @@ export const translations = {
             privacy: 'Politique de confidentialité',
             terms: 'Conditions d\'utilisation',
         },
+        technologies: {
+            title: 'Nos Technologies',
+            subtitle: 'Des solutions technologiques innovantes au service de votre sécurité',
+            badge: 'Innovation',
+            introTitle: 'La technologie au service de la sécurité',
+            introDescription: 'Aissia Sécurité développe des solutions technologiques de pointe pour renforcer la protection de ses clients. Nos outils innovants combinent intelligence artificielle, géolocalisation et analyse de données pour une sécurité proactive et efficace.',
+            cta: 'Demander une démo',
+            alertguard: {
+                category: 'Tracking',
+                title: 'Application de tracking et d\'alerte en temps réel',
+                description: 'Le tracking dans le contexte des entreprises fait référence à la pratique de collecter et d\'analyser des données sur les activités et les comportements des employés, souvent à l\'aide de technologies telles que les systèmes de gestion des performances, les logiciels de suivi du temps, les systèmes de surveillance électronique, etc. AlertGuard est notre solution propriétaire qui offre un suivi continu et des alertes instantanées pour assurer la sécurité de vos équipes sur le terrain.',
+                features: [
+                    'Géolocalisation des agents en temps réel',
+                    'Alertes instantanées en cas d\'incident',
+                    'Suivi des rondes et des itinéraires',
+                    'Rapports détaillés et historique complet',
+                    'Interface intuitive accessible sur mobile et desktop',
+                    'Communication sécurisée entre les équipes',
+                ],
+            },
+            howItWorks: {
+                badge: 'Comment ça marche',
+                title: 'Comment ça fonctionne ?',
+                steps: [
+                    {
+                        title: 'Installation',
+                        description: 'Déploiement rapide de l\'application sur les appareils de vos agents et configuration personnalisée selon vos besoins.',
+                    },
+                    {
+                        title: 'Suivi en temps réel',
+                        description: 'Visualisez la position et l\'activité de vos équipes en temps réel depuis votre tableau de bord centralisé.',
+                    },
+                    {
+                        title: 'Alertes & Rapports',
+                        description: 'Recevez des notifications instantanées en cas d\'anomalies et générez des rapports détaillés automatiquement.',
+                    },
+                ],
+            },
+            ctaSection: {
+                badge: 'Passez à l\'action',
+                title: 'Prêt à moderniser votre sécurité ?',
+                description: 'Contactez-nous pour une démonstration personnalisée de nos solutions technologiques et découvrez comment AlertGuard peut transformer votre dispositif de sécurité.',
+                button: 'Demander une démo',
+            },
+        },
     },
     en: {
         nav: {
@@ -361,6 +408,7 @@ export const translations = {
             services: 'Services',
             products: 'Products',
             training: 'Training',
+            technologies: 'Technologies',
             news: 'News',
             contact: 'Contact',
         },
@@ -682,6 +730,51 @@ export const translations = {
                 hours: 'Opening Hours',
             },
         },
+        technologies: {
+            title: 'Our Technologies',
+            subtitle: 'Innovative technological solutions at the service of your security',
+            badge: 'Innovation',
+            introTitle: 'Technology at the service of security',
+            introDescription: 'Aissia Sécurité develops cutting-edge technological solutions to strengthen client protection. Our innovative tools combine artificial intelligence, geolocation, and data analysis for proactive and effective security.',
+            cta: 'Request a demo',
+            alertguard: {
+                category: 'Tracking',
+                title: 'Real-time tracking and alert application',
+                description: 'Tracking in the business context refers to the practice of collecting and analyzing data on employee activities and behaviors, often using technologies such as performance management systems, time tracking software, electronic surveillance systems, etc. AlertGuard is our proprietary solution that offers continuous monitoring and instant alerts to ensure the safety of your teams in the field.',
+                features: [
+                    'Real-time agent geolocation',
+                    'Instant alerts in case of incident',
+                    'Patrol and route tracking',
+                    'Detailed reports and complete history',
+                    'Intuitive interface accessible on mobile and desktop',
+                    'Secure communication between teams',
+                ],
+            },
+            howItWorks: {
+                badge: 'How it works',
+                title: 'How does it work?',
+                steps: [
+                    {
+                        title: 'Installation',
+                        description: 'Quick deployment of the application on your agents\' devices and custom configuration to your needs.',
+                    },
+                    {
+                        title: 'Real-time tracking',
+                        description: 'View the position and activity of your teams in real-time from your centralized dashboard.',
+                    },
+                    {
+                        title: 'Alerts & Reports',
+                        description: 'Receive instant notifications in case of anomalies and generate detailed reports automatically.',
+                    },
+                ],
+            },
+            ctaSection: {
+                badge: 'Take action',
+                title: 'Ready to modernize your security?',
+                description: 'Contact us for a personalized demonstration of our technological solutions and discover how AlertGuard can transform your security system.',
+                button: 'Request a demo',
+            },
+        },
         footer: {
             description: 'Your trusted partner in private security. We support businesses and individuals with reliable and effective solutions.',
             services: 'Services',
@@ -697,6 +790,7 @@ export const translations = {
                 about: 'About Us',
                 services: 'Our services',
                 products: 'Our offers',
+                technologies: 'Technologies',
                 training: 'Training',
                 contact: 'Contact',
             },
