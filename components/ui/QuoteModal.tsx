@@ -98,7 +98,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                         {/* Header */}
                         <div className="sticky top-0 bg-[var(--primary)] text-white px-6 py-5 rounded-t-2xl flex justify-between items-start z-10">
                             <div>
-                                <h2 className="text-xl font-bold">{t.title}</h2>
+                                <h2 className="text-xl font-bold text-[var(--secondary)]">{t.title}</h2>
                                 <p className="text-white/80 text-sm mt-1">{t.subtitle}</p>
                             </div>
                             <button

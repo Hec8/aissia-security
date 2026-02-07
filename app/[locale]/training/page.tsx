@@ -1,11 +1,11 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
-import { AnimatedSection, ScaleAnimation, StaggerContainer } from '@/components/ui';
 import { Container } from '@/components/ui';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 
 export default async function TrainingPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -14,51 +14,63 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
     const trainingModules = [
         {
             title: 'Sport',
+            description: 'Entraînement physique intensif pour garantir la forme et l\'endurance nécessaires aux missions de sécurité sur le terrain.',
             image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
         },
         {
             title: 'Parcours du combattant',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Exercices pratiques sur parcours d\'obstacles pour développer l\'agilité, la résistance et les réflexes en situation de stress.',
+            image: '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
         },
         {
             title: 'Formation théorique',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Cours magistraux couvrant le cadre juridique, la déontologie et les fondamentaux du métier d\'agent de sécurité.',
+            image: '/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg',
         },
         {
             title: 'Sécurité privée',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Module complet sur les techniques de surveillance, le contrôle d\'accès et la gestion de la sécurité des sites.',
+            image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
         },
         {
-            title: 'Consignes générales de la sécurité privée',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            title: 'Consignes générales',
+            description: 'Apprentissage des consignes et protocoles fondamentaux régissant l\'exercice de la profession de sécurité privée.',
+            image: '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
         },
         {
-            title: 'Manipulation et usage des armes non-létales',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            title: 'Armes non-létales',
+            description: 'Formation à la manipulation et à l\'usage réglementaire des équipements de défense non-létaux.',
+            image: '/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
         },
         {
             title: 'Communication',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Techniques de communication verbale et non-verbale pour la gestion des conflits et l\'accueil du public.',
+            image: '/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
         },
         {
             title: 'Formation cyno',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Initiation au travail avec les chiens de sécurité : obéissance, détection et intervention canine.',
+            image: '/images site/Whisk_de2cf0006a6e0838ea9477dbb5ba68cedr.jpeg',
         },
         {
-            title: 'Assistance et Intervention',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            title: 'Assistance & Intervention',
+            description: 'Protocoles d\'intervention rapide, premiers secours et coordination avec les forces de l\'ordre.',
+            image: '/images site/Whisk_47b0b5038e58a95a87042a6fd0231c05dr.jpeg',
         },
         {
             title: 'Self défense',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: 'Techniques de défense personnelle adaptées au métier d\'agent de sécurité pour les situations à risque.',
+            image: '/images site/Whisk_b45eac5d7cb2009b2e648461d62d93e9dr.jpeg',
         },
         {
-            title: 'La protection rapprochée',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            title: 'Protection rapprochée',
+            description: 'Formation spécialisée en escorte et protection de personnalités : analyse de risques, itinéraires et réactivité.',
+            image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
         },
         {
-            title: 'COMMENT RÉDIGER UN RAPPORT',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            title: 'Rédaction de rapports',
+            description: 'Méthodologie de rédaction des rapports d\'incident, mains courantes et comptes rendus professionnels.',
+            image: '/images site/Whisk_e6308d781c51042a7cf4162c4757b890dr.jpeg',
         },
     ];
 
@@ -112,30 +124,56 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                     </section>
                 </AnimatedSection>
 
-                {/* Section Modules de formation - Grille de cartes */}
+                {/* Section Modules de formation - Grille 2x2 style cards */}
                 <section className="py-20 bg-gray-50">
                     <Container>
-                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <AnimatedSection>
+                            <div className="text-center mb-16">
+                                <div className="inline-block bg-[var(--primary)] text-white text-sm font-semibold uppercase tracking-wide px-4 py-1.5 rounded-full mb-4">
+                                    Modules
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
+                                    Nos modules de formation
+                                </h2>
+                                <div className="w-16 h-1 bg-[var(--secondary)] rounded-full mx-auto"></div>
+                            </div>
+                        </AnimatedSection>
+
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" staggerDelay={0.08}>
                             {trainingModules.map((module, index) => (
-                                <ScaleAnimation key={index} delay={index * 0.05}>
-                                    <div 
-                                        className="bg-[var(--secondary)] rounded-2xl overflow-hidden border-4 border-[var(--primary)] shadow-lg hover:scale-105 transition-transform duration-300"
-                                    >
-                                        <div className="relative aspect-[4/3] bg-gray-800">
-                                            <Image 
-                                                src={module.image}
-                                                alt={module.title}
-                                            fill
-                                            className="object-cover object-top opacity-80"
-                                        />
+                                <StaggerItem key={index} direction="up">
+                                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                                        <div className={`flex flex-col sm:flex-row ${index % 2 === 1 ? 'sm:flex-row-reverse' : ''}`}>
+                                            {/* Image */}
+                                            <div className="relative w-full sm:w-2/5 min-h-[200px] sm:min-h-[220px] flex-shrink-0">
+                                                <Image
+                                                    src={module.image}
+                                                    alt={module.title}
+                                                    fill
+                                                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                            </div>
+                                            {/* Texte */}
+                                            <div className="flex-1 p-6 flex flex-col justify-center">
+                                                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
+                                                    {module.title}
+                                                </h3>
+                                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                                                    {module.description}
+                                                </p>
+                                                <Link
+                                                    href={`/${locale}/contact`}
+                                                    className="inline-flex items-center gap-1.5 text-[var(--secondary)] font-semibold text-sm hover:text-[var(--primary)] transition-colors group/link"
+                                                >
+                                                    En savoir plus
+                                                    <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                    </svg>
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="p-6 bg-[var(--secondary)]">
-                                        <h3 className="text-xl font-bold text-[var(--primary)]">
-                                            {module.title}
-                                        </h3>
-                                    </div>
-                                    </div>
-                                </ScaleAnimation>
+                                </StaggerItem>
                             ))}
                         </StaggerContainer>
                     </Container>
