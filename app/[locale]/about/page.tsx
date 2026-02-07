@@ -94,9 +94,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                                         <Image 
                                             src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
-                                            alt="Agent de sécurité Aissia Security"
+                                            alt="Agent de sécurité Aissia Sécurité"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover object-top"
                                         />
                                     </div>
                                 </ScaleAnimation>
@@ -112,13 +112,13 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         </h2>
                                         <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                                             <p>
-                                                AISSIA-SECURITY est votre partenaire de confiance pour assurer la sécurité des et des services. Grâce à une étude de sécurité adaptée à vos besoins, nous vous proposons des solutions adéquates.
+                                                AISSIA-SÉCURITÉ est votre partenaire de confiance pour assurer la sécurité des et des services. Grâce à une étude de sécurité adaptée à vos besoins, nous vous proposons des solutions adéquates.
                                             </p>
                                             <p>
                                                 Notre mission est de garantir un environnement sûr en utilisant des moyens humains et technologiques performants.
                                             </p>
                                             <p>
-                                                Avec AISSIA-SECURITY, bénéficiez d'une approche complète et personnalisée pour relever les défis sécuritaires modernes.
+                                                Avec AISSIA-SÉCURITÉ, bénéficiez d'une approche complète et personnalisée pour relever les défis sécuritaires modernes.
                                             </p>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     </section>
                 </AnimatedSection>
 
-                {/* Section "Pour AISSIA SECURITY, la sécurité c'est quoi ?" */}
+                {/* Section "Pour AISSIA SÉCURITÉ, la sécurité c'est quoi ?" */}
                 <section className="py-20 bg-gray-400 relative overflow-hidden">
                     {/* Cercles décoratifs en arrière-plan */}
                     <div className="absolute inset-0 opacity-10">
@@ -142,7 +142,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <AnimatedSection>
                             <div className="text-center mb-16">
                                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                                    Pour <span className="text-[var(--secondary)]">AISSIA-SECURITY</span>,
+                                    Pour <span className="text-[var(--secondary)]">AISSIA-SÉCURITÉ</span>,
                                 </h2>
                                 <p className="text-3xl md:text-4xl font-normal text-white">
                                     la sécurité c'est quoi ?

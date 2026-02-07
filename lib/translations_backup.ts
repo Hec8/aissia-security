@@ -23,7 +23,7 @@ export const translations = {
             hero: {
                 title: 'Votre sécurité, notre responsabilité',
                 subtitle: 'Excellence et Professionnalisme en Sécurité Privée',
-                description: 'Aissia Security accompagne entreprises, institutions et particuliers avec des solutions de sécurité fiables, humaines et efficaces.',
+                description: 'Aissia Sécurité accompagne entreprises, institutions et particuliers avec des solutions de sécurité fiables, humaines et efficaces.',
                 cta: 'Découvrir nos services',
                 ctaPrimary: 'Demander un devis',
                 ctaSecondary: 'Découvrir nos solutions',
@@ -85,15 +85,15 @@ export const translations = {
                 learnMore: 'En savoir plus',
                 surveillance: {
                     title: 'Surveillance de site',
-                    description: 'Pour la surveillance de vos sites, entreprises, commerces et habitations, AISSIA-SECURITY met à votre disposition des équipes composées d\'agents de sécurité, d\'agents incendie, et de maîtres-chiens.',
+                    description: 'Pour la surveillance de vos sites, entreprises, commerces et habitations, AISSIA-SÉCURITÉ met à votre disposition des équipes composées d\'agents de sécurité, d\'agents incendie, et de maîtres-chiens.',
                 },
                 audit: {
                     title: 'Audit et Conseil',
-                    description: 'Pour une sécurité adaptée à vos besoins, AISSIA-SECURITY propose des services d\'audit et de conseil spécialisés. Nous analysons votre niveau de sécurité et vous conseillons sur les meilleures solutions à adopter.',
+                    description: 'Pour une sécurité adaptée à vos besoins, AISSIA-SÉCURITÉ propose des services d\'audit et de conseil spécialisés. Nous analysons votre niveau de sécurité et vous conseillons sur les meilleures solutions à adopter.',
                 },
                 risk: {
                     title: 'Gestion des risques',
-                    description: 'Nos équipes d\'experts en gestion des risques sont disponibles 24h/24 pour intervenir rapidement dans des situations à haut risque. AISSIA-SECURITY vous propose une réponse rapide et coordonnée avec les autorités.',
+                    description: 'Nos équipes d\'experts en gestion des risques sont disponibles 24h/24 pour intervenir rapidement dans des situations à haut risque. AISSIA-SÉCURITÉ vous propose une réponse rapide et coordonnée avec les autorités.',
                 },
                 protection: {
                     title: 'Protection rapprochée et Assistance',
@@ -251,7 +251,7 @@ export const translations = {
         },
         home: {
             hero: {
-                title: 'AISSIA SECURITY',
+                title: 'AISSIA SÉCURITÉ',
                 subtitle: 'Excellence and Professionalism in Private Security',
                 description: 'Your trusted partner for all your private security and professional training needs.',
                 cta: 'Discover our services',
@@ -315,15 +315,15 @@ export const translations = {
                 learnMore: 'Learn more',
                 surveillance: {
                     title: 'Site Surveillance',
-                    description: 'For the surveillance of your sites, businesses, shops and homes, AISSIA-SECURITY provides teams composed of security guards, fire safety officers, and dog handlers.',
+                    description: 'For the surveillance of your sites, businesses, shops and homes, AISSIA-SÉCURITÉ provides teams composed of security guards, fire safety officers, and dog handlers.',
                 },
                 audit: {
                     title: 'Audit and Consulting',
-                    description: 'For security tailored to your needs, AISSIA-SECURITY offers specialized audit and consulting services. We analyze your security level and advise you on the best solutions to adopt.',
+                    description: 'For security tailored to your needs, AISSIA-SÉCURITÉ offers specialized audit and consulting services. We analyze your security level and advise you on the best solutions to adopt.',
                 },
                 risk: {
                     title: 'Risk Management',
-                    description: 'Our risk management expert teams are available 24/7 to respond quickly in high-risk situations. AISSIA-SECURITY offers a rapid and coordinated response with authorities.',
+                    description: 'Our risk management expert teams are available 24/7 to respond quickly in high-risk situations. AISSIA-SÉCURITÉ offers a rapid and coordinated response with authorities.',
                 },
                 protection: {
                     title: 'Close Protection and Assistance',

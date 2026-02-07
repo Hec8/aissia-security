@@ -104,7 +104,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                                                 src={service.image}
                                                 alt={service.title}
                                                 fill
-                                                className="object-cover"
+                                                className="object-cover object-top"
                                             />
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                             src="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg"
                             alt="Formation en sécurité"
                             fill
-                            className="object-cover"
+                            className="object-cover object-top"
                         />
                         <div className="absolute inset-0 bg-black/70"></div>
                     </div>

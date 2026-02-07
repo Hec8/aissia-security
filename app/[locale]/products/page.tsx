@@ -5,6 +5,7 @@ import { Container } from '@/components/ui';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Link from 'next/link';
+import { QuoteButton } from '@/components/ui/QuoteModal';
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -149,12 +150,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         ))}
                                     </ul>
                                     <div className="mt-6">
-                                        <Link 
-                                            href={`/${locale}/contact`}
+                                        <QuoteButton
                                             className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                                         >
-                                            📋 Demander un devis
-                                        </Link>
+                                            📋 {t.products.quote}
+                                        </QuoteButton>
                                     </div>
                                     </div>
                                 </ScaleAnimation>
@@ -191,12 +191,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         ))}
                                     </ul>
                                     <div className="text-center">
-                                        <Link 
-                                            href={`/${locale}/contact`}
+                                        <QuoteButton
                                             className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                                         >
-                                            📋 Demander un devis
-                                        </Link>
+                                            📋 {t.products.quote}
+                                        </QuoteButton>
                                     </div>
                                     </div>
                                 </ScaleAnimation>
@@ -233,12 +232,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         ))}
                                     </ul>
                                     <div className="text-center">
-                                        <Link 
-                                            href={`/${locale}/contact`}
+                                        <QuoteButton
                                             className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                                         >
-                                            📋 Demander un devis
-                                        </Link>
+                                            📋 {t.products.quote}
+                                        </QuoteButton>
                                     </div>
                                 </div>
                                 </ScaleAnimation>
@@ -268,12 +266,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         {service.title}
                                     </h3>
                                     <div className="text-center">
-                                        <Link 
-                                            href={`/${locale}/contact`}
+                                        <QuoteButton
                                             className="inline-block px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                                         >
-                                            📋 Demander un devis
-                                        </Link>
+                                            📋 {t.products.quote}
+                                        </QuoteButton>
                                     </div>
                                 </div>
                                 </ScaleAnimation>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/layout';
 import { Button, Card, CardBody, Container } from '@/components/ui';
+import { QuoteButton } from '@/components/ui/QuoteModal';
 import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
@@ -62,11 +63,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 </AnimatedSection>
                                 <AnimatedSection direction="up" delay={0.8}>
                                     <div className="flex flex-wrap gap-4 pt-4 justify-center">
-                                        <Link href={`/${locale}/contact`}>
-                                            <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none">
-                                                {t.home.hero.ctaPrimary}
-                                            </Button>
-                                        </Link>
+                                        <QuoteButton className="inline-flex items-center justify-center font-semibold transition-all duration-300 ease-in-out rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-105 active:scale-95 px-8 py-4 text-lg bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none">
+                                            {t.home.hero.ctaPrimary}
+                                        </QuoteButton>
                                         <Link href={`/${locale}/services`}>
                                             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[var(--primary)]">
                                                 {t.home.hero.ctaSecondary}
@@ -80,7 +79,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </section>
 
                 {/* Services Cards - Ligne blanche comme dans la maquette */}
-                <section className="py-6 bg-white border-b">
+                <section className="py-6 bg-white/[0.95] border-b">
                     <Container>
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8" staggerDelay={0.15}>
                             <StaggerItem direction="up">
@@ -129,7 +128,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </section>
 
                 {/* Section Culture/Valeurs - Inspiré de la maquette */}
-                <section className="py-20 bg-white">
+                <section className="py-20 bg-white/[0.95]">
                     <Container>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             {/* Texte */}
@@ -178,7 +177,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <AnimatedSection direction="right" delay={0.2}>
                                 <div className="relative">
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative group">
-                                        <Image src="/team.jpeg" alt="Équipe AISSIA Sécurité" fill className="object-cover" />
+                                        <Image src="/team.jpeg" alt="Équipe AISSIA Sécurité" fill className="object-cover object-top" />
                                         {/* Badge 15+ ans */}
                                         <ScaleAnimation delay={0.7} scale={0.7}>
                                             <div className="absolute bottom-6 right-6 bg-[var(--secondary)] text-white px-6 py-3 rounded-lg shadow-lg z-10">
@@ -194,124 +193,121 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </section>
 
                 {/* Section Services détaillés */}
-                <section className="py-20 bg-white">
+                <section className="py-20 bg-white/[0.95]">
                     <Container>
                         {/* En-tête section */}
                         <AnimatedSection direction="up">
                             <div className="text-center mb-16">
-                                <div className="text-[var(--secondary)] font-semibold text-sm uppercase tracking-wide mb-3">
+                                <div className="inline-block px-5 py-1.5 border-2 border-[var(--primary)] rounded-full text-sm font-semibold text-[var(--primary)] mb-6">
                                     {t.home.servicesDetail.label}
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] mb-6 max-w-2xl mx-auto leading-tight">
                                     {t.home.servicesDetail.title}
                                 </h2>
+                                <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+                                    {t.home.servicesDetail.subtitle}
+                                </p>
                             </div>
                         </AnimatedSection>
 
-                        {/* Grille de services - 2 lignes de 2 */}
-                        <div className="max-w-5xl mx-auto space-y-8">
-                            {/* Première ligne */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Service 1 - Surveillance de site */}
-                                <RotateAnimation degrees={-3} delay={0.1}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt="Surveillance de site" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                            <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.surveillance.title}</h3>
-                                            </div>
-                                        </div>
-                                        <CardBody className="p-6">
-                                            <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                {t.home.servicesDetail.surveillance.description}
-                                            </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                {t.home.servicesDetail.learnMore}
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </CardBody>
-                                    </Card>
-                                </RotateAnimation>
+                        {/* Grille de services - 3 colonnes, 2 lignes */}
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" staggerDelay={0.1}>
+                            {/* Service 1 - Surveillance */}
+                            <StaggerItem direction="up">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.surveillance.title}</h3>
+                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.surveillance.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt={t.home.servicesDetail.surveillance.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
 
-                                {/* Service 2 - Audit et Conseil */}
-                                <RotateAnimation degrees={3} delay={0.2}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt="Audit et Conseil" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                            <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.audit.title}</h3>
-                                            </div>
-                                        </div>
-                                        <CardBody className="p-6">
-                                            <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                {t.home.servicesDetail.audit.description}
-                                            </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                {t.home.servicesDetail.learnMore}
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </CardBody>
-                                    </Card>
-                                </RotateAnimation>
-                            </div>
+                            {/* Service 2 - Audit (carte mise en avant) */}
+                            <StaggerItem direction="up">
+                                <div className="bg-[var(--primary)] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-white mb-2">{t.home.servicesDetail.audit.title}</h3>
+                                    <p className="text-sm text-white/80 mb-4 leading-relaxed">{t.home.servicesDetail.audit.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt={t.home.servicesDetail.audit.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--secondary)] bg-[var(--secondary)] flex items-center justify-center text-[var(--primary)] hover:opacity-90 transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
 
-                            {/* Deuxième ligne */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Service 3 - Gestion des risques */}
-                                <RotateAnimation degrees={3} delay={0.3}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt="Gestion des risques" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                            <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.risk.title}</h3>
-                                            </div>
-                                        </div>
-                                        <CardBody className="p-6">
-                                            <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                {t.home.servicesDetail.risk.description}
-                                            </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                {t.home.servicesDetail.learnMore}
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </CardBody>
-                                    </Card>
-                                </RotateAnimation>
+                            {/* Service 3 - Gestion des risques */}
+                            <StaggerItem direction="up">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.risk.title}</h3>
+                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.risk.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.risk.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
 
-                                {/* Service 4 - Protection rapprochée et Assistance */}
-                                <RotateAnimation degrees={-3} delay={0.4}>
-                                    <Card className="overflow-hidden group hover:shadow-2xl transition-all bg-white border-2 border-gray-100 hover:border-[var(--secondary)]">
-                                        <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                                            <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt="Protection rapprochée" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                            <div className="absolute bottom-4 left-4 right-4">
-                                                <h3 className="font-bold text-white text-xl">{t.home.servicesDetail.protection.title}</h3>
-                                            </div>
-                                        </div>
-                                        <CardBody className="p-6">
-                                            <p className="text-[var(--text-secondary)] leading-relaxed">
-                                                {t.home.servicesDetail.protection.description}
-                                            </p>
-                                            <button className="mt-4 text-[var(--primary)] font-semibold hover:text-[var(--secondary-dark)] transition-colors flex items-center gap-2">
-                                                {t.home.servicesDetail.learnMore}
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </CardBody>
-                                    </Card>
-                                </RotateAnimation>
-                            </div>
-                        </div>
+                            {/* Service 4 - Protection rapprochée */}
+                            <StaggerItem direction="up">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.protection.title}</h3>
+                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.protection.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.protection.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
+
+                            {/* Service 5 - Formation */}
+                            <StaggerItem direction="up">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.formation.title}</h3>
+                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.formation.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.formation.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/training`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
+
+                            {/* Service 6 - Escorte sécurisée */}
+                            <StaggerItem direction="up">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.escorte.title}</h3>
+                                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.escorte.description}</p>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
+                                        <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.escorte.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                    </div>
+                                    <div className="flex justify-end mt-4">
+                                        <Link href={`/${locale}/products`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </StaggerItem>
+                        </StaggerContainer>
                     </Container>
                 </section>
 
@@ -340,7 +336,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <ScaleAnimation delay={0.3}>
                                 <div className="relative">
                                     <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative">
-                                        <Image src="/images site/Whisk_16ddc33bdfa1e1186704be1a6413cf96dr.jpeg" alt="Solutions de sécurité AISSIA" fill className="object-cover" />
+                                        <Image src="/images site/Whisk_16ddc33bdfa1e1186704be1a6413cf96dr.jpeg" alt="Solutions de sécurité AISSIA" fill className="object-cover object-top" />
                                     </div>
                                 </div>
                             </ScaleAnimation>
@@ -349,32 +345,51 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </section>
 
                 {/* Section Nos Partenaires */}
-                <section className="py-16 bg-white overflow-hidden">
+                <section className="py-16 bg-white/[0.95] overflow-hidden">
                     <Container>
                         <AnimatedSection direction="up">
-                            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--text-primary)]">
+                            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[var(--text-primary)]">
                                 {t.home.partners.title}
                             </h2>
+                            <p className="text-center text-[var(--text-secondary)] mb-12 max-w-xl mx-auto">
+                                {t.home.partners.subtitle}
+                            </p>
                         </AnimatedSection>
                         
-                        {/* Conteneur du carousel avec animation */}
+                        {/* Carrousel défilant */}
                         <div className="relative">
-                            <div className="flex partners-scroll w-max">
-                                {/* Premier groupe de logos */}
-                                {[...Array(6)].map((_, i) => (
-                                    <div key={`logo-${i}`} className="flex-shrink-0 w-48 h-32 mx-8 bg-gray-100 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[var(--secondary)] transition-colors">
-                                        <div className="text-center">
-                                            <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                                            <p className="text-xs text-gray-400">{t.home.partners.partnerLogo} {i + 1}</p>
+                            <div className="flex partners-scroll w-max items-center">
+                                {/* Premier groupe */}
+                                {[
+                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
+                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
+                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
+                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
+                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
+                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
+                                ].map((logo, i) => (
+                                    <div key={`logo-${i}`} className="flex-shrink-0 mx-10 group">
+                                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-[var(--secondary)] transition-all duration-300">
+                                            <div className="relative w-40 h-24 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
-                                {/* Duplication pour effet infini */}
-                                {[...Array(6)].map((_, i) => (
-                                    <div key={`logo-duplicate-${i}`} className="flex-shrink-0 w-48 h-32 mx-8 bg-gray-100 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[var(--secondary)] transition-colors">
-                                        <div className="text-center">
-                                            <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                                            <p className="text-xs text-gray-400">{t.home.partners.partnerLogo} {i + 1}</p>
+                                {/* Duplication pour boucle infinie */}
+                                {[
+                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
+                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
+                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
+                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
+                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
+                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
+                                ].map((logo, i) => (
+                                    <div key={`logo-dup-${i}`} className="flex-shrink-0 mx-10 group">
+                                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-[var(--secondary)] transition-all duration-300">
+                                            <div className="relative w-40 h-24 grayscale group-hover:grayscale-0 transition-all duration-500">
+                                                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -491,14 +506,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 {/* Section Cases/Témoignages avec photos */}
                
                 {/* Section expertise avec stats */}
-                <section className="py-20 bg-white">
+                <section className="py-20 bg-white/[0.95]">
                     <Container>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                             {/* Gauche - Image */}
                             <AnimatedSection direction="left">
                                 <div className="relative">
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative">
-                                        <Image src="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg" alt="Expertise AISSIA Sécurité" fill className="object-cover" />
+                                        <Image src="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg" alt="Expertise AISSIA Sécurité" fill className="object-cover object-top" />
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -506,12 +521,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             {/* Droite - Texte et Stats */}
                             <AnimatedSection direction="right" delay={0.2}>
                                 <div>
-                                    <div className="inline-block px-4 py-1 bg-[var(--secondary)]/10 text-[var(--secondary)] rounded-full text-sm font-semibold mb-4">
+                                    <div className="inline-block bg-[var(--primary)] text-white text-sm font-semibold uppercase tracking-wide px-4 py-1.5 rounded-full mb-4">
                                         {t.home.expertise.label}
                                     </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
                                         {t.home.expertise.title}
                                     </h2>
+                                    <div className="w-12 h-1 bg-[var(--primary)] rounded-full mb-6"></div>
                                     <p className="text-lg text-[var(--text-secondary)] mb-8">
                                         {t.home.expertise.description}
                                     </p>
@@ -664,33 +680,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                     </Container>
                 </section>
 
-                {/* Newsletter */}
-                <section className="py-16 bg-[var(--primary)] border-t border-white/10">
-                    <Container>
-                        <AnimatedSection direction="up">
-                            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                                <div className="text-white w-full md:w-auto">
-                                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-[var(--secondary)]">
-                                        {t.home.newsletter.title}
-                                    </h3>
-                                    <p className="text-white text-sm md:text-base">
-                                        {t.home.newsletter.description}
-                                    </p>
-                                </div>
-                                <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
-                                    <input 
-                                        type="email" 
-                                        placeholder={t.home.newsletter.placeholder}
-                                        className="px-4 md:px-6 py-3 rounded-lg w-full sm:flex-1 md:w-80 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
-                                    />
-                                    <button className="bg-[var(--secondary)] text-white px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors whitespace-nowrap w-full sm:w-auto">
-                                        {t.home.newsletter.subscribe}
-                                    </button>
-                                </div>
-                            </div>
-                        </AnimatedSection>
-                    </Container>
-                </section>
+               
             </main>
             <Footer />
         </>

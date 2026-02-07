@@ -125,7 +125,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                                 src={module.image}
                                                 alt={module.title}
                                             fill
-                                            className="object-cover opacity-80"
+                                            className="object-cover object-top opacity-80"
                                         />
                                     </div>
                                     <div className="p-6 bg-[var(--secondary)]">

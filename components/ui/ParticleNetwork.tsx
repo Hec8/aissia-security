@@ -10,7 +10,112 @@ interface Particle {
     vx: number;
     vy: number;
     radius: number;
+    iconIndex: number;
+    rotation: number;
+    rotationSpeed: number;
 }
+
+// SVG path data for security-themed icons
+const SECURITY_ICONS = [
+    // Shield
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size;
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.bezierCurveTo(s * 0.8, -s * 0.7, s, -s * 0.2, s, s * 0.1);
+        ctx.bezierCurveTo(s, s * 0.6, s * 0.5, s * 0.9, 0, s);
+        ctx.bezierCurveTo(-s * 0.5, s * 0.9, -s, s * 0.6, -s, s * 0.1);
+        ctx.bezierCurveTo(-s, -s * 0.2, -s * 0.8, -s * 0.7, 0, -s);
+        ctx.closePath();
+        ctx.restore();
+    },
+    // Lock / Padlock
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size * 0.8;
+        // Lock body
+        ctx.beginPath();
+        ctx.roundRect(-s * 0.6, -s * 0.1, s * 1.2, s * 1.1, s * 0.15);
+        // Lock shackle
+        ctx.moveTo(-s * 0.35, -s * 0.1);
+        ctx.bezierCurveTo(-s * 0.35, -s * 0.8, s * 0.35, -s * 0.8, s * 0.35, -s * 0.1);
+        ctx.restore();
+    },
+    // Camera / Eye
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size;
+        // Eye shape
+        ctx.beginPath();
+        ctx.moveTo(-s, 0);
+        ctx.bezierCurveTo(-s * 0.5, -s * 0.7, s * 0.5, -s * 0.7, s, 0);
+        ctx.bezierCurveTo(s * 0.5, s * 0.7, -s * 0.5, s * 0.7, -s, 0);
+        ctx.closePath();
+        // Pupil
+        ctx.moveTo(s * 0.3, 0);
+        ctx.arc(0, 0, s * 0.3, 0, Math.PI * 2);
+        ctx.restore();
+    },
+    // Key
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size * 0.8;
+        // Key head (circle)
+        ctx.beginPath();
+        ctx.arc(-s * 0.4, 0, s * 0.45, 0, Math.PI * 2);
+        // Key shaft
+        ctx.moveTo(-s * 0.05, 0);
+        ctx.lineTo(s * 0.9, 0);
+        // Key teeth
+        ctx.moveTo(s * 0.5, 0);
+        ctx.lineTo(s * 0.5, s * 0.3);
+        ctx.moveTo(s * 0.75, 0);
+        ctx.lineTo(s * 0.75, s * 0.25);
+        ctx.restore();
+    },
+    // Star / Badge
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size * 0.9;
+        const spikes = 5;
+        ctx.beginPath();
+        for (let i = 0; i < spikes * 2; i++) {
+            const r = i % 2 === 0 ? s : s * 0.45;
+            const angle = (i * Math.PI) / spikes - Math.PI / 2;
+            const px = Math.cos(angle) * r;
+            const py = Math.sin(angle) * r;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.restore();
+    },
+    // Checkmark in circle
+    (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        const s = size;
+        ctx.beginPath();
+        ctx.arc(0, 0, s, 0, Math.PI * 2);
+        // Checkmark
+        ctx.moveTo(-s * 0.4, 0);
+        ctx.lineTo(-s * 0.1, s * 0.35);
+        ctx.lineTo(s * 0.45, -s * 0.3);
+        ctx.restore();
+    },
+];
 
 export const ParticleNetwork = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -45,6 +150,9 @@ export const ParticleNetwork = () => {
                     vx: (Math.random() - 0.5) * PARTICLE_SPEED * 2,
                     vy: (Math.random() - 0.5) * PARTICLE_SPEED * 2,
                     radius: Math.random() * 2 + 1.5,
+                    iconIndex: Math.floor(Math.random() * SECURITY_ICONS.length),
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 0.005,
                 });
             }
         };
@@ -84,6 +192,7 @@ export const ParticleNetwork = () => {
 
                 p.x += p.vx;
                 p.y += p.vy;
+                p.rotation += p.rotationSpeed;
 
                 if (p.x < 0 || p.x > width) p.vx *= -1;
                 if (p.y < 0 || p.y > height) p.vy *= -1;
@@ -99,18 +208,18 @@ export const ParticleNetwork = () => {
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < CONNECTION_DISTANCE) {
-                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.2;
+                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.15;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(6, 21, 37, ${opacity})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(249, 198, 11, ${opacity})`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
             }
 
-            // Draw mouse connections & particle dots
+            // Draw mouse connections & security icons
             for (let i = 0; i < particles.length; i++) {
                 const p = particles[i];
                 const mdx = p.x - mouse.x;
@@ -118,23 +227,23 @@ export const ParticleNetwork = () => {
                 const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
 
                 if (mDist < MOUSE_RADIUS) {
-                    const opacity = (1 - mDist / MOUSE_RADIUS) * 0.3;
+                    const opacity = (1 - mDist / MOUSE_RADIUS) * 0.2;
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(6, 21, 37, ${opacity})`;
-                    ctx.lineWidth = 0.6;
+                    ctx.strokeStyle = `rgba(249, 198, 11, ${opacity})`;
+                    ctx.lineWidth = 0.4;
                     ctx.stroke();
                 }
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(6, 21, 37, 0.4)';
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius + 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(6, 21, 37, 0.08)';
+                // Draw security icon instead of a dot
+                const iconSize = p.radius * 3.5;
+                const drawIcon = SECURITY_ICONS[p.iconIndex];
+                drawIcon(ctx, p.x, p.y, iconSize, p.rotation);
+                ctx.strokeStyle = 'rgba(249, 198, 11, 0.25)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.fillStyle = 'rgba(249, 198, 11, 0.04)';
                 ctx.fill();
             }
 
@@ -168,8 +277,8 @@ export const ParticleNetwork = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 pointer-events-none z-0"
-            style={{ opacity: 0.8 }}
+            className="fixed inset-0 pointer-events-none"
+            style={{ opacity: 0.5, zIndex: 0 }}
         />
     );
 };
