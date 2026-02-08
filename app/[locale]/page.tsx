@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/layout';
-import { Button, Card, CardBody, Container } from '@/components/ui';
+import { Button, Container } from '@/components/ui';
 import { QuoteButton } from '@/components/ui/QuoteModal';
 import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
-import { RotateAnimation } from '@/components/animations/RotateAnimation';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -45,14 +44,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                     <Container>
                         <div className="relative z-10 flex flex-col items-center justify-center text-center py-8 md:py-10 lg:py-16">
                             {/* Contenu texte centré */}
-                            <div className="space-y-6 max-w-4xl mx-auto">
+                            <div className="space-y-6 w-full">
                                 <ScaleAnimation delay={0.2} scale={0.8}>
                                     <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-bold mb-4 text-white">
                                         {t.home.hero.subtitle || "Bienvenue chez AISSIA"}
                                     </div>
                                 </ScaleAnimation>
                                 <AnimatedSection direction="up" delay={0.4}>
-                                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[var(--secondary)]">
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold leading-tight text-[var(--secondary)] whitespace-nowrap">
                                         {t.home.hero.title || "Gardiennage professionnel & sécurité"}
                                     </h1>
                                 </AnimatedSection>
@@ -201,7 +200,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                 <div className="inline-block px-5 py-1.5 border-2 border-[var(--primary)] rounded-full text-sm font-semibold text-[var(--primary)] mb-6">
                                     {t.home.servicesDetail.label}
                                 </div>
-                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] mb-6 max-w-2xl mx-auto leading-tight">
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] mb-6 leading-tight whitespace-nowrap">
                                     {t.home.servicesDetail.title}
                                 </h2>
                                 <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">

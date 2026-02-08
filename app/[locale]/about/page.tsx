@@ -154,14 +154,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                             {securityValues.map((value, index) => (
                                 <ScaleAnimation key={index} delay={index * 0.1}>
-                                    <div className="bg-white rounded-lg p-8 h-full hover:scale-105 transition-transform duration-300 shadow-lg">
+                                    <div className="bg-white/20 backdrop-blur-sm rounded-lg p-8 h-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg group">
                                         <div className="w-12 h-12 bg-[var(--secondary)] rounded-full flex items-center justify-center mb-4">
                                             {value.icon}
                                         </div>
-                                        <h3 className="text-xl font-bold mb-3 text-[var(--primary)]">
+                                        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-[var(--primary)] transition-colors duration-300">
                                             {value.title}
                                         </h3>
-                                        <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+                                        <p className="text-white/70 group-hover:text-[var(--text-secondary)] text-sm leading-relaxed transition-colors duration-300">
                                             {value.description}
                                         </p>
                                     </div>

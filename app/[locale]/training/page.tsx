@@ -143,7 +143,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                             {trainingModules.map((module, index) => (
                                 <StaggerItem key={index} direction="up">
                                     <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                                        <div className={`flex flex-col sm:flex-row ${index % 2 === 1 ? 'sm:flex-row-reverse' : ''}`}>
+                                        <div className="flex flex-col sm:flex-row">
                                             {/* Image */}
                                             <div className="relative w-full sm:w-2/5 min-h-[200px] sm:min-h-[220px] flex-shrink-0">
                                                 <Image

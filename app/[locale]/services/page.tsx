@@ -173,7 +173,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                     {/* Background Image */}
                     <div className="absolute inset-0">
                         <Image 
-                            src="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg"
+                            src="/images site/Whisk_48cad00aca33977a38c4b336d234e7f3dr.jpeg"
                             alt="Formation en sécurité"
                             fill
                             className="object-cover object-top"

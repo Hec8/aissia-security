@@ -162,7 +162,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     <Container>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
                             {/* Left sidebar */}
-                            <AnimatedSection className="lg:col-span-1">
+                            <AnimatedSection className="lg:col-span-1 lg:self-center">
                                 <span className="inline-block px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
                                     Nos Offres
                                 </span>

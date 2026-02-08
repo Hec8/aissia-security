@@ -5,8 +5,30 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Container } from '../ui/Container';
 import { useTranslation } from '@/lib/hooks/useTranslation';
+
+// Composants de drapeaux en SVG (déclarés hors du composant pour éviter les re-créations)
+const FlagFR = () => (
+    <svg className="w-5 h-4 rounded-sm" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+        <rect width="900" height="600" fill="#ED2939" />
+        <rect width="600" height="600" fill="#fff" />
+        <rect width="300" height="600" fill="#002395" />
+    </svg>
+);
+
+const FlagGB = () => (
+    <svg className="w-5 h-4 rounded-sm" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="s"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
+        <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z" /></clipPath>
+        <g clipPath="url(#s)">
+            <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#t)" stroke="#C8102E" strokeWidth="4" />
+            <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
+            <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+        </g>
+    </svg>
+);
 
 export const Header = () => {
     const { t, locale } = useTranslation();
@@ -25,29 +47,6 @@ export const Header = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    // Composants de drapeaux en SVG
-    const FlagFR = () => (
-        <svg className="w-5 h-4 rounded-sm" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="900" height="600" fill="#ED2939" />
-            <rect width="600" height="600" fill="#fff" />
-            <rect width="300" height="600" fill="#002395" />
-        </svg>
-    );
-
-    const FlagGB = () => (
-        <svg className="w-5 h-4 rounded-sm" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-            <clipPath id="s"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
-            <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z" /></clipPath>
-            <g clipPath="url(#s)">
-                <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
-                <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#t)" stroke="#C8102E" strokeWidth="4" />
-                <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
-                <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
-            </g>
-        </svg>
-    );
 
     // Fermer le dropdown quand on clique en dehors
     useEffect(() => {
@@ -86,13 +85,13 @@ export const Header = () => {
 
     const switchLanguage = (newLocale: string) => {
         const newPath = pathname?.replace(`/${locale}`, `/${newLocale}`) || `/${newLocale}`;
-        window.location.href = newPath;
         setIsLangDropdownOpen(false);
+        window.location.assign(newPath);
     };
 
     return (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-[var(--primary)]'}`}>
-            <Container>
+            <div className="max-w-[85rem] mx-auto px-6 sm:px-10 lg:px-12">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link href={`/${locale}`} className="flex items-center group">
@@ -254,7 +253,7 @@ export const Header = () => {
                         </motion.nav>
                     )}
                 </AnimatePresence>
-            </Container>
+            </div>
         </header>
     );
 };
