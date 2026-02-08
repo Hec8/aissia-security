@@ -91,11 +91,11 @@ export const Header = () => {
 
     return (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-[var(--primary)]'}`}>
-            <div className="max-w-[85rem] mx-auto px-6 sm:px-10 lg:px-12">
+            <div className="max-w-[85rem] mx-auto px-4 sm:px-10 lg:px-12">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link href={`/${locale}`} className="flex items-center group">
-                        <div className="relative h-14 w-40">
+                        <div className="relative h-12 w-32 sm:h-14 sm:w-40">
                             <Image 
                                 src={isScrolled ? "/logo AISSIA /Variantes logo-02.png" : "/logo AISSIA /Variantes logo-03.png"}
                                 alt="AISSIA SÉCURITÉ"
