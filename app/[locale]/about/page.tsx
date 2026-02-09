@@ -109,7 +109,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                             À Propos
                                         </div>
                                         <h2 className="text-4xl font-bold text-[var(--text-primary)] mb-6">
-                                            Aissia <span className="text-[var(--secondary)]">Security</span>
+                                            Aissia <span className="text-[var(--secondary)]">Securité</span>
                                         </h2>
                                         <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                                             <p>
