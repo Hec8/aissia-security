@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
 import { Container, AnimatedSection, ScaleAnimation } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 import { api } from '@/lib/api';
 
@@ -51,6 +52,7 @@ export default function ContactPage() {
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <AnimatedSection>
                 <PageHeader
@@ -69,8 +71,8 @@ export default function ContactPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
                             {/* Contact Form - Left side (3 cols) */}
                             <AnimatedSection delay={0.1} className="lg:col-span-3">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-8">
+                                <div className="bg-[var(--primary)] rounded-2xl p-8 h-full">
+                                    <h2 className="text-2xl font-bold text-white mb-8">
                                         {t.contact.sendMessage}
                                     </h2>
 
@@ -95,7 +97,7 @@ export default function ContactPage() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder={t.contact.form.email}
-                                                className="w-full px-5 py-4 bg-[var(--primary)]/5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 placeholder-gray-700"
+                                                className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
                                             />
                                             <input
                                                 type="tel"
@@ -103,7 +105,7 @@ export default function ContactPage() {
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 placeholder={t.contact.form.phone}
-                                                className="w-full px-5 py-4 bg-[var(--primary)]/5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 placeholder-gray-700"
+                                                className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
                                             />
                                         </div>
                                         <input
@@ -113,7 +115,7 @@ export default function ContactPage() {
                                             onChange={handleChange}
                                             required
                                             placeholder={t.contact.form.name}
-                                            className="w-full px-5 py-4 bg-[var(--primary)]/5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 placeholder-gray-700"
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
                                         />
                                         <textarea
                                             name="message"
@@ -122,12 +124,12 @@ export default function ContactPage() {
                                             required
                                             rows={5}
                                             placeholder={t.contact.form.message}
-                                            className="w-full px-5 py-4 bg-[var(--primary)]/5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 placeholder-gray-700 resize-none"
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50 resize-none"
                                         ></textarea>
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="px-8 py-4 bg-[var(--primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                                            className="px-8 py-4 bg-[var(--secondary)] text-[var(--primary)] font-semibold rounded-xl hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                                         >
                                             {isSubmitting ? t.common.loading : t.contact.form.submit}
                                         </button>
@@ -136,19 +138,19 @@ export default function ContactPage() {
                             </AnimatedSection>
 
                             {/* Newsletter - Right side (2 cols) */}
-                            <AnimatedSection delay={0.3} className="lg:col-span-2">
-                                <div className="bg-[var(--primary)] rounded-2xl p-8 text-white h-full flex flex-col justify-center">
-                                    <h3 className="text-xl font-bold mb-3 text-[var(--secondary)]">{t.home.newsletter.title}</h3>
-                                    <p className="text-white/80 text-sm leading-relaxed mb-6">
+                            <AnimatedSection delay={0.3} className="lg:col-span-2 flex items-center">
+                                <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 w-full max-w-sm mx-auto">
+                                    <h3 className="text-lg font-bold mb-2 text-[var(--primary)]">{t.home.newsletter.title}</h3>
+                                    <p className="text-gray-600 text-xs leading-relaxed mb-4">
                                         {t.home.newsletter.description}
                                     </p>
-                                    <div className="space-y-3">
+                                    <div className="space-y-2">
                                         <input
                                             type="email"
                                             placeholder={t.home.newsletter.placeholder}
-                                            className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent"
+                                            className="w-full px-4 py-2.5 text-sm rounded-lg bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent"
                                         />
-                                        <button className="w-full py-3 bg-[var(--secondary)] text-[var(--primary)] font-bold rounded-lg hover:opacity-90 transition-all">
+                                        <button className="w-full py-2.5 text-sm bg-[var(--primary)] text-white font-bold rounded-lg hover:opacity-90 transition-all">
                                             {t.home.newsletter.subscribe}
                                         </button>
                                     </div>
@@ -159,19 +161,19 @@ export default function ContactPage() {
                 </section>
 
                 {/* Info Cards Section */}
-                <section className="py-16 bg-white">
+                <section className="py-16 bg-[var(--primary)]">
                     <Container>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Phone */}
                             <ScaleAnimation delay={0.1}>
                                 <div className="text-center group">
-                                    <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--primary)] transition-colors duration-300">
-                                        <svg className="w-7 h-7 text-[var(--primary)] group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                    <div className="w-16 h-16 bg-[var(--secondary)]/20 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--secondary)] transition-colors duration-300">
+                                        <svg className="w-7 h-7 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.contact.phoneNumber}</h3>
-                                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs mx-auto">
+                                    <h3 className="text-lg font-bold text-white mb-2">{t.contact.phoneNumber}</h3>
+                                    <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto">
                                         {t.contact.hours.weekdays}<br />{t.contact.hours.saturday}
                                     </p>
                                 </div>
@@ -180,14 +182,14 @@ export default function ContactPage() {
                             {/* Email */}
                             <ScaleAnimation delay={0.2}>
                                 <div className="text-center group">
-                                    <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--primary)] transition-colors duration-300">
-                                        <svg className="w-7 h-7 text-[var(--primary)] group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                    <div className="w-16 h-16 bg-[var(--secondary)]/20 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--secondary)] transition-colors duration-300">
+                                        <svg className="w-7 h-7 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.contact.emailPrimary}</h3>
-                                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs mx-auto">
+                                    <h3 className="text-lg font-bold text-white mb-2">{t.contact.emailPrimary}</h3>
+                                    <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto">
                                         {t.contact.emailSecondary}
                                     </p>
                                 </div>
@@ -196,13 +198,13 @@ export default function ContactPage() {
                             {/* Address */}
                             <ScaleAnimation delay={0.3}>
                                 <div className="text-center group">
-                                    <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--primary)] transition-colors duration-300">
-                                        <svg className="w-7 h-7 text-[var(--primary)] group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                    <div className="w-16 h-16 bg-[var(--secondary)]/20 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[var(--secondary)] transition-colors duration-300">
+                                        <svg className="w-7 h-7 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.contact.info.address}</h3>
-                                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs mx-auto">
+                                    <h3 className="text-lg font-bold text-white mb-2">{t.contact.info.address}</h3>
+                                    <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto">
                                         {t.contact.addressFull}
                                     </p>
                                 </div>

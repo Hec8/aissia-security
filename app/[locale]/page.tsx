@@ -324,7 +324,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         {t.home.solutions.description}
                                     </p>
                                     <Link href={`/${locale}/contact`}>
-                                        <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary)] border-none shadow-lg font-bold uppercase">
+                                        <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-primary-dark border-none shadow-lg font-bold">
                                             {t.home.solutions.cta}
                                         </Button>
                                     </Link>
@@ -625,7 +625,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     </StaggerContainer>
 
                                     <ScaleAnimation delay={0.6}>
-                                        <button className="mt-8 bg-[var(--secondary)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors shadow-lg">
+                                        <button className="mt-8 bg-[var(--secondary)] text-[var(--primary)] px-8 py-3 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors shadow-lg">
                                             {t.home.contactSection.cta}
                                         </button>
                                     </ScaleAnimation>
@@ -668,7 +668,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         ></textarea>
                                         <button 
                                             type="submit"
-                                            className="w-full bg-[var(--secondary)] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors"
+                                            className="w-full bg-[var(--secondary)] text-[var(--primary)] py-3 px-6 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors"
                                         >
                                             {t.home.contactSection.submit}
                                         </button>

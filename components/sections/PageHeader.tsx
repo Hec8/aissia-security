@@ -36,7 +36,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {/* w-screen ensures centering matches the fixed header (which uses 100vw) */}
             <div className="relative z-10 w-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-2xl py-8 text-left">
+                    <div className="max-w-4xl py-8 text-left">
                     {breadcrumbs && breadcrumbs.length > 0 && (
                         <nav className="flex items-center space-x-2 text-sm mb-6 text-white/80">
                             {breadcrumbs.map((crumb, index) => (
@@ -61,7 +61,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                         {title}
                     </h1>
                     {subtitle && (
-                        <p className="text-base md:text-lg text-white/85 leading-relaxed max-w-xl">
+                        <p className="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl">
                             {subtitle}
                         </p>
                     )}

@@ -380,16 +380,24 @@ export const translations = {
                 title: 'Comment ça fonctionne ?',
                 steps: [
                     {
-                        title: 'Installation',
-                        description: 'Déploiement rapide de l\'application sur les appareils de vos agents et configuration personnalisée selon vos besoins.',
+                        title: 'Déclenchez une alerte',
+                        description: 'En cas d\'urgence, l\'agent déclenche une alerte SOS directement depuis l\'application mobile.',
                     },
                     {
-                        title: 'Suivi en temps réel',
-                        description: 'Visualisez la position et l\'activité de vos équipes en temps réel depuis votre tableau de bord centralisé.',
+                        title: 'Transmission automatique',
+                        description: 'Le signal est automatiquement transmis à notre centre d\'assistance pour une prise en charge immédiate.',
                     },
                     {
-                        title: 'Alertes & Rapports',
-                        description: 'Recevez des notifications instantanées en cas d\'anomalies et générez des rapports détaillés automatiquement.',
+                        title: 'ALERTGUARD & cockpit',
+                        description: 'La solution ainsi que le cockpit sont mis à votre disposition pour un suivi optimal et une gestion centralisée.',
+                    },
+                    {
+                        title: 'Géolocalisation & rappel',
+                        description: 'Vous serez géolocalisé et rappelé par un de nos opérateurs formés pour intervenir rapidement.',
+                    },
+                    {
+                        title: 'Prise en charge',
+                        description: 'L\'alerte est prise en charge selon un processus conjointement établi pour garantir votre sécurité.',
                     },
                 ],
             },
@@ -755,16 +763,24 @@ export const translations = {
                 title: 'How does it work?',
                 steps: [
                     {
-                        title: 'Installation',
-                        description: 'Quick deployment of the application on your agents\' devices and custom configuration to your needs.',
+                        title: 'Trigger an alert',
+                        description: 'In case of emergency, the agent triggers an SOS alert directly from the mobile application.',
                     },
                     {
-                        title: 'Real-time tracking',
-                        description: 'View the position and activity of your teams in real-time from your centralized dashboard.',
+                        title: 'Automatic transmission',
+                        description: 'The signal is automatically transmitted to our assistance center for immediate action.',
                     },
                     {
-                        title: 'Alerts & Reports',
-                        description: 'Receive instant notifications in case of anomalies and generate detailed reports automatically.',
+                        title: 'ALERTGUARD & cockpit',
+                        description: 'The solution and the cockpit are made available to you for optimal monitoring and centralized management.',
+                    },
+                    {
+                        title: 'Geolocation & callback',
+                        description: 'You will be geolocated and called back by one of our trained operators to intervene quickly.',
+                    },
+                    {
+                        title: 'Processing',
+                        description: 'The alert is processed according to a jointly established process to ensure your safety.',
                     },
                 ],
             },

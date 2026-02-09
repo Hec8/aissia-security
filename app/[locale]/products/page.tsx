@@ -2,9 +2,11 @@ import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
 import { AnimatedSection, ScaleAnimation, StaggerContainer } from '@/components/ui';
 import { Container } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Link from 'next/link';
+import Image from 'next/image';
 import { QuoteButton } from '@/components/ui/QuoteModal';
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -97,7 +99,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
             title: 'Services d\'intervention & escorte sécurisé',
             features: [
                 'Escorte moto ou auto',
-                'Ramassage de clés de coffres et accès sécurisés',
+                'Ramassage de clés sécurisés',
             ],
         },
     ];
@@ -144,6 +146,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <AnimatedSection>
                 <PageHeader
@@ -185,22 +188,22 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                     <ScaleAnimation key={index} delay={index * 0.1}>
                                         <div 
                                             className={`relative rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-xl group ${
-                                                index === 0
+                                                index === 0 || index === 3
                                                     ? 'bg-[var(--primary)] text-white shadow-2xl'
                                                     : 'bg-white border border-gray-200 hover:border-[var(--secondary)]'
                                             }`}
                                         >
                                             {/* Arrow top-right */}
                                             <div className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 ${
-                                                index === 0 ? 'bg-white/20' : 'bg-gray-100'
+                                                index === 0 || index === 3 ? 'bg-white/20' : 'bg-gray-100'
                                             }`}>
-                                                <span className={`text-lg ${index === 0 ? 'text-white' : 'text-[var(--primary)]'}`}>↗</span>
+                                                <span className={`text-lg ${index === 0 || index === 3 ? 'text-white' : 'text-[var(--primary)]'}`}>↗</span>
                                             </div>
 
                                             {/* Badge */}
                                             {service.badge && (
                                                 <span className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full mb-4 ${
-                                                    index === 0 ? 'bg-[var(--secondary)] text-[var(--primary)]' : 'bg-red-100 text-red-600'
+                                                    index === 0 || index === 3 ? 'bg-[var(--secondary)] text-[var(--primary)]' : 'bg-red-100 text-red-600'
                                                 }`}>
                                                     {service.badge}
                                                 </span>
@@ -208,14 +211,14 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
                                             {/* Icon */}
                                             <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${
-                                                index === 0 ? 'bg-white/20 text-white' : 'bg-[var(--secondary)]/20 text-[var(--secondary)]'
+                                                index === 0 || index === 3 ? 'bg-white/20 text-white' : 'bg-[var(--secondary)]/20 text-[var(--secondary)]'
                                             }`}>
                                                 {service.icon}
                                             </div>
 
                                             {/* Title */}
                                             <h3 className={`text-lg font-bold mb-3 ${
-                                                index === 0 ? 'text-white' : 'text-[var(--primary)]'
+                                                index === 0 || index === 3 ? 'text-white' : 'text-[var(--primary)]'
                                             }`}>
                                                 {service.title}
                                             </h3>
@@ -224,7 +227,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                             <ul className="space-y-2">
                                                 {service.features.map((feature, idx) => (
                                                     <li key={idx} className={`text-sm ${
-                                                        index === 0 ? 'text-white/80' : 'text-gray-600'
+                                                        index === 0 || index === 3 ? 'text-white/80' : 'text-gray-600'
                                                     }`}>
                                                         {feature}
                                                     </li>
@@ -243,9 +246,6 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     <Container>
                         {/* Centered header */}
                         <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
-                            <span className="inline-block px-4 py-1.5 bg-[var(--primary)]/10 text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                                Services
-                            </span>
                             <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">
                                 Prestations supplémentaires
                             </h2>
@@ -259,10 +259,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {additionalServices.map((service, index) => (
                                 <ScaleAnimation key={index} delay={index * 0.15}>
-                                    <div className="text-center group">
+                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
                                         {/* Circular icon */}
                                         <div className="w-24 h-24 bg-[var(--primary)] text-[var(--secondary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                            <div className="w-10 h-10">{service.icon}</div>
+                                            {service.icon}
                                         </div>
 
                                         {/* Title */}
@@ -281,7 +281,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         <QuoteButton
                                             className="inline-flex items-center gap-1 text-[var(--secondary)] font-semibold text-sm hover:gap-2 transition-all"
                                         >
-                                            En savoir plus <span>→</span>
+                                            Demander un devis <span>→</span>
                                         </QuoteButton>
                                     </div>
                                 </ScaleAnimation>
@@ -293,7 +293,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 {/* Analyses & Notes Stratégiques — sidebar + cards */}
                 <section className="py-20 bg-[var(--primary)]">
                     <Container>
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
                             {/* Left sidebar */}
                             <AnimatedSection className="lg:col-span-1">
                                 <span className="inline-block px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
@@ -354,9 +354,9 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         <div className="max-w-md mx-auto">
                             {annexServices.map((service, index) => (
                                 <ScaleAnimation key={index} delay={0.2}>
-                                    <div className="text-center group">
+                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
                                         <div className="w-24 h-24 bg-[var(--primary)] text-[var(--secondary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                            <div className="w-10 h-10">{service.icon}</div>
+                                            {service.icon}
                                         </div>
                                         <h3 className="text-xl font-bold text-[var(--primary)] mb-4">
                                             {service.title}
@@ -364,7 +364,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                         <QuoteButton
                                             className="inline-flex items-center gap-1 text-[var(--secondary)] font-semibold text-sm hover:gap-2 transition-all"
                                         >
-                                            En savoir plus <span>→</span>
+                                            Demander un devis <span>→</span>
                                         </QuoteButton>
                                     </div>
                                 </ScaleAnimation>
@@ -374,10 +374,21 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-20 bg-white">
-                    <Container>
+                <section className="relative py-32 overflow-hidden w-full">
+                    {/* Background image */}
+                    <div className="absolute inset-0">
+                        <Image
+                            src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
+                            alt=""
+                            fill
+                            className="object-cover object-[center_20%]"
+                        />
+                        <div className="absolute inset-0 bg-[var(--primary)]/90"></div>
+                    </div>
+                    
+                    <div className="relative z-10 w-full">
                         <AnimatedSection delay={0.2}>
-                        <div className="max-w-3xl mx-auto text-center bg-[var(--primary)] text-white rounded-2xl p-12">
+                        <div className="max-w-3xl mx-auto text-center px-4">
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
                                 Besoin d&apos;une solution personnalisée ?
                             </h2>
@@ -394,7 +405,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                             </ScaleAnimation>
                         </div>
                         </AnimatedSection>
-                    </Container>
+                    </div>
                 </section>
             </main>
             <Footer />

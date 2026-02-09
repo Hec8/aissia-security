@@ -1,6 +1,7 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
 import { Container } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
@@ -61,6 +62,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <AnimatedSection>
                 <PageHeader

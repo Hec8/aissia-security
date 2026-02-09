@@ -1,6 +1,7 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
 import { Card, CardBody, Container } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Link from 'next/link';
@@ -73,6 +74,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <PageHeader
                     title={t.news.title}

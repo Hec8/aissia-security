@@ -1,6 +1,7 @@
 import { Header, Footer } from '@/components/layout';
 import { PageHeader } from '@/components/sections';
 import { Container } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
@@ -77,6 +78,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <AnimatedSection>
                 <PageHeader
@@ -142,7 +144,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" staggerDelay={0.08}>
                             {trainingModules.map((module, index) => (
                                 <StaggerItem key={index} direction="up">
-                                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300 group">
                                         <div className="flex flex-col sm:flex-row">
                                             {/* Image */}
                                             <div className="relative w-full sm:w-2/5 min-h-[200px] sm:min-h-[220px] flex-shrink-0">
