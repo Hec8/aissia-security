@@ -18,7 +18,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
             category: t.technologies.alertguard.category,
             title: t.technologies.alertguard.title,
             description: t.technologies.alertguard.description,
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            image: '/mobile/WhatsApp-Image-2024-12-20-a-12.35.00_b22f59d4-scaled-qyseak0dp271df222mk2b71pjbbtouc52vjj06m5ps.jpg-removebg-preview.png',
             features: t.technologies.alertguard.features,
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,8 +172,25 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                     </Container>
                 </section>
 
-                {/* Application Mobile Section */}
+                {/* Satellite Diagram Section */}
                 <section className="py-20 bg-white">
+                    <Container>
+                        <AnimatedSection>
+                            <div className="relative w-full max-w-6xl mx-auto px-4">
+                                <Image
+                                    src="/mobile/WhatsApp-Image-2024-10-08-a-00.27.24_f5b45fed.jpg.jpeg"
+                                    alt="AlertGuard System Diagram"
+                                    width={1920}
+                                    height={800}
+                                    className="w-full h-auto rounded-2xl shadow-lg"
+                                />
+                            </div>
+                        </AnimatedSection>
+                    </Container>
+                </section>
+
+                {/* Application Mobile Section */}
+                <section className="py-20 bg-gray-50">
                     <Container>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             {/* Texte à gauche */}
@@ -184,7 +201,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                                     </h2>
                                     <div className="w-16 h-1 bg-[var(--secondary)] rounded-full mb-8" />
                                     <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                        Notre application AWAKEGUARD fournit une interface pour effectuer les tâches quotidiennes. Telles que l&apos;analyse de points de contrôle la soumission de formulaire, les rapports d&apos;incidents, les tâches, les rapports de présence, le suivi de localisations et les alertes d&apos;urgences.
+                                        Notre application ALERTGUARD fournit une interface pour effectuer les tâches quotidiennes. Telles que l&apos;analyse de points de contrôle la soumission de formulaire, les rapports d&apos;incidents, les tâches, les rapports de présence, le suivi de localisations et les alertes d&apos;urgences.
                                     </p>
                                     
                                     <div className="flex flex-wrap gap-4">
@@ -214,15 +231,18 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                             <AnimatedSection direction="right" delay={0.2}>
                                 <div className="relative flex justify-center">
                                     <div className="relative w-full max-w-sm">
-                                        <div className="absolute inset-0 bg-[var(--secondary)]/20 rounded-[3rem] blur-3xl"></div>
-                                        <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-gray-800">
-                                            <Image
-                                                src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
-                                                alt="Application AlertGuard"
-                                                fill
-                                                className="object-cover"
-                                            />
-                                        </div>
+                                        <Image
+                                            src="/mobile/WhatsApp-Image-2024-12-20-a-12.35.00_b22f59d4-scaled-qyseak0dp271df222mk2b71pjbbtouc52vjj06m5ps.jpg-removebg-preview.png"
+                                            alt="Application AlertGuard"
+                                            width={500}
+                                            height={1000}
+                                            className="w-full h-auto"
+                                            style={{
+                                                filter: 'brightness(1.2) contrast(1.1)',
+                                                mixBlendMode: 'darken',
+                                                background: 'white'
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             </AnimatedSection>

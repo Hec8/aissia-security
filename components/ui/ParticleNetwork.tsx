@@ -208,7 +208,7 @@ export const ParticleNetwork = () => {
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < CONNECTION_DISTANCE) {
-                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.25;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -227,7 +227,7 @@ export const ParticleNetwork = () => {
                 const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
 
                 if (mDist < MOUSE_RADIUS) {
-                    const opacity = (1 - mDist / MOUSE_RADIUS) * 0.2;
+                    const opacity = (1 - mDist / MOUSE_RADIUS) * 0.35;
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(mouse.x, mouse.y);
@@ -240,10 +240,10 @@ export const ParticleNetwork = () => {
                 const iconSize = p.radius * 3.5;
                 const drawIcon = SECURITY_ICONS[p.iconIndex];
                 drawIcon(ctx, p.x, p.y, iconSize, p.rotation);
-                ctx.strokeStyle = 'rgba(249, 198, 11, 0.25)';
+                ctx.strokeStyle = 'rgba(249, 198, 11, 0.4)';
                 ctx.lineWidth = 1;
                 ctx.stroke();
-                ctx.fillStyle = 'rgba(249, 198, 11, 0.04)';
+                ctx.fillStyle = 'rgba(249, 198, 11, 0.08)';
                 ctx.fill();
             }
 
@@ -278,7 +278,7 @@ export const ParticleNetwork = () => {
         <canvas
             ref={canvasRef}
             className="fixed inset-0 pointer-events-none"
-            style={{ opacity: 0.5, zIndex: 0 }}
+            style={{ opacity: 0.65, zIndex: 0 }}
         />
     );
 };
