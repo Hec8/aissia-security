@@ -1,111 +1,63 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-
-interface Quote {
-    id: number;
-    name: string;
-    email: string;
-    phone: string;
-    company: string;
-    service: string;
-    message: string;
-    date: string;
-    status: 'new' | 'read' | 'replied' | 'archived';
-}
+import { useEffect, useState } from 'react';
+import { api, Quote as ApiQuote } from '@/lib/api';
 
 export default function DashboardQuotesPage() {
-    const [quotes, setQuotes] = useState<Quote[]>([
-        {
-            id: 1,
-            name: 'Jean Dupont',
-            email: 'jean.dupont@email.com',
-            phone: '+33 6 12 34 56 78',
-            company: 'Dupont & Fils SARL',
-            service: 'Agent de Sécurité (ADS J/N)',
-            message: 'Bonjour, nous souhaitons obtenir un devis pour la surveillance de notre entrepôt situé dans la zone industrielle de Lyon. Nous avons besoin d\'une couverture 24h/24 du lundi au samedi.',
-            date: '06/02/2026 14:32',
-            status: 'new',
-        },
-        {
-            id: 2,
-            name: 'Marie Lambert',
-            email: 'marie.lambert@corporate.fr',
-            phone: '+33 6 98 76 54 32',
-            company: 'Lambert Corp',
-            service: 'Protection rapprochée',
-            message: 'Je recherche un service de protection rapprochée pour un déplacement professionnel en Afrique de l\'Ouest prévu pour mars 2026. Durée estimée : 2 semaines.',
-            date: '05/02/2026 09:15',
-            status: 'read',
-        },
-        {
-            id: 3,
-            name: 'Pierre Martin',
-            email: 'p.martin@securitas.fr',
-            phone: '+33 7 11 22 33 44',
-            company: 'Martin Industries',
-            service: 'Audit & études de sécurité',
-            message: 'Nous souhaitons faire réaliser un audit complet de sécurité de nos 3 sites de production. Merci de nous proposer une offre.',
-            date: '04/02/2026 16:48',
-            status: 'new',
-        },
-        {
-            id: 4,
-            name: 'Fatou Diallo',
-            email: 'fatou.d@gmail.com',
-            phone: '+221 77 123 45 67',
-            company: '',
-            service: 'Abonnement Assistance ALERTGUARD',
-            message: 'Je souhaite souscrire à l\'abonnement AlertGuard pour mon domicile. Quels sont vos tarifs ?',
-            date: '03/02/2026 11:20',
-            status: 'replied',
-        },
-        {
-            id: 5,
-            name: 'Ahmed Ben Ali',
-            email: 'ahmed.benali@company.ma',
-            phone: '+212 6 55 44 33 22',
-            company: 'BenAli Trading',
-            service: 'Conducteur-Chien',
-            message: 'Demande de devis pour un service de surveillance avec chien pour un chantier de construction. Superficie : 2 hectares.',
-            date: '01/02/2026 08:00',
-            status: 'archived',
-        },
-    ]);
+    const [quotes, setQuotes] = useState<ApiQuote[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [selectedQuote, setSelectedQuote] = useState<ApiQuote | null>(null);
+    const [filter, setFilter] = useState<'all' | string>('all');
 
-    const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
-    const [filter, setFilter] = useState<'all' | 'new' | 'read' | 'replied' | 'archived'>('all');
+    useEffect(() => {
+        api.admin.getQuotes()
+            .then(res => {
+                if (res.success) setQuotes(res.data || []);
+                else setError(res.message || 'Erreur de chargement');
+            })
+            .catch(() => setError('Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, []);
 
     const filteredQuotes = filter === 'all' ? quotes : quotes.filter(q => q.status === filter);
 
-    const updateStatus = (id: number, status: Quote['status']) => {
-        setQuotes(quotes.map(q => q.id === id ? { ...q, status } : q));
-        if (selectedQuote?.id === id) {
-            setSelectedQuote({ ...selectedQuote, status });
+    const updateStatus = async (id: number, status: ApiQuote['status']) => {
+        // Optimistic update
+        setQuotes(prev => prev.map(q => q.id === id ? { ...q, status } : q));
+        if (selectedQuote?.id === id) setSelectedQuote({ ...selectedQuote, status });
+        try {
+            await api.admin.updateQuote(id, { status });
+        } catch {
+            // ignore errors for now
         }
     };
 
-    const openQuote = (quote: Quote) => {
+    const openQuote = (quote: ApiQuote) => {
         setSelectedQuote(quote);
-        if (quote.status === 'new') {
-            updateStatus(quote.id, 'read');
+        if (quote.status === 'pending') {
+            updateStatus(quote.id, 'contacted');
         }
     };
 
-    const statusLabels = {
-        new: { label: 'Nouveau', color: 'bg-blue-100 text-blue-700' },
-        read: { label: 'Lu', color: 'bg-gray-100 text-gray-600' },
-        replied: { label: 'Répondu', color: 'bg-green-100 text-green-700' },
-        archived: { label: 'Archivé', color: 'bg-orange-100 text-orange-700' },
+    const statusLabels: Record<string, { label: string; color: string }> = {
+        pending: { label: 'Nouveau', color: 'bg-blue-100 text-blue-700' },
+        contacted: { label: 'Contacté', color: 'bg-indigo-100 text-indigo-700' },
+        in_progress: { label: 'En cours', color: 'bg-yellow-100 text-yellow-700' },
+        quoted: { label: 'Devis envoyé', color: 'bg-green-100 text-green-700' },
+        accepted: { label: 'Accepté', color: 'bg-teal-100 text-teal-700' },
+        rejected: { label: 'Rejeté', color: 'bg-orange-100 text-orange-700' },
     };
+
+    const statuses = ['pending', 'contacted', 'in_progress', 'quoted', 'accepted', 'rejected'];
 
     const counts = {
         all: quotes.length,
-        new: quotes.filter(q => q.status === 'new').length,
-        read: quotes.filter(q => q.status === 'read').length,
-        replied: quotes.filter(q => q.status === 'replied').length,
-        archived: quotes.filter(q => q.status === 'archived').length,
-    };
+        ...Object.fromEntries(statuses.map(s => [s, quotes.filter(q => q.status === s).length]))
+    } as Record<string, number>;
+
+    if (loading) return <div className="p-6 text-center text-gray-500">Chargement des devis...</div>;
+    if (error) return <div className="p-6 text-center text-red-500">{error}</div>;
 
     return (
         <div className="space-y-6">
@@ -117,7 +69,7 @@ export default function DashboardQuotesPage() {
 
             {/* Filters */}
             <div className="flex flex-wrap gap-2">
-                {(['all', 'new', 'read', 'replied', 'archived'] as const).map((f) => (
+                {(['all', ...statuses] as const).map((f) => (
                     <button
                         key={f}
                         onClick={() => setFilter(f)}
@@ -127,8 +79,8 @@ export default function DashboardQuotesPage() {
                                 : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
                         }`}
                     >
-                        {f === 'all' ? 'Tous' : statusLabels[f].label}
-                        <span className="ml-1.5 text-xs opacity-70">({counts[f]})</span>
+                        {f === 'all' ? 'Tous' : (statusLabels[f as string]?.label ?? f)}
+                        <span className="ml-1.5 text-xs opacity-70">({counts[f as string] ?? 0})</span>
                     </button>
                 ))}
             </div>
@@ -146,13 +98,13 @@ export default function DashboardQuotesPage() {
                                 }`}
                             >
                                 <div className="flex items-center justify-between mb-1">
-                                    <span className={`text-sm font-medium ${quote.status === 'new' ? 'text-gray-900' : 'text-gray-600'}`}>
-                                        {quote.name}
+                                    <span className={`text-sm font-medium ${quote.status === 'pending' ? 'text-gray-900' : 'text-gray-600'}`}>
+                                        {quote.contact_name ?? quote.email}
                                     </span>
-                                    {quote.status === 'new' && <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />}
+                                    {quote.status === 'pending' && <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />}
                                 </div>
-                                <div className="text-xs text-gray-500 truncate">{quote.service}</div>
-                                <div className="text-[11px] text-gray-400 mt-0.5">{quote.date}</div>
+                                <div className="text-xs text-gray-500 truncate">{quote.service_type}</div>
+                                <div className="text-[11px] text-gray-400 mt-0.5">{quote.created_at ? new Date(quote.created_at).toLocaleString('fr-FR') : ''}</div>
                             </button>
                         ))}
                         {filteredQuotes.length === 0 && (
@@ -167,14 +119,19 @@ export default function DashboardQuotesPage() {
                         <div className="space-y-6">
                             <div className="flex items-start justify-between">
                                 <div>
-                                    <h2 className="text-lg font-bold text-gray-900">{selectedQuote.name}</h2>
-                                    <p className="text-sm text-gray-500">{selectedQuote.company || 'Particulier'}</p>
+                                    <h2 className="text-lg font-bold text-gray-900">{selectedQuote.contact_name ?? selectedQuote.email}</h2>
+                                    <p className="text-sm text-gray-500">{selectedQuote.company_name || 'Particulier'}</p>
                                 </div>
-                                <span className={`inline-block px-2.5 py-1 text-xs font-semibold rounded-full ${statusLabels[selectedQuote.status].color}`}>
-                                    {statusLabels[selectedQuote.status].label}
-                                </span>
+                                {(() => {
+                                    const st = selectedQuote?.status ?? 'pending';
+                                    const info = statusLabels[st] ?? { label: st, color: 'bg-gray-100 text-gray-700' };
+                                    return (
+                                        <span className={`inline-block px-2.5 py-1 text-xs font-semibold rounded-full ${info.color}`}>
+                                            {info.label}
+                                        </span>
+                                    );
+                                })()}
                             </div>
-
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div className="bg-gray-50 rounded-lg p-3">
                                     <div className="text-[11px] text-gray-400 uppercase font-semibold mb-1">Email</div>
@@ -186,28 +143,28 @@ export default function DashboardQuotesPage() {
                                 </div>
                                 <div className="bg-gray-50 rounded-lg p-3">
                                     <div className="text-[11px] text-gray-400 uppercase font-semibold mb-1">Service demandé</div>
-                                    <div className="text-sm text-gray-700 font-medium">{selectedQuote.service}</div>
+                                    <div className="text-sm text-gray-700 font-medium">{selectedQuote.service_type}</div>
                                 </div>
                             </div>
 
                             <div>
                                 <div className="text-[11px] text-gray-400 uppercase font-semibold mb-2">Message</div>
                                 <div className="bg-gray-50 rounded-lg p-4 text-sm text-gray-700 leading-relaxed">
-                                    {selectedQuote.message}
+                                    {selectedQuote.description}
                                 </div>
                             </div>
 
-                            <div className="text-xs text-gray-400">Reçu le {selectedQuote.date}</div>
+                            <div className="text-xs text-gray-400">Reçu le {selectedQuote.created_at ? new Date(selectedQuote.created_at).toLocaleString('fr-FR') : ''}</div>
 
                             <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100">
                                 <button
-                                    onClick={() => updateStatus(selectedQuote.id, 'replied')}
+                                    onClick={() => updateStatus(selectedQuote.id, 'quoted')}
                                     className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
                                 >
                                     Marquer comme répondu
                                 </button>
                                 <button
-                                    onClick={() => updateStatus(selectedQuote.id, 'archived')}
+                                    onClick={() => updateStatus(selectedQuote.id, 'rejected')}
                                     className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
                                 >
                                     Archiver

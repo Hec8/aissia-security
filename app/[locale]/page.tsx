@@ -10,7 +10,7 @@ import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
-    const t = translations[locale];
+    const t = translations[locale] ?? translations['fr'];
 
     return (
         <>
@@ -213,7 +213,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" staggerDelay={0.1}>
                             {/* Service 1 - Surveillance */}
                             <StaggerItem direction="up">
-                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                <div className="bg-white rounded-2xl p-6 shadow-xl border border-[var(--secondary)] hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.surveillance.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.surveillance.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
@@ -245,7 +245,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
                             {/* Service 3 - Gestion des risques */}
                             <StaggerItem direction="up">
-                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                <div className="bg-white rounded-2xl p-6 shadow-xl border border-[var(--secondary)] hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.risk.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.risk.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
@@ -261,7 +261,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
                             {/* Service 4 - Protection rapprochée */}
                             <StaggerItem direction="up">
-                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                <div className="bg-white rounded-2xl p-6 shadow-xl border border-[var(--secondary)] hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.protection.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.protection.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
@@ -293,7 +293,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
                             {/* Service 6 - Escorte sécurisée */}
                             <StaggerItem direction="up">
-                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                                <div className="bg-white rounded-2xl p-6 shadow-xl border border-[var(--secondary)] hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.escorte.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.escorte.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
@@ -324,7 +324,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         {t.home.solutions.description}
                                     </p>
                                     <Link href={`/${locale}/contact`}>
-                                        <Button size="lg" className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-primary-dark border-none shadow-lg font-bold">
+                                        <Button
+                                            size="lg"
+                                            className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] !text-[var(--primary)] hover:text-[var(--primary-dark)] border-none shadow-lg font-bold">
                                             {t.home.solutions.cta}
                                         </Button>
                                     </Link>

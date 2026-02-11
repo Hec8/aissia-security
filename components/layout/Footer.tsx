@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Container } from '../ui/Container';
 import { QuoteModal } from '../ui/QuoteModal';
 import { useTranslation } from '@/lib/hooks/useTranslation';
+import { NewsletterForm } from './NewsletterForm';
 
 export const Footer = () => {
     const { t, locale } = useTranslation();
@@ -116,16 +117,7 @@ export const Footer = () => {
                         <p className="text-sm text-white/60 leading-relaxed mb-4">
                             {t.footer.newsletterText}
                         </p>
-                        <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-                            <input 
-                                type="email" 
-                                placeholder={t.footer.emailPlaceholder}
-                                className="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/10 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent"
-                            />
-                            <button className="w-full bg-[var(--secondary)] text-[var(--primary)] font-semibold text-sm py-2.5 px-4 rounded-lg hover:opacity-90 transition-all">
-                                {t.footer.subscribe}
-                            </button>
-                        </form>
+                        <NewsletterForm t={t} />
                     </div>
                 </div>
 

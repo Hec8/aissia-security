@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
+import { api } from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 
@@ -36,7 +37,25 @@ export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const [admin, setAdmin] = useState<{ id: number; name: string; email: string } | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const userMenuRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
+    // Récupérer l'admin connecté
+    useEffect(() => {
+        const fetchAdmin = async () => {
+            const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
+            if (token) {
+                try {
+                    const res = await api.getMe();
+                    if (res.success && res.data) setAdmin(res.data);
+                } catch {}
+            }
+        };
+        fetchAdmin();
+    }, []);
+
 
     // Détection du scroll
     useEffect(() => {
@@ -48,17 +67,26 @@ export const Header = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Fermer le dropdown quand on clique en dehors
+    // Fermer les dropdowns quand on clique en dehors
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsLangDropdownOpen(false);
             }
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+                setUserMenuOpen(false);
+            }
         };
-
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+    // Déconnexion
+    const handleLogout = async () => {
+        await api.logout();
+        localStorage.removeItem('auth_token');
+        setAdmin(null);
+        router.replace('/login');
+    };
 
     const navigation = [
         { name: t.nav.about, href: `/${locale}/about` },
@@ -127,8 +155,9 @@ export const Header = () => {
                         ))}
                     </nav>
 
-                    {/* Language Switcher & Mobile Menu Button */}
+                    {/* Language Switcher, User Menu & Mobile Menu Button */}
                     <div className="flex items-center space-x-4">
+                        {/* Lang */}
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
@@ -149,7 +178,6 @@ export const Header = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-
                             {isLangDropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-[var(--border)] overflow-hidden z-50">
                                     {languages.map((lang) => (
@@ -169,6 +197,10 @@ export const Header = () => {
                             )}
                         </div>
 
+                        {/* User/Admin menu */}
+                        {/* ...admin menu supprimé, il ne s'affiche plus sur le site public... */}
+
+                        {/* Mobile menu button */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { api, ApiError } from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface QuoteModalProps {
@@ -34,6 +35,19 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [preselectedService, setPreselectedService] = useState('');
 
+    // form fields
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [company, setCompany] = useState('');
+    const [service, setService] = useState('');
+    const [message, setMessage] = useState('');
+    const [submitError, setSubmitError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const MIN_DESCRIPTION_LENGTH = 20;
+
     const handleOpen = useCallback((e: Event) => {
         const customEvent = e as CustomEvent;
         if (customEvent.detail?.service) {
@@ -57,15 +71,45 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
         return () => { document.body.style.overflow = ''; };
     }, [isOpen]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: Intégrer l'envoi réel (API backend)
-        setIsSubmitted(true);
-        setTimeout(() => {
-            setIsOpen(false);
-            setIsSubmitted(false);
-            setPreselectedService('');
-        }, 3000);
+        setSubmitError(null);
+        setIsSubmitting(true);
+        // client-side validation
+        if ((message || '').trim().length < MIN_DESCRIPTION_LENGTH) {
+            setSubmitError(`Le message doit contenir au moins ${MIN_DESCRIPTION_LENGTH} caractères.`);
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            await api.submitQuote({
+                company_name: company,
+                contact_name: `${firstName} ${lastName}`.trim(),
+                email,
+                phone: phone || undefined,
+                service_type: service || preselectedService || '',
+                description: message,
+            });
+            setIsSubmitted(true);
+            // reset form and close after short delay
+            setTimeout(() => {
+                setIsOpen(false);
+                setIsSubmitted(false);
+                setPreselectedService('');
+                setFirstName(''); setLastName(''); setEmail(''); setPhone(''); setCompany(''); setService(''); setMessage('');
+            }, 2000);
+        } catch (err: any) {
+            if (err instanceof ApiError) {
+                setSubmitError(err.message || 'Erreur serveur');
+            } else if (err?.message) {
+                setSubmitError(String(err.message));
+            } else {
+                setSubmitError('Erreur réseau');
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -135,6 +179,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                             <input
                                                 type="text"
                                                 required
+                                                value={firstName}
+                                                onChange={e => setFirstName(e.target.value)}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
                                             />
                                         </div>
@@ -143,6 +189,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                             <input
                                                 type="text"
                                                 required
+                                                value={lastName}
+                                                onChange={e => setLastName(e.target.value)}
                                                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
                                             />
                                         </div>
@@ -153,6 +201,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <input
                                             type="email"
                                             required
+                                            value={email}
+                                            onChange={e => setEmail(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
                                         />
                                     </div>
@@ -161,6 +211,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.phone}</label>
                                         <input
                                             type="tel"
+                                            value={phone}
+                                            onChange={e => setPhone(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
                                         />
                                     </div>
@@ -169,6 +221,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.company}</label>
                                         <input
                                             type="text"
+                                            value={company}
+                                            onChange={e => setCompany(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
                                         />
                                     </div>
@@ -176,7 +230,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.service}</label>
                                         <select
-                                            defaultValue={preselectedService}
+                                            value={service || preselectedService}
+                                            onChange={e => setService(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 bg-white"
                                         >
                                             <option value="">{t.service}</option>
@@ -194,15 +249,27 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.message}</label>
                                         <textarea
                                             rows={3}
+                                            value={message}
+                                            onChange={e => setMessage(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 resize-none"
                                         ></textarea>
+
+                                        <div className="flex items-center justify-between mt-2">
+                                            <div className={`text-xs font-medium ${ (message || '').trim().length < MIN_DESCRIPTION_LENGTH ? 'text-red-600' : 'text-green-600' }`}>
+                                                {(message || '').trim().length} / {MIN_DESCRIPTION_LENGTH} caractères
+                                            </div>
+                                            {submitError && (
+                                                <div className="text-xs text-red-600">{submitError}</div>
+                                            )}
+                                        </div>
                                     </div>
 
                                     <button
                                         type="submit"
-                                        className="w-full bg-[var(--primary)] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                                        disabled={isSubmitting || (message || '').trim().length < MIN_DESCRIPTION_LENGTH}
+                                        className={`w-full bg-[var(--primary)] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg ${isSubmitting || (message || '').trim().length < MIN_DESCRIPTION_LENGTH ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]'}`}
                                     >
-                                        {t.submit}
+                                        {isSubmitting ? 'Envoi...' : t.submit}
                                     </button>
                                 </form>
                             )}

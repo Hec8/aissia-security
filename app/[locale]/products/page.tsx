@@ -138,7 +138,9 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
-            title: 'Accompagnement voyage sécurisé',
+            title: 'Sport',
+            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+            description: "Entrainement physique intensif pour garantir la forme et l'endurance nécessaires aux missions de sécurité sur le terrain.",
             features: [],
         },
     ];
@@ -187,10 +189,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                 {securityServices.map((service, index) => (
                                     <ScaleAnimation key={index} delay={index * 0.1}>
                                         <div 
-                                            className={`relative rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-xl group ${
+                                            className={`relative rounded-2xl p-6 h-full transition-all duration-300 shadow-xl group ${
                                                 index === 0 || index === 3
                                                     ? 'bg-[var(--primary)] text-white shadow-2xl'
-                                                    : 'bg-white border border-gray-200 hover:border-[var(--secondary)]'
+                                                    : 'bg-white border border-[var(--secondary)]'
                                             }`}
                                         >
                                             {/* Arrow top-right */}
@@ -259,7 +261,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {additionalServices.map((service, index) => (
                                 <ScaleAnimation key={index} delay={index * 0.15}>
-                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
+                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] shadow-xl transition-all duration-300">
                                         {/* Circular icon */}
                                         <div className="w-24 h-24 bg-[var(--primary)] text-[var(--secondary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             {service.icon}
@@ -351,21 +353,24 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                             <div className="w-12 h-1 bg-[var(--secondary)] mx-auto" />
                         </AnimatedSection>
 
-                        <div className="max-w-md mx-auto">
+                        <div className="max-w-4xl mx-auto">
                             {annexServices.map((service, index) => (
                                 <ScaleAnimation key={index} delay={0.2}>
-                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
-                                        <div className="w-24 h-24 bg-[var(--primary)] text-[var(--secondary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                            {service.icon}
+                                    <div className="bg-white rounded-2xl border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
+                                        <div className="flex flex-col sm:flex-row items-start gap-4 p-4 sm:p-6">
+                                            <div className="w-full sm:w-56 h-60 rounded-lg overflow-hidden flex-shrink-0">
+                                                <Image src={service.image ?? '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg'} alt={service.title} width={400} height={280} className="object-cover w-full h-full" />
+                                            </div>
+                                            <div className="flex-1 px-0 sm:px-4 py-2">
+                                                <h3 className="text-xl font-bold text-[var(--primary)] md:mt-10">{service.title}</h3>
+                                                <p className="text-gray-700 mt-6">{service.description || service.features?.[0] || ''}</p>
+                                                <div>
+                                                    <QuoteButton className="inline-flex items-center gap-1 bg-[var(--secondary)] p-3 mt-2 rounded-lg text-[var(--primary)] hover:scale-105 font-semibold text-sm hover:gap-2 transition-all">
+                                                        Demander un devis <span>→</span>
+                                                    </QuoteButton>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h3 className="text-xl font-bold text-[var(--primary)] mb-4">
-                                            {service.title}
-                                        </h3>
-                                        <QuoteButton
-                                            className="inline-flex items-center gap-1 text-[var(--secondary)] font-semibold text-sm hover:gap-2 transition-all"
-                                        >
-                                            Demander un devis <span>→</span>
-                                        </QuoteButton>
                                     </div>
                                 </ScaleAnimation>
                             ))}
@@ -383,7 +388,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                             fill
                             className="object-cover object-[center_20%]"
                         />
-                        <div className="absolute inset-0 bg-[var(--primary)]/90"></div>
+                        <div className="absolute inset-0 bg-black/70"></div>
                     </div>
                     
                     <div className="relative z-10 w-full">

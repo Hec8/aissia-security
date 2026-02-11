@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 import { useState } from 'react';
+import { DashboardUserMenu } from './DashboardUserMenu';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -115,6 +117,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             <Link
                                 key={item.href}
                                 href={item.href}
+                                onClick={() => setSidebarOpen(false)}
                                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                                     isActive(item.href)
                                         ? 'bg-[var(--secondary)] text-[var(--primary)]'
@@ -131,6 +134,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className="p-4 border-t border-white/10">
                         <Link
                             href={`/${locale}`}
+                            onClick={() => setSidebarOpen(false)}
                             className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,9 +162,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         <h2 className="text-lg font-semibold text-gray-800">Dashboard Administrateur</h2>
                     </div>
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                            A
-                        </div>
+                        <DashboardUserMenu locale={locale} />
                     </div>
                 </header>
 

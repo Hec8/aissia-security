@@ -1,88 +1,81 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { api, ContactMessage } from '@/lib/api';
 
-interface Message {
-    id: number;
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    date: string;
-    status: 'new' | 'read' | 'replied' | 'archived';
-}
+type MessageStatus = 'new' | 'read' | 'replied' | 'archived';
 
 export default function DashboardMessagesPage() {
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: 1,
-            name: 'Sophie Bernard',
-            email: 'sophie.bernard@gmail.com',
-            subject: 'Demande d\'information sur vos services',
-            message: 'Bonjour, je souhaiterais obtenir plus d\'informations sur vos prestations de surveillance pour un commerce de centre-ville. Quels sont vos horaires de disponibilité et vos tarifs ? Merci d\'avance.',
-            date: '06/02/2026 16:45',
-            status: 'new',
-        },
-        {
-            id: 2,
-            name: 'Alain Moreau',
-            email: 'a.moreau@enterprise.com',
-            subject: 'Proposition de partenariat',
-            message: 'Cher AISSIA Sécurité, je représente une entreprise spécialisée dans les systèmes d\'alarme et je souhaiterais explorer des opportunités de partenariat avec votre structure. Pouvons-nous organiser un rendez-vous ?',
-            date: '05/02/2026 10:22',
-            status: 'read',
-        },
-        {
-            id: 3,
-            name: 'Claire Rousseau',
-            email: 'claire.r@yahoo.fr',
-            subject: 'Réclamation - Intervention tardive',
-            message: 'Bonjour, je tiens à signaler que l\'intervention de vos agents lors de l\'alerte du 2 février a été tardive (45 minutes au lieu des 20 minutes promises). Je souhaite une explication et un geste commercial.',
-            date: '03/02/2026 14:10',
-            status: 'new',
-        },
-        {
-            id: 4,
-            name: 'Marc Leblanc',
-            email: 'marc.leblanc@orange.fr',
-            subject: 'Félicitations pour votre service',
-            message: 'Bonjour, je tenais simplement à remercier votre équipe pour l\'excellent travail réalisé lors de notre événement du 1er février. Les agents étaient professionnels et courtois. Bravo !',
-            date: '02/02/2026 09:00',
-            status: 'replied',
-        },
-        {
-            id: 5,
-            name: 'Isabelle Petit',
-            email: 'isabelle.petit@hotmail.com',
-            subject: 'Question sur les formations',
-            message: 'Bonjour, je souhaite m\'inscrire à votre formation d\'Agent de Sécurité Privée. Quelles sont les prochaines sessions disponibles et les conditions d\'admission ?',
-            date: '31/01/2026 17:30',
-            status: 'archived',
-        },
-    ]);
+    const [messages, setMessages] = useState<ContactMessage[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
+    const [filter, setFilter] = useState<'all' | MessageStatus>('all');
+    // local status map to track UI-only statuses (backend ContactMessage doesn't include `status`)
+    const [statusMap, setStatusMap] = useState<Record<number, MessageStatus>>({});
 
-    const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
-    const [filter, setFilter] = useState<'all' | 'new' | 'read' | 'replied' | 'archived'>('all');
+    useEffect(() => {
+        setLoading(true);
+        api.admin.getMessages()
+            .then(res => {
+                if (res.success) {
+                    setMessages(res.data);
+                    // initialize status map from backend `is_read` flag
+                    const map: Record<number, MessageStatus> = {};
+                    (res.data || []).forEach((m: any) => {
+                        map[m.id] = m.is_read ? 'read' : 'new';
+                    });
+                    setStatusMap(map);
+                }
+                else setError(res.message || 'Erreur de chargement');
+            })
+            .catch(() => setError('Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, []);
 
-    const filteredMessages = filter === 'all' ? messages : messages.filter(m => m.status === filter);
+    if (loading) return <div className="p-10 text-center text-gray-500">Chargement des messages...</div>;
+    if (error) return <div className="p-10 text-center text-red-500">{error}</div>;
 
-    const updateStatus = (id: number, status: Message['status']) => {
-        setMessages(messages.map(m => m.id === id ? { ...m, status } : m));
+    const getStatusForMessage = (m: ContactMessage) => {
+        const isRead = !!m.is_read;
+        return statusMap[m.id] ?? (isRead ? 'read' : 'new');
+    };
+
+    const filteredMessages = filter === 'all'
+        ? messages
+        : messages.filter(m => getStatusForMessage(m) === filter);
+
+    const updateStatus = (id: number, status: MessageStatus) => {
+        setStatusMap(prev => ({ ...prev, [id]: status }));
+        // mark as read flag on backend-like object for consistency
+        setMessages(prev => prev.map(m => m.id === id ? { ...m, is_read: status === 'read' || status === 'replied' } : m));
         if (selectedMessage?.id === id) {
-            setSelectedMessage({ ...selectedMessage, status });
+            setSelectedMessage(prev => prev ? { ...prev, is_read: status === 'read' || status === 'replied' } : prev);
         }
     };
 
-    const openMessage = (msg: Message) => {
+    const openMessage = (msg: ContactMessage) => {
         setSelectedMessage(msg);
-        if (msg.status === 'new') {
+        const current = getStatusForMessage(msg);
+        if (current === 'new') {
             updateStatus(msg.id, 'read');
         }
     };
 
-    const deleteMessage = (id: number) => {
+    const deleteMessage = async (id: number) => {
+        const prev = messages;
         setMessages(messages.filter(m => m.id !== id));
         if (selectedMessage?.id === id) setSelectedMessage(null);
+        try {
+            const res = await api.admin.deleteMessage(id);
+            if (!res.success) {
+                setError(res.message || 'Erreur lors de la suppression');
+                setMessages(prev);
+            }
+        } catch (e) {
+            setError('Erreur réseau lors de la suppression');
+            setMessages(prev);
+        }
     };
 
     const statusLabels = {
@@ -94,10 +87,10 @@ export default function DashboardMessagesPage() {
 
     const counts = {
         all: messages.length,
-        new: messages.filter(m => m.status === 'new').length,
-        read: messages.filter(m => m.status === 'read').length,
-        replied: messages.filter(m => m.status === 'replied').length,
-        archived: messages.filter(m => m.status === 'archived').length,
+        new: messages.filter(m => getStatusForMessage(m) === 'new').length,
+        read: messages.filter(m => getStatusForMessage(m) === 'read').length,
+        replied: messages.filter(m => getStatusForMessage(m) === 'replied').length,
+        archived: messages.filter(m => getStatusForMessage(m) === 'archived').length,
     };
 
     return (
@@ -139,13 +132,13 @@ export default function DashboardMessagesPage() {
                                 }`}
                             >
                                 <div className="flex items-center justify-between mb-1">
-                                    <span className={`text-sm font-medium ${msg.status === 'new' ? 'text-gray-900' : 'text-gray-600'}`}>
+                                    <span className={`text-sm font-medium ${getStatusForMessage(msg) === 'new' ? 'text-gray-900' : 'text-gray-600'}`}>
                                         {msg.name}
                                     </span>
-                                    {msg.status === 'new' && <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />}
+                                    {getStatusForMessage(msg) === 'new' && <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />}
                                 </div>
                                 <div className="text-xs text-gray-700 font-medium truncate">{msg.subject}</div>
-                                <div className="text-[11px] text-gray-400 mt-0.5">{msg.date}</div>
+                                <div className="text-[11px] text-gray-400 mt-0.5">{msg.created_at ? new Date(msg.created_at).toLocaleString('fr-FR') : ''}</div>
                             </button>
                         ))}
                         {filteredMessages.length === 0 && (
@@ -163,9 +156,14 @@ export default function DashboardMessagesPage() {
                                     <h2 className="text-lg font-bold text-gray-900">{selectedMessage.subject}</h2>
                                     <p className="text-sm text-gray-500 mt-0.5">De : {selectedMessage.name}</p>
                                 </div>
-                                <span className={`inline-block px-2.5 py-1 text-xs font-semibold rounded-full ${statusLabels[selectedMessage.status].color}`}>
-                                    {statusLabels[selectedMessage.status].label}
-                                </span>
+                                {(() => {
+                                    const st = getStatusForMessage(selectedMessage as ContactMessage);
+                                    return (
+                                        <span className={`inline-block px-2.5 py-1 text-xs font-semibold rounded-full ${statusLabels[st].color}`}>
+                                            {statusLabels[st].label}
+                                        </span>
+                                    );
+                                })()}
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -175,7 +173,7 @@ export default function DashboardMessagesPage() {
                                 </div>
                                 <div className="bg-gray-50 rounded-lg p-3">
                                     <div className="text-[11px] text-gray-400 uppercase font-semibold mb-1">Date</div>
-                                    <div className="text-sm text-gray-700">{selectedMessage.date}</div>
+                                    <div className="text-sm text-gray-700">{selectedMessage.created_at ? new Date(selectedMessage.created_at).toLocaleString('fr-FR') : ''}</div>
                                 </div>
                             </div>
 

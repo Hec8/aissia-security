@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { api } from '@/lib/api';
 
 interface Service {
     id: number;
@@ -12,44 +14,24 @@ interface Service {
 }
 
 export default function DashboardServicesPage() {
-    const [services, setServices] = useState<Service[]>([
-        {
-            id: 1,
-            title: 'Surveillance de site et Gardiennage',
-            description: 'Nous mettons à disposition des agents de sécurité formés pour surveiller vos sites, entreprises, commerces et habitations.',
-            badge: 'Gardiennage',
-            isDefault: true,
-            createdAt: '01/01/2026',
-        },
-        {
-            id: 2,
-            title: 'Protection rapprochée',
-            description: 'Nos agents spécialisés en protection rapprochée vous accompagnent de manière discrète et efficace 24h/24.',
-            badge: 'Protection',
-            isDefault: true,
-            createdAt: '01/01/2026',
-        },
-        {
-            id: 3,
-            title: 'Gestion de risque',
-            description: 'Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.',
-            badge: 'Analyse',
-            isDefault: true,
-            createdAt: '01/01/2026',
-        },
-        {
-            id: 4,
-            title: 'Assistance',
-            description: 'AISSIA-SÉCURITÉ assure une assistance rapide et efficace en cas de situation d\'urgence.',
-            badge: 'Urgence',
-            isDefault: true,
-            createdAt: '01/01/2026',
-        },
-    ]);
+    const [services, setServices] = useState<Service[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const [showForm, setShowForm] = useState(false);
     const [editingService, setEditingService] = useState<Service | null>(null);
     const [form, setForm] = useState({ title: '', description: '', badge: '' });
+
+    useEffect(() => {
+        setLoading(true);
+        api.admin.getServices()
+            .then(res => {
+                if (res.success) setServices(res.data as any);
+                else setError(res.message || 'Erreur de chargement');
+            })
+            .catch(() => setError('Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, []);
 
     const resetForm = () => {
         setForm({ title: '', description: '', badge: '' });

@@ -1,58 +1,65 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { api, NewsletterSubscriber } from '@/lib/api';
 
-interface Subscriber {
-    id: number;
-    email: string;
-    subscribedAt: string;
-    status: 'active' | 'unsubscribed';
-}
 
 export default function DashboardNewsletterPage() {
-    const [subscribers, setSubscribers] = useState<Subscriber[]>([
-        { id: 1, email: 'jean.dupont@email.com', subscribedAt: '06/02/2026', status: 'active' },
-        { id: 2, email: 'marie.lambert@corporate.fr', subscribedAt: '05/02/2026', status: 'active' },
-        { id: 3, email: 'sophie.bernard@gmail.com', subscribedAt: '05/02/2026', status: 'active' },
-        { id: 4, email: 'pierre.martin@securitas.fr', subscribedAt: '04/02/2026', status: 'active' },
-        { id: 5, email: 'claire.rousseau@yahoo.fr', subscribedAt: '03/02/2026', status: 'active' },
-        { id: 6, email: 'alain.moreau@enterprise.com', subscribedAt: '02/02/2026', status: 'active' },
-        { id: 7, email: 'marc.leblanc@orange.fr', subscribedAt: '01/02/2026', status: 'active' },
-        { id: 8, email: 'isabelle.petit@hotmail.com', subscribedAt: '31/01/2026', status: 'unsubscribed' },
-        { id: 9, email: 'fatou.diallo@gmail.com', subscribedAt: '30/01/2026', status: 'active' },
-        { id: 10, email: 'ahmed.benali@company.ma', subscribedAt: '29/01/2026', status: 'active' },
-        { id: 11, email: 'laura.garcia@outlook.com', subscribedAt: '28/01/2026', status: 'active' },
-        { id: 12, email: 'thomas.ngom@protonmail.com', subscribedAt: '27/01/2026', status: 'active' },
-        { id: 13, email: 'nadia.fall@yahoo.fr', subscribedAt: '26/01/2026', status: 'unsubscribed' },
-        { id: 14, email: 'david.kamara@gmail.com', subscribedAt: '25/01/2026', status: 'active' },
-        { id: 15, email: 'aminata.sy@hotmail.fr', subscribedAt: '24/01/2026', status: 'active' },
-    ]);
-
+    const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState<'all' | 'active' | 'unsubscribed'>('all');
 
+    useEffect(() => {
+        setLoading(true);
+        api.admin.getSubscribers()
+            .then(res => {
+                if (res.success) setSubscribers(res.data);
+                else setError(res.message || 'Erreur de chargement');
+            })
+            .catch(() => setError('Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, []);
+
+    if (loading) return <div className="p-10 text-center text-gray-500">Chargement des abonnés newsletter...</div>;
+    if (error) return <div className="p-10 text-center text-red-500">{error}</div>;
+
+
     const filteredSubscribers = subscribers
-        .filter(s => filter === 'all' || s.status === filter)
+        .filter(s => filter === 'all' || (filter === 'active' ? s.is_active : !s.is_active))
         .filter(s => s.email.toLowerCase().includes(search.toLowerCase()));
 
-    const activeCount = subscribers.filter(s => s.status === 'active').length;
-    const unsubscribedCount = subscribers.filter(s => s.status === 'unsubscribed').length;
+    const activeCount = subscribers.filter(s => s.is_active).length;
+    const unsubscribedCount = subscribers.filter(s => !s.is_active).length;
 
     const toggleStatus = (id: number) => {
         setSubscribers(subscribers.map(s =>
             s.id === id
-                ? { ...s, status: s.status === 'active' ? 'unsubscribed' : 'active' }
+                ? { ...s, is_active: !s.is_active }
                 : s
         ));
     };
 
-    const deleteSubscriber = (id: number) => {
+    const deleteSubscriber = async (id: number) => {
+        // optimistic UI update
+        const prev = subscribers;
         setSubscribers(subscribers.filter(s => s.id !== id));
+        try {
+            const res = await api.admin.deleteSubscriber(id);
+            if (!res.success) {
+                setError(res.message || 'Erreur lors de la suppression');
+                setSubscribers(prev); // revert
+            }
+        } catch (e) {
+            setError('Erreur réseau lors de la suppression');
+            setSubscribers(prev); // revert
+        }
     };
 
     const exportCsv = () => {
-        const active = subscribers.filter(s => s.status === 'active');
-        const csv = 'Email,Date d\'inscription\n' + active.map(s => `${s.email},${s.subscribedAt}`).join('\n');
+        const active = subscribers.filter(s => s.is_active);
+        const csv = 'Email,Date d\'inscription\n' + active.map(s => `${s.email},${s.subscribed_at}`).join('\n');
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -151,9 +158,9 @@ export default function DashboardNewsletterPage() {
                                             <span className="text-sm text-gray-900">{sub.email}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-3.5 text-sm text-gray-500">{sub.subscribedAt}</td>
+                                    <td className="px-6 py-3.5 text-sm text-gray-500">{sub.subscribed_at}</td>
                                     <td className="px-6 py-3.5">
-                                        {sub.status === 'active' ? (
+                                        {sub.is_active ? (
                                             <span className="inline-block px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Actif</span>
                                         ) : (
                                             <span className="inline-block px-2.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">Désabonné</span>
@@ -164,13 +171,13 @@ export default function DashboardNewsletterPage() {
                                             <button
                                                 onClick={() => toggleStatus(sub.id)}
                                                 className={`p-1.5 rounded-lg transition-colors ${
-                                                    sub.status === 'active'
+                                                    sub.is_active
                                                         ? 'text-gray-400 hover:text-orange-600 hover:bg-orange-50'
                                                         : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
                                                 }`}
-                                                title={sub.status === 'active' ? 'Désabonner' : 'Réactiver'}
+                                                title={sub.is_active ? 'Désabonner' : 'Réactiver'}
                                             >
-                                                {sub.status === 'active' ? (
+                                                {sub.is_active ? (
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                                                     </svg>

@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { api, Formation } from '@/lib/api';
 
 interface TrainingModule {
     id: number;
@@ -12,20 +13,31 @@ interface TrainingModule {
 }
 
 export default function DashboardTrainingPage() {
-    const [modules, setModules] = useState<TrainingModule[]>([
-        { id: 1, title: 'Agent de Sécurité Privée (ASP)', description: 'Formation complète aux métiers de la sécurité privée.', duration: '5 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 2, title: 'Secourisme & Premiers soins', description: 'Techniques de premiers secours en milieu professionnel.', duration: '2 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 3, title: 'Protection Rapprochée', description: 'Techniques avancées de protection de personnes.', duration: '4 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 4, title: 'Gestion de Foule & Événements', description: 'Sécurisation d\'événements et gestion de foule.', duration: '3 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 5, title: 'Sécurité Incendie', description: 'Prévention incendie et techniques d\'évacuation.', duration: '2 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 6, title: 'Surveillance Électronique', description: 'Utilisation des systèmes de vidéosurveillance et alarmes.', duration: '2 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 7, title: 'Communication & Gestion de Conflits', description: 'Techniques de communication et résolution de conflits.', duration: '2 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 8, title: 'Cadre Juridique de la Sécurité', description: 'Réglementation et droit appliqués à la sécurité privée.', duration: '2 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 9, title: 'Conducteur de Chien de Défense', description: 'Formation au travail avec chien de défense.', duration: '4 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 10, title: 'Gestion des Risques', description: 'Identification et évaluation des risques sécuritaires.', duration: '3 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 11, title: 'Techniques d\'Intervention', description: 'Techniques de neutralisation et d\'intervention.', duration: '3 semaines', isDefault: true, createdAt: '01/01/2026' },
-        { id: 12, title: 'Éthique & Déontologie', description: 'Principes éthiques et déontologiques de la profession.', duration: '1 semaine', isDefault: true, createdAt: '01/01/2026' },
-    ]);
+    const [modules, setModules] = useState<TrainingModule[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        setLoading(true);
+        api.admin.getFormations()
+            .then(res => {
+                if (res.success) {
+                    const mapped: TrainingModule[] = (res.data || []).map((f: Formation) => ({
+                        id: f.id,
+                        title: f.title,
+                        description: f.description ?? '',
+                        duration: f.duration_weeks ? `${f.duration_weeks} semaines` : '',
+                        isDefault: f.is_active,
+                        createdAt: f.created_at,
+                    }));
+                    setModules(mapped);
+                } else {
+                    setError(res.message || 'Erreur de chargement');
+                }
+            })
+            .catch(() => setError('Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, []);
 
     const [showForm, setShowForm] = useState(false);
     const [editingModule, setEditingModule] = useState<TrainingModule | null>(null);

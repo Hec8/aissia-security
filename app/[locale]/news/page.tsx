@@ -6,61 +6,20 @@ import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Link from 'next/link';
 
-export default async function NewsPage({ params }: { params: Promise<{ locale: Locale }> }) {
-    const { locale } = await params;
-    const t = translations[locale];
+export default async function NewsPage({ params }: { params: { locale: Locale } }) {
+    const { locale } = params;
+    const t = translations[locale] ?? translations['fr'];
 
-    // Données d'exemple - À remplacer par des appels API
-    const news = [
-        {
-            id: 1,
-            title: 'Nouvelle session de formation en mars 2026',
-            excerpt: 'AISSIA SÉCURITÉ ouvre les inscriptions pour sa prochaine session de formation d\'agents de sécurité qui débutera le 15 mars 2026.',
-            date: '2026-01-15',
-            category: 'Formations',
-            image: '/images/news/training.jpg',
-        },
-        {
-            id: 2,
-            title: 'Partenariat avec de nouvelles institutions',
-            excerpt: 'Notre entreprise renforce sa présence en signant de nouveaux contrats avec plusieurs institutions de premier plan.',
-            date: '2026-01-10',
-            category: 'Entreprise',
-            image: '/images/news/partnership.jpg',
-        },
-        {
-            id: 3,
-            title: 'Nouveau centre de formation inauguré',
-            excerpt: 'AISSIA SÉCURITÉ inaugure son nouveau centre de formation ultra-moderne équipé des dernières technologies pédagogiques.',
-            date: '2025-12-20',
-            category: 'Infrastructure',
-            image: '/images/news/center.jpg',
-        },
-        {
-            id: 4,
-            title: 'Certification ISO obtenue',
-            excerpt: 'Notre entreprise obtient la certification ISO 9001 pour la qualité de ses services et formations.',
-            date: '2025-12-01',
-            category: 'Certifications',
-            image: '/images/news/iso.jpg',
-        },
-        {
-            id: 5,
-            title: 'Renforcement de nos équipes',
-            excerpt: 'Recrutement de 50 nouveaux agents de sécurité formés pour répondre à la demande croissante de nos clients.',
-            date: '2025-11-15',
-            category: 'Ressources Humaines',
-            image: '/images/news/team.jpg',
-        },
-        {
-            id: 6,
-            title: 'Nouveau système de vidéosurveillance',
-            excerpt: 'Déploiement de systèmes de vidéosurveillance intelligents utilisant l\'intelligence artificielle pour une sécurité optimale.',
-            date: '2025-11-01',
-            category: 'Technologie',
-            image: '/images/news/video.jpg',
-        },
-    ];
+    // Fetch articles server-side
+    let news: any[] = [];
+    let error: string | null = null;
+    try {
+        const res = await (await import('@/lib/api')).api.getArticles({ limit: 12 });
+        if (res.success) news = res.data || [];
+        else error = res.message || 'Erreur de chargement';
+    } catch (e) {
+        error = 'Erreur de chargement';
+    }
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -70,6 +29,8 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
             day: 'numeric',
         });
     };
+
+    if (error) return <div className="p-10 text-center text-red-500">{error}</div>;
 
     return (
         <>
@@ -106,7 +67,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
                                             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                                             </svg>
-                                            {formatDate(article.date)}
+                                            {article.published_at ? new Date(article.published_at).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}
                                         </div>
                                         <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3 hover:text-[var(--primary)] transition-colors">
                                             <Link href={`/${locale}/news/${article.id}`}>
@@ -129,27 +90,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: L
                                 </Card>
                             ))}
                         </div>
-
-                        {/* Pagination */}
-                        <div className="mt-12 flex justify-center">
-                            <nav className="flex items-center space-x-2">
-                                <button className="px-4 py-2 border border-[var(--border)] rounded-lg text-[var(--text-primary)] hover:bg-[var(--accent)] transition-smooth disabled:opacity-50" disabled>
-                                    Précédent
-                                </button>
-                                <button className="px-4 py-2 bg-[var(--primary)] text-white rounded-lg">
-                                    1
-                                </button>
-                                <button className="px-4 py-2 border border-[var(--border)] rounded-lg text-[var(--text-primary)] hover:bg-[var(--accent)] transition-smooth">
-                                    2
-                                </button>
-                                <button className="px-4 py-2 border border-[var(--border)] rounded-lg text-[var(--text-primary)] hover:bg-[var(--accent)] transition-smooth">
-                                    3
-                                </button>
-                                <button className="px-4 py-2 border border-[var(--border)] rounded-lg text-[var(--text-primary)] hover:bg-[var(--accent)] transition-smooth">
-                                    Suivant
-                                </button>
-                            </nav>
-                        </div>
+                        {/* Pagination à implémenter avec l'API */}
                     </Container>
                 </section>
             </main>
