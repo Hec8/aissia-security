@@ -140,7 +140,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                         {t.home.team.description}
                                     </p>
                                     
-                                    <div className="grid grid-cols-2 gap-6 pt-4">
+                                    <div className=" gap-6 pt-4">
                                         <ScaleAnimation delay={0.3}>
                                             <div className="text-center p-6 bg-[var(--accent)] rounded-lg">
                                                 <div className="text-4xl font-bold text-[var(--secondary)] mb-2">4.7+</div>
@@ -155,7 +155,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                             </div>
                                         </ScaleAnimation>
 
-                                        <ScaleAnimation delay={0.5}>
+                                        {/*<ScaleAnimation delay={0.5}>
                                             <div className="text-center p-6 bg-[var(--accent)] rounded-lg">
                                                 <div className="text-4xl font-bold text-[var(--secondary)] mb-2">B+</div>
                                                 <div className="flex justify-center mb-1">
@@ -167,7 +167,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                                 </div>
                                                 <div className="text-sm text-[var(--text-secondary)]">{t.home.team.servicesPro}</div>
                                             </div>
-                                        </ScaleAnimation>
+                                        </ScaleAnimation>*/}
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -178,12 +178,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative group">
                                         <Image src="/team.jpeg" alt="Équipe AISSIA Sécurité" fill className="object-cover object-top" />
                                         {/* Badge 15+ ans */}
-                                        <ScaleAnimation delay={0.7} scale={0.7}>
+                                        {/*<ScaleAnimation delay={0.7} scale={0.7}>
                                             <div className="absolute bottom-6 right-6 bg-[var(--secondary)] text-white px-6 py-3 rounded-lg shadow-lg z-10">
                                                 <div className="text-3xl font-bold">15+</div>
                                                 <div className="text-sm">{t.home.team.yearsExp}</div>
                                             </div>
-                                        </ScaleAnimation>
+                                        </ScaleAnimation>*/}
                                     </div>
                                 </div>
                             </AnimatedSection>
@@ -346,58 +346,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </section>
 
                 {/* Section Nos Partenaires */}
-                <section className="py-16 bg-white/[0.95] overflow-hidden">
-                    <Container>
-                        <AnimatedSection direction="up">
-                            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[var(--text-primary)]">
-                                {t.home.partners.title}
-                            </h2>
-                            <p className="text-center text-[var(--text-secondary)] mb-12 max-w-xl mx-auto">
-                                {t.home.partners.subtitle}
-                            </p>
-                        </AnimatedSection>
-                        
-                        {/* Carrousel défilant */}
-                        <div className="relative">
-                            <div className="flex partners-scroll w-max items-center">
-                                {/* Premier groupe */}
-                                {[
-                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
-                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
-                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
-                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
-                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
-                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
-                                ].map((logo, i) => (
-                                    <div key={`logo-${i}`} className="flex-shrink-0 mx-10 group">
-                                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-[var(--secondary)] transition-all duration-300">
-                                            <div className="relative w-40 h-24 grayscale group-hover:grayscale-0 transition-all duration-500">
-                                                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                                {/* Duplication pour boucle infinie */}
-                                {[
-                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
-                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
-                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
-                                    { src: '/partenaires/LOGO_SECUMAT_NEW8195-1-1024x657.png', alt: 'Secumat' },
-                                    { src: '/partenaires/alertguard-1.webp', alt: 'AlertGuard' },
-                                    { src: '/partenaires/esguard-1024x1024.png', alt: 'EsGuard' },
-                                ].map((logo, i) => (
-                                    <div key={`logo-dup-${i}`} className="flex-shrink-0 mx-10 group">
-                                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-[var(--secondary)] transition-all duration-300">
-                                            <div className="relative w-40 h-24 grayscale group-hover:grayscale-0 transition-all duration-500">
-                                                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </Container>
-                </section>
+                
 
                 {/* Section Qu'est-ce qui nous distingue */}
                 <section className="py-20 bg-[var(--primary)] text-white border-t-4 border-white">
@@ -601,7 +550,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                             <div className="flex items-center space-x-3">
                                                 <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
                                                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11a2 2 0 100-4 2 2 0 000 4z" />
                                                     </svg>
                                                 </div>
                                                 <div>
@@ -615,12 +565,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                             <div className="flex items-center space-x-3">
                                                 <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
                                                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h1.5a1 1 0 01.97.757l.35 1.4a1 1 0 01-.27.93L6.4 8.4a11.05 11.05 0 005.2 5.2l1.3-.19a1 1 0 01.85.25l1.8 1.8a1 1 0 01.28.95V20a2 2 0 01-2 2h-1C9.716 22 3 15.284 3 7V5z" />
                                                     </svg>
                                                 </div>
                                                 <div>
                                                     <div className="text-sm text-white/80">{t.home.contactSection.phoneLabel}</div>
-                                                    <div className="font-semibold text-white">{t.home.contactSection.phone}</div>
+                                                    {t.home.contactSection.directorsPhones && (
+                                                        <ul className="mt-2 text-sm font-semibold text-white/90 space-y-1">
+                                                            {t.home.contactSection.directorsPhones.map((num, i) => (
+                                                                <li key={i} className="flex items-center gap-2">
+                                                                    <span className="inline-block w-2 h-2 bg-white rounded-full" />
+                                                                    <span>{num}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
                                                 </div>
                                             </div>
                                         </StaggerItem>

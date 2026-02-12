@@ -4,7 +4,7 @@ export const translations = {
             home: 'Accueil',
             about: 'Qui sommes-nous',
             services: 'Nos Services',
-            training: 'Nos Formations',
+            training: 'Nos Programmes',
             products: 'Nos offres de Sécurité',
             technologies: 'Nos Technologies',
             contact: 'Contact',
@@ -106,8 +106,8 @@ export const translations = {
                     description: 'Notre centre de formation assure la qualification et la certification de tous nos agents de sécurité.',
                 },
                 escorte: {
-                    title: 'Escorte sécurisée',
-                    description: 'Service d\'escorte moto ou auto pour vos déplacements professionnels et le transport de valeurs.',
+                    title: 'Transport de valeurs',
+                    description: 'Transport sécurisé de valeurs et d\'équipements sensibles (convoyage de fonds et biens de valeur), assuré par des équipes spécialisées et des véhicules adaptés.',
                 },
             },
             solutions: {
@@ -127,8 +127,8 @@ export const translations = {
                     description: 'Nous assurons des services de sécurité de haute qualité, disponibles en tout temps pour répondre à vos besoins urgents.',
                 },
                 communication: {
-                    title: 'Communication 24/7',
-                    description: 'Notre équipe est à votre disposition 24/7, assurant une communication fluide et des interventions rapides.',
+                    title: 'Disponibilité 24/7',
+                    description: 'Notre équipe est disponible 24/7 pour assurer une présence et des interventions rapides lorsque vous en avez besoin.',
                 },
                 fleet: {
                     title: 'Notre flotte de véhicules',
@@ -139,8 +139,8 @@ export const translations = {
                     description: 'Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.',
                 },
                 technology: {
-                    title: 'Technologie avancée',
-                    description: 'Nous utilisons les dernières technologies pour garantir des solutions de sécurité fiables et performantes.',
+                    title: 'AISSIA GUARD',
+                    description: 'AISSIA GUARD, notre solution technologique propriétaire, assure une surveillance proactive et des réponses rapides grâce à des outils avancés.',
                 },
                 emergency: {
                     title: 'Aide d\'urgence',
@@ -164,7 +164,8 @@ export const translations = {
                 phoneLabel: 'Téléphone',
                 phone: '2722261328',
                 cta: 'Contactez-nous',
-                formTitle: 'Obtenir un devis gratuit',
+                formTitle: 'Contactez-nous',
+                directorsPhones: ['+225 0758737473', '+225 0717508264'],
                 firstName: 'Prénom',
                 lastName: 'Nom',
                 email: 'Email',
@@ -194,7 +195,7 @@ export const translations = {
                 risk: 'Gestion des risques',
                 protection: 'Protection rapprochée',
                 formation: 'Formation',
-                escorte: 'Escorte sécurisée',
+                escorte: 'Transport de valeurs',
                 other: 'Autre',
             },
             message: 'Décrivez votre besoin',
@@ -265,10 +266,10 @@ export const translations = {
             },
         },
         training: {
-            title: 'Formations',
-            subtitle: 'Formation professionnelle des agents de sécurité',
-            program: 'Programme de Formation',
-            programTitle: 'PROGRAMME DE FORMATION DES',
+            title: 'Nos Programmes',
+            subtitle: 'Préparation professionnelle des agents de sécurité',
+            program: 'Programme de Préparation',
+            programTitle: 'PROGRAMME DE PREPARATION DES',
             programSubtitle: 'AGENTS DE SÉCURITE',
             viewModules: 'Voir les modules',
             duration: 'Durée',
@@ -360,12 +361,12 @@ export const translations = {
             subtitle: 'Des solutions technologiques innovantes au service de votre sécurité',
             badge: 'Innovation',
             introTitle: 'La technologie au service de la sécurité',
-            introDescription: 'Aissia Sécurité développe des solutions technologiques de pointe pour renforcer la protection de ses clients. Nos outils innovants combinent intelligence artificielle, géolocalisation et analyse de données pour une sécurité proactive et efficace.',
+            introDescription: 'AISSIA SECURITE propose des solutions technologiques de pointe pour renforcer la protection de ses clients. Nos outils innovants combinent géolocalisation et analyse des données pour une sécurité proactive et efficace.',
             cta: 'Demander une démo',
             alertguard: {
                 category: 'Tracking',
                 title: 'Application de tracking et d\'alerte en temps réel',
-                description: 'Le tracking dans le contexte des entreprises fait référence à la pratique de collecter et d\'analyser des données sur les activités et les comportements des employés, souvent à l\'aide de technologies telles que les systèmes de gestion des performances, les logiciels de suivi du temps, les systèmes de surveillance électronique, etc. AlertGuard est notre solution propriétaire qui offre un suivi continu et des alertes instantanées pour assurer la sécurité de vos équipes sur le terrain.',
+                description: 'Le tracking dans le contexte des entreprises fait référence à la pratique de collecter et d\'analyser des données sur les activités et les comportements des employés, souvent à l\'aide de technologies telles que les systèmes de gestion des performances, les logiciels de suivi du temps, les systèmes de surveillance électronique, etc. Aissia Guard est notre solution propriétaire qui offre un suivi continu et des alertes instantanées pour assurer la sécurité de vos équipes sur le terrain.',
                 features: [
                     'Géolocalisation des agents en temps réel',
                     'Alertes instantanées en cas d\'incident',
@@ -388,7 +389,7 @@ export const translations = {
                         description: 'Le signal est automatiquement transmis à notre centre d\'assistance pour une prise en charge immédiate.',
                     },
                     {
-                        title: 'ALERTGUARD & cockpit',
+                        title: 'Aissia Guard & cockpit',
                         description: 'La solution ainsi que le cockpit sont mis à votre disposition pour un suivi optimal et une gestion centralisée.',
                     },
                     {
@@ -404,7 +405,7 @@ export const translations = {
             ctaSection: {
                 badge: 'Passez à l\'action',
                 title: 'Prêt à moderniser votre sécurité ?',
-                description: 'Contactez-nous pour une démonstration personnalisée de nos solutions technologiques et découvrez comment AlertGuard peut transformer votre dispositif de sécurité.',
+                description: 'Contactez-nous pour une démonstration personnalisée de nos solutions technologiques et découvrez comment Aissia Guard peut transformer votre dispositif de sécurité.',
                 button: 'Demander une démo',
             },
         },
@@ -516,8 +517,8 @@ export const translations = {
                     description: 'Our training center ensures the qualification and certification of all our security agents.',
                 },
                 escorte: {
-                    title: 'Secure Escort',
-                    description: 'Motorcycle or car escort service for your professional trips and value transport.',
+                    title: 'Transport of valuables',
+                    description: 'Secure transport of valuables and sensitive equipment (cash-in-transit and high-value items), carried out by specialized teams using adapted vehicles.',
                 },
             },
             solutions: {
@@ -574,7 +575,8 @@ export const translations = {
                 phoneLabel: 'Phone',
                 phone: '2722261328',
                 cta: 'Contact us',
-                formTitle: 'Get a free quote',
+                formTitle: 'Contact us',
+                directorsPhones: ['+225 0758737473', '+225 0717508264'],
                 firstName: 'First name',
                 lastName: 'Last name',
                 email: 'Email',
@@ -604,7 +606,7 @@ export const translations = {
                 risk: 'Risk management',
                 protection: 'Close protection',
                 formation: 'Training',
-                escorte: 'Secure escort',
+                escorte: 'Transport of valuables',
                 other: 'Other',
             },
             message: 'Describe your needs',
@@ -748,7 +750,7 @@ export const translations = {
             alertguard: {
                 category: 'Tracking',
                 title: 'Real-time tracking and alert application',
-                description: 'Tracking in the business context refers to the practice of collecting and analyzing data on employee activities and behaviors, often using technologies such as performance management systems, time tracking software, electronic surveillance systems, etc. AlertGuard is our proprietary solution that offers continuous monitoring and instant alerts to ensure the safety of your teams in the field.',
+                description: 'Tracking in the business context refers to the practice of collecting and analyzing data on employee activities and behaviors, often using technologies such as performance management systems, time tracking software, electronic surveillance systems, etc. Aissia Guard is our proprietary solution that offers continuous monitoring and instant alerts to ensure the safety of your teams in the field.',
                 features: [
                     'Real-time agent geolocation',
                     'Instant alerts in case of incident',
@@ -771,7 +773,7 @@ export const translations = {
                         description: 'The signal is automatically transmitted to our assistance center for immediate action.',
                     },
                     {
-                        title: 'ALERTGUARD & cockpit',
+                        title: 'Aissia Guard & cockpit',
                         description: 'The solution and the cockpit are made available to you for optimal monitoring and centralized management.',
                     },
                     {
@@ -787,7 +789,7 @@ export const translations = {
             ctaSection: {
                 badge: 'Take action',
                 title: 'Ready to modernize your security?',
-                description: 'Contact us for a personalized demonstration of our technological solutions and discover how AlertGuard can transform your security system.',
+                description: 'Contact us for a personalized demonstration of our technological solutions and discover how Aissia Guard can transform your security system.',
                 button: 'Request a demo',
             },
         },

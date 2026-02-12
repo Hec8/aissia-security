@@ -111,17 +111,17 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                             À Propos
                                         </div>
                                         <h2 className="text-4xl font-bold text-[var(--text-primary)] mb-6">
-                                            Aissia <span className="text-[var(--secondary)]">Securité</span>
+                                            AISSIA <span className="text-[var(--secondary)]">SECURITE</span>
                                         </h2>
                                         <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                                             <p>
-                                                AISSIA-SÉCURITÉ est votre partenaire de confiance pour assurer la sécurité des et des services. Grâce à une étude de sécurité adaptée à vos besoins, nous vous proposons des solutions adéquates.
+                                                AISSIA SECURITE est votre partenaire de confiance pour assurer la sécurité des biens et des services. Grâce à une étude de sécurité adaptée à vos besoins, nous vous proposons des solutions sur mesure.
                                             </p>
                                             <p>
-                                                Notre mission est de garantir un environnement sûr en utilisant des moyens humains et technologiques performants.
+                                                Notre mission est de garantir un environnement sûr en utilisant des moyens humains, matériels et technologiques performants.
                                             </p>
                                             <p>
-                                                Avec AISSIA-SÉCURITÉ, bénéficiez d'une approche complète et personnalisée pour relever les défis sécuritaires modernes.
+                                                Avec AISSIA SECURITE, bénéficiez d'une approche complète et personnalisée pour relever les défis sécuritaires modernes.
                                             </p>
                                         </div>
                                     </div>
@@ -145,7 +145,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <AnimatedSection>
                             <div className="text-center mb-16">
                                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                                    Pour <span className="text-[var(--secondary)]">AISSIA-SÉCURITÉ</span>,
+                                    Pour <span className="text-[var(--secondary)]">AISSIA SECURITE</span>,
                                 </h2>
                                 <p className="text-3xl md:text-4xl font-normal text-white">
                                     la sécurité c'est quoi ?

@@ -152,11 +152,10 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                 {/* Stats Section */}
                 <section className="py-16 bg-[var(--primary)]">
                     <Container>
-                        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.1}>
+                        <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-6" staggerDelay={0.1}>
                             {[
-                                { number: '15+', label: 'Années d\'expérience' },
-                                { number: '500+', label: 'Clients satisfaits' },
-                                { number: '1200+', label: 'Agents formés' },
+                                { number: '100+', label: 'Sites sécurisés' },
+                                { number: '400+', label: 'Agents formés' },
                                 { number: '24/7', label: 'Disponibilité' },
                             ].map((stat, index) => (
                                 <StaggerItem key={index} direction="scale">

@@ -54,13 +54,13 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         },
         {
             icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                </svg>
+               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
             ),
-            title: 'Abonnement Assistance ALERTGUARD',
+                title: 'Accompagnement voyage sécurisé',
             features: [
-                'Assistance en cas d\'urgence',
+                'Garantir votre sécurité tout au long de vos déplacements professionnels.',
             ],
         },
     ];
@@ -100,6 +100,22 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
             features: [
                 'Escorte moto ou auto',
                 'Ramassage de clés sécurisés',
+            ],
+        },
+        {
+            icon: (
+                <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11v1a7 7 0 01-14 0v-1" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17v4" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 21h8" />
+                </svg>
+            ),
+            title: 'Sécurité évènementielle',
+            features: [
+                'Sécurisation d\'événements publics et privés',
+                'Gestion des accès et contrôle des entrées',
+                'Coordination avec les organisateurs et interventions rapides',
             ],
         },
     ];
@@ -258,10 +274,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         </AnimatedSection>
 
                         {/* 3 cards row */}
-                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                             {additionalServices.map((service, index) => (
                                 <ScaleAnimation key={index} delay={index * 0.15}>
-                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] shadow-xl transition-all duration-300">
+                                    <div className="text-center group bg-white rounded-2xl p-8 border-2 border-[var(--secondary)] shadow-xl transition-all duration-300 flex flex-col justify-between h-full md:min-h-[360px]">
                                         {/* Circular icon */}
                                         <div className="w-24 h-24 bg-[var(--primary)] text-[var(--secondary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             {service.icon}

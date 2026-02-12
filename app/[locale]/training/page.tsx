@@ -44,8 +44,8 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
             image: '/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
         },
         {
-            title: 'Communication',
-            description: 'Techniques de communication verbale et non-verbale pour la gestion des conflits et l\'accueil du public.',
+            title: 'Communication et Technologie',
+            description: 'AISSIA GUARD, application de tracking développée par l\'entreprise, optimise les techniques de communication verbale et non-verbale pour la gestion des conflits et l\'accueil du public.',
             image: '/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
         },
         {
@@ -99,7 +99,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                             <ScaleAnimation>
                                 <div className="bg-[var(--primary)] text-white rounded-2xl p-12 text-center">
                                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                                        PROGRAMME DE FORMATION DES
+                                        PROGRAMME DE PREPARATION DES
                                     </h2>
                                     <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
                                         AGENTS DE SÉCURITE
@@ -111,12 +111,10 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                             DURÉE DU STAGE 2 À 5 SEMAINES, EXAMEN FINAL ÉLIMINATOIRE
                                         </p>
                                         <p className="font-semibold text-[var(--secondary)]">
-                                            LES CRITÈRES MINIMUM D&apos;ADMISSION AU CENTRE DE FORMATION :
+                                            LES CRITÈRES MINIMUM D&apos;ADMISSION AU CENTRE DE PREPARATION :
                                         </p>
-                                        <p>Taille : 1,72 m</p>
-                                        <p>– Lire et écrire couramment (dictée d&apos;admission)</p>
-                                        <p>– Extrait de casier</p>
-                                        <p>– Enquête de moralité validée par la DST</p>
+                                        <p>– Taille : 1,70m Hommes , 1,65m Femmes</p>
+                                        <p>– Lire et écrire correctement</p>
                                         <p>– Dossier administratif complet</p>
                                         <p>– Certificat médical d&apos;aptitude</p>
                                     </div>

@@ -179,10 +179,8 @@ export default function ContactPage() {
                                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-bold text-white mb-2">{t.contact.phoneNumber}</h3>
-                                    <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto">
-                                        {t.contact.hours.weekdays}<br />{t.contact.hours.saturday}
-                                    </p>
+                                    <h3 className="text-lg font-semibold text-white">+225 0758737473</h3>
+                                    <h3 className="text-lg font-semibold text-white mb-2">+225 0717508264</h3>
                                 </div>
                             </ScaleAnimation>
 
@@ -195,10 +193,7 @@ export default function ContactPage() {
                                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-bold text-white mb-2">{t.contact.emailPrimary}</h3>
-                                    <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto">
-                                        {t.contact.emailSecondary}
-                                    </p>
+                                    <a className="text-lg font-bold text-white mb-2" href={`mailto:${t.contact.emailSecondary}`}>{t.contact.emailSecondary}</a>
                                 </div>
                             </ScaleAnimation>
 
@@ -231,7 +226,7 @@ export default function ContactPage() {
                         <ScaleAnimation delay={0.2}>
                             <div className="rounded-2xl overflow-hidden shadow-lg">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.3486157719!2d-3.988!3d5.367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjInMDEuMiJOIDPCsDU5JzE2LjgiVw!5e0!3m2!1sfr!2sci!4v1234567890"
+                                    src="https://maps.google.com/maps?q=5.370120,-3.977597&z=15&output=embed"
                                     width="100%"
                                     height="450"
                                     style={{ border: 0 }}
