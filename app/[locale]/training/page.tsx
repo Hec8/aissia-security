@@ -106,17 +106,56 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                     </h3>
                                     <p className="text-xl mb-8">Voir les modules</p>
                                     
-                                    <div className="space-y-3 text-left max-w-3xl mx-auto text-sm md:text-base">
+                                    <div className="max-w-3xl mx-auto text-sm md:text-base">
                                         <p className="font-semibold">
                                             DURÉE DU STAGE 2 À 5 SEMAINES, EXAMEN FINAL ÉLIMINATOIRE
                                         </p>
-                                        <p className="font-semibold text-[var(--secondary)]">
-                                            LES CRITÈRES MINIMUM D&apos;ADMISSION AU CENTRE DE PREPARATION :
+
+                                        <p className="font-semibold text-[var(--secondary)] mt-4 mb-6">
+                                            CRITÈRES MINIMUM D&apos;ADMISSION
                                         </p>
-                                        <p>– Taille : 1,70m Hommes , 1,65m Femmes</p>
-                                        <p>– Lire et écrire correctement</p>
-                                        <p>– Dossier administratif complet</p>
-                                        <p>– Certificat médical d&apos;aptitude</p>
+
+                                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            <li className="flex items-start gap-3">
+                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </span>
+                                                <span>Taille minimale — <span className="font-medium">1,70 m</span> (hommes), <span className="font-medium">1,65 m</span> (femmes)</span>
+                                            </li>
+
+                                            <li className="flex items-start gap-3">
+                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </span>
+                                                <span>Lire et écrire correctement — compétences de base en communication écrite</span>
+                                            </li>
+
+                                            <li className="flex items-start gap-3">
+                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </span>
+                                                <span>Dossier administratif complet (pièces d&apos;identité, photos, justificatifs demandés)</span>
+                                            </li>
+
+                                            <li className="flex items-start gap-3">
+                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </span>
+                                                <span>Certificat médical d&apos;aptitude récent attestant l&apos;aptitude au service</span>
+                                            </li>
+                                        </ul>
+
+                                        <p className="text-[var(--secondary)] mt-4">
+                                            Ces critères sont les minimums requis. Des tests supplémentaires (physiques et théoriques) sont effectués lors de la sélection.
+                                        </p>
                                     </div>
                                 </div>
                             </ScaleAnimation>

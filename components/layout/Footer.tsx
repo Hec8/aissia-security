@@ -19,13 +19,26 @@ export const Footer = () => {
         { name: t.footer.servicesLinks.formation, href: `/${locale}/training` },
     ];
 
+    const companyLinksObj = t.footer.companyLinks as {
+        about: string;
+        services: string;
+        products: string;
+        technologies: string;
+        training: string;
+        recrutement?: string;
+        job?: string;
+        contact: string;
+        [key: string]: string | undefined;
+    };
+
     const companyLinks = [
-        { name: t.footer.companyLinks.about, href: `/${locale}/about` },
-        { name: t.footer.companyLinks.services, href: `/${locale}/services` },
-        { name: t.footer.companyLinks.products, href: `/${locale}/products` },
-        { name: t.footer.companyLinks.technologies, href: `/${locale}/technologies` },
-        { name: t.footer.companyLinks.training, href: `/${locale}/training` },
-        { name: t.footer.companyLinks.contact, href: `/${locale}/contact` },
+        { name: companyLinksObj.about, href: `/${locale}/about` },
+        { name: companyLinksObj.services, href: `/${locale}/services` },
+        { name: companyLinksObj.products, href: `/${locale}/products` },
+        { name: companyLinksObj.technologies, href: `/${locale}/technologies` },
+        { name: companyLinksObj.training, href: `/${locale}/training` },
+        { name: companyLinksObj.recrutement ?? companyLinksObj.job ?? '', href: `/${locale}/recrutement` },
+        { name: companyLinksObj.contact, href: `/${locale}/contact` },
     ];
 
     return (
@@ -49,7 +62,7 @@ export const Footer = () => {
                         <div className="flex space-x-3">
                             {/* Facebook */}
                             <a
-                                href="#"
+                                href="https://www.facebook.com/profile.php?id=61585512675004"
                                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                                 aria-label="Facebook"
                             >
@@ -60,7 +73,7 @@ export const Footer = () => {
 
                             {/* Instagram */}
                             <a
-                                href="#"
+                                href="https://www.instagram.com/aissia_securite"
                                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                                 aria-label="Instagram"
                             >
@@ -71,7 +84,7 @@ export const Footer = () => {
 
                             {/* LinkedIn */}
                             <a
-                                href="#"
+                                href="https://www.linkedin.com/company/aissia-securit%C3%A9/"
                                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                                 aria-label="LinkedIn"
                             >
@@ -82,7 +95,7 @@ export const Footer = () => {
 
                             {/* TikTok - CORRIGÉ */}
                             <a
-                                href="#"
+                                href="https://www.tiktok.com/@aissia.securit6"
                                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                                 aria-label="TikTok"
                             >
@@ -143,10 +156,10 @@ export const Footer = () => {
                         © {currentYear} AISSIA SÉCURITÉ. {t.footer.rights}.
                     </p>
                     <div className="flex space-x-6">
-                        <Link href="#" className="text-xs text-white/50 hover:text-white transition-colors">
+                        <Link href={`/${locale}/legal/privacy`} className="text-xs text-white/50 hover:text-white transition-colors">
                             {t.footer.privacy}
                         </Link>
-                        <Link href="#" className="text-xs text-white/50 hover:text-white transition-colors">
+                        <Link href={`/${locale}/legal/terms`} className="text-xs text-white/50 hover:text-white transition-colors">
                             {t.footer.terms}
                         </Link>
                     </div>

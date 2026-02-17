@@ -61,11 +61,11 @@ export default function DashboardPage() {
             </div>
 
             {/* Stats cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                <Link href={`/${locale}/dashboard/services`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {/*<Link href={`/${locale}/dashboard/services`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
                     <div className="flex items-center justify-between mb-3">
                         <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white">
-                            {/* Service icon */}
+                            
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
@@ -80,7 +80,7 @@ export default function DashboardPage() {
                 <Link href={`/${locale}/dashboard/training`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
                     <div className="flex items-center justify-between mb-3">
                         <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white">
-                            {/* Training icon */}
+                            
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
@@ -91,7 +91,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="text-2xl font-bold text-gray-900">{stats?.formations ?? '-'}</div>
                     <div className="text-sm text-gray-500 mt-0.5">Modules de formation</div>
-                </Link>
+                </Link>*/}
                 <Link href={`/${locale}/dashboard/quotes`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
                     <div className="flex items-center justify-between mb-3">
                         <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white">
@@ -138,6 +138,22 @@ export default function DashboardPage() {
                     </div>
                     <div className="text-2xl font-bold text-gray-900">{stats?.newsletter_subscribers ?? '-'}</div>
                     <div className="text-sm text-gray-500 mt-0.5">Abonnés newsletter</div>
+                </Link>
+                <Link href={`/${locale}/dashboard/job-offers`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center text-white">
+                            <svg className="w-4 h-4 text-white group-hover:text-gray-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <rect x="4" y="6" width="18" height="16" rx="2" ry="2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M4 10h16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                        <svg className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <div className="text-2xl font-bold text-gray-900">{typeof stats?.job_offers === 'number' ? stats.job_offers : '-'}</div>
+                    <div className="text-sm text-gray-500 mt-0.5">Offres d emploi</div>
                 </Link>
             </div>
 

@@ -7,6 +7,7 @@ import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
+import HomeContactForm from '@/components/sections/HomeContactForm';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -599,41 +600,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
                                         {t.home.contactSection.formTitle}
                                     </h3>
-                                    <form className="space-y-4">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <input 
-                                                type="text" 
-                                                placeholder={t.home.contactSection.firstName}
-                                                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
-                                            />
-                                            <input 
-                                                type="text" 
-                                                placeholder={t.home.contactSection.lastName}
-                                                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
-                                            />
-                                        </div>
-                                        <input 
-                                            type="email" 
-                                            placeholder={t.home.contactSection.email}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
-                                        />
-                                        <input 
-                                            type="tel" 
-                                            placeholder={t.home.contactSection.phonePlaceholder}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900"
-                                        />
-                                        <textarea 
-                                            placeholder={t.home.contactSection.message} 
-                                            rows={4}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-gray-900 resize-none"
-                                        ></textarea>
-                                        <button 
-                                            type="submit"
-                                            className="w-full bg-[var(--secondary)] text-[var(--primary)] py-3 px-6 rounded-lg font-semibold hover:bg-[var(--secondary-dark)] transition-colors"
-                                        >
-                                            {t.home.contactSection.submit}
-                                        </button>
-                                    </form>
+                                    <HomeContactForm t={t} />
                                 </div>
                             </ScaleAnimation>
                         </div>

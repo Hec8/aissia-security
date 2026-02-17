@@ -124,6 +124,19 @@ export interface NewsletterSubscriber {
     updated_at: string;
 }
 
+export interface JobOffer {
+    id: number;
+    title: string;
+    slug: string;
+    description: string | null;
+    profiles: string | null;
+    conditions: string | null;
+    location: string | null;
+    is_active: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface DashboardStats {
     services: number;
     products: number;
@@ -134,7 +147,22 @@ export interface DashboardStats {
     quotes: number;
     pending_quotes: number;
     newsletter_subscribers: number;
+    job_offers?: number;
 }
+
+export type SubmitQuotePayload = {
+    company_name: string;
+    contact_name: string;
+    email: string;
+    phone?: string;
+    service_type: string;
+    description: string;
+    budget_min?: number;
+    budget_max?: number;
+    desired_start_date?: string;
+    ncc?: string;
+    rccm?: string;
+};
 
 // Erreur API personnalisée
 export class ApiError extends Error {
@@ -252,6 +280,12 @@ export const api = {
         return handleResponse<ContactMessage>(response);
     },
 
+    // Jobs / Recruitment
+    getJobs: async (): Promise<ApiResponse<JobOffer[]>> => {
+        const response = await fetch(`${API_BASE_URL}/jobs`);
+        return handleResponse<JobOffer[]>(response);
+    },
+
     // Newsletter
     subscribeNewsletter: async (data: { email: string; name?: string }): Promise<ApiResponse<NewsletterSubscriber>> => {
         const response = await fetch(`${API_BASE_URL}/newsletter/subscribe`, {
@@ -278,17 +312,7 @@ export const api = {
     },
 
     // Quote / Devis
-    submitQuote: async (data: {
-        company_name: string;
-        contact_name: string;
-        email: string;
-        phone?: string;
-        service_type: string;
-        description: string;
-        budget_min?: number;
-        budget_max?: number;
-        desired_start_date?: string;
-    }): Promise<ApiResponse<{ reference: string }>> => {
+    submitQuote: async (data: SubmitQuotePayload): Promise<ApiResponse<{ reference: string }>> => {
         const response = await fetch(`${API_BASE_URL}/quotes`, {
             method: 'POST',
             headers: {
@@ -543,6 +567,42 @@ export const api = {
                 body: JSON.stringify(data),
             });
             return handleResponse(response);
+        },
+        // Job Offers (admin)
+        getJobOffers: async (): Promise<ApiResponse<JobOffer[]>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/job-offers`, {
+                headers: { 'Accept': 'application/json', ...getAuthHeaders() },
+            });
+            return handleResponse<JobOffer[]>(response);
+        },
+        getJobOffer: async (id: number): Promise<ApiResponse<JobOffer>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/job-offers/${id}`, {
+                headers: { 'Accept': 'application/json', ...getAuthHeaders() },
+            });
+            return handleResponse<JobOffer>(response);
+        },
+        createJobOffer: async (data: Partial<JobOffer>): Promise<ApiResponse<JobOffer>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/job-offers`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', ...getAuthHeaders() },
+                body: JSON.stringify(data),
+            });
+            return handleResponse<JobOffer>(response);
+        },
+        updateJobOffer: async (id: number, data: Partial<JobOffer>): Promise<ApiResponse<JobOffer>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/job-offers/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', ...getAuthHeaders() },
+                body: JSON.stringify(data),
+            });
+            return handleResponse<JobOffer>(response);
+        },
+        deleteJobOffer: async (id: number): Promise<ApiResponse<null>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/job-offers/${id}`, {
+                method: 'DELETE',
+                headers: { 'Accept': 'application/json', ...getAuthHeaders() },
+            });
+            return handleResponse<null>(response);
         },
     },
 };

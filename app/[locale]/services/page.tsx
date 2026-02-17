@@ -154,8 +154,8 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                     <Container>
                         <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-6" staggerDelay={0.1}>
                             {[
-                                { number: '100+', label: 'Sites sécurisés' },
-                                { number: '400+', label: 'Agents formés' },
+                                { number: '+100', label: 'Sites sécurisés' },
+                                { number: '+400', label: 'Agents formés' },
                                 { number: '24/7', label: 'Disponibilité' },
                             ].map((stat, index) => (
                                 <StaggerItem key={index} direction="scale">

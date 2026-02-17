@@ -18,7 +18,7 @@ export function DashboardUserMenu({ locale }: { locale: string }) {
     const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
     if (token) {
       // Simuler récupération admin (à adapter si API réelle)
-      setAdmin({ id: 1, name: "Administrator", email: "admin@aissia.com" });
+      setAdmin({ id: 1, name: "Administrator", email: "info@aissia-securite.com" });
     }
   }, []);
 

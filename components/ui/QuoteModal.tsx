@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { api, ApiError } from '@/lib/api';
+import { api, type SubmitQuotePayload } from '@/lib/api';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface QuoteModalProps {
@@ -45,9 +45,20 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
     const [message, setMessage] = useState('');
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState<'personne_physique' | 'personne_morale'>('personne_physique');
+    const [ncc, setNcc] = useState<string>('');
+    const [rccm, setRccm] = useState<string>('');
 
     const MIN_DESCRIPTION_LENGTH = 20;
 
+    const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedStatus = e.target.value as 'personne_physique' | 'personne_morale';
+        setStatus(selectedStatus);
+        if (selectedStatus === 'personne_physique') {
+            setNcc('');
+            setRccm('');
+        }
+    };
     const handleOpen = useCallback((e: Event) => {
         const customEvent = e as CustomEvent;
         if (customEvent.detail?.service) {
@@ -90,7 +101,9 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                 phone: phone || undefined,
                 service_type: service || preselectedService || '',
                 description: message,
-            });
+                ncc: status === 'personne_morale' ? ncc : undefined,
+                rccm: status === 'personne_morale' ? rccm : undefined,
+            } as SubmitQuotePayload);
             setIsSubmitted(true);
             // reset form and close after short delay
             setTimeout(() => {
@@ -99,13 +112,9 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                 setPreselectedService('');
                 setFirstName(''); setLastName(''); setEmail(''); setPhone(''); setCompany(''); setService(''); setMessage('');
             }, 2000);
-        } catch (err: any) {
-            if (err instanceof ApiError) {
-                setSubmitError(err.message || 'Erreur serveur');
-            } else if (err?.message) {
-                setSubmitError(String(err.message));
-            } else {
-                setSubmitError('Erreur réseau');
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error(err.message);
             }
         } finally {
             setIsSubmitting(false);
@@ -246,6 +255,41 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                     </div>
 
                                     <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                                        <select
+                                            value={status}
+                                            onChange={handleStatusChange}
+                                            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 bg-white"
+                                        >
+                                            <option value="personne_physique">Personne Physique</option>
+                                            <option value="personne_morale">Personne Morale</option>
+                                        </select>
+                                    </div>
+
+                                    {status === 'personne_morale' && (
+                                        <>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Numéro de Compte Contribuable (NCC)</label>
+                                                <input
+                                                    type="text"
+                                                    value={ncc}
+                                                    onChange={e => setNcc(e.target.value)}
+                                                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Régistre de Commerce (RCCM)</label>
+                                                <input
+                                                    type="text"
+                                                    value={rccm}
+                                                    onChange={e => setRccm(e.target.value)}
+                                                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
+                                                />
+                                            </div>
+                                        </>
+                                    )}
+
+                                    <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.message}</label>
                                         <textarea
                                             rows={3}
@@ -301,3 +345,4 @@ export function QuoteButton({
         </button>
     );
 }
+

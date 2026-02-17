@@ -91,7 +91,17 @@ export default function ContactPage() {
                                     )}
 
                                     <form onSubmit={handleSubmit} className="space-y-5">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder={t.contact.form.name}
+                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
+                                        />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                            
                                             <input
                                                 type="email"
                                                 name="email"
@@ -110,15 +120,7 @@ export default function ContactPage() {
                                                 className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
                                             />
                                         </div>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            required
-                                            placeholder={t.contact.form.name}
-                                            className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-white placeholder-white/50"
-                                        />
+                                        
                                         <textarea
                                             name="message"
                                             value={formData.message}
