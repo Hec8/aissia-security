@@ -14,6 +14,7 @@ export default function ApplyModal({ open, onClose, offer }: Props) {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
+    const [file, setFile] = useState<File | null>(null);
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
 
@@ -25,7 +26,21 @@ export default function ApplyModal({ open, onClose, offer }: Props) {
         try {
             const subject = `Candidature: ${offer?.title || 'Offre'}`;
             const body = `Candidature pour l'offre ${offer?.title || ''} (id: ${offer?.id || ''})\n\nMessage:\n${message}`;
-            await api.sendContactForm({ name, email, phone, company: '', subject, message: body });
+
+            // If a file is attached, send as multipart/form-data
+            if (file) {
+                const form = new FormData();
+                form.append('name', name);
+                form.append('email', email);
+                if (phone) form.append('phone', phone);
+                form.append('company', '');
+                form.append('subject', subject);
+                form.append('message', body);
+                form.append('attachment', file, file.name);
+                await api.sendContactFormMultipart(form);
+            } else {
+                await api.sendContactForm({ name, email, phone, company: '', subject, message: body });
+            }
             setSent(true);
             // optionally close after a short delay
             setTimeout(() => { setSending(false); onClose(); setSent(false); setName(''); setEmail(''); setPhone(''); setMessage(''); }, 1200);
@@ -48,6 +63,19 @@ export default function ApplyModal({ open, onClose, offer }: Props) {
                         <input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="w-full px-3 py-2 border rounded" />
                         <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="Téléphone (optionnel)" className="w-full px-3 py-2 border rounded" />
                         <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Message / CV (lien ou texte)" className="w-full px-3 py-2 border rounded" rows={4} />
+
+                        <input
+                            type="file"
+                            accept=".zip"
+                            onChange={e => setFile(e.target.files && e.target.files[0] ? e.target.files[0] : null)}
+                            className="w-full px-3 py-2 border rounded"
+                        />
+                        <div className="text-sm text-gray-600">
+                            <p className="mb-2 font-medium">Pièces justificatives (obligatoires)</p>
+                            <p className="mb-3">Si vous avez plusieurs documents (CV, pièces d&apos;identité, diplômes, certificats), regroupez-les dans un dossier, compressez-le au format <strong>.zip</strong> et téléversez-le ci-dessous. Le fichier ZIP doit contenir des scans au format PDF.</p>
+                        </div>
+
+                        
                         <div className="flex justify-end gap-2">
                             <button type="button" onClick={onClose} className="px-3 py-2 border rounded">Annuler</button>
                             <button type="submit" disabled={sending} className="px-3 py-2 bg-[var(--secondary)] text-[var(--primary)] rounded">{sending ? 'Envoi...' : 'Envoyer'}</button>

@@ -26,6 +26,22 @@ export default function DashboardMessagesPage() {
                         map[m.id] = m.is_read ? 'read' : 'new';
                     });
                     setStatusMap(map);
+
+                    // if URL contains ?id=..., open that message
+                    if (typeof window !== 'undefined') {
+                        const params = new URLSearchParams(window.location.search);
+                        const idParam = params.get('id');
+                        if (idParam) {
+                            const id = parseInt(idParam, 10);
+                            const found = (res.data || []).find((x: any) => x.id === id);
+                            if (found) {
+                                setSelectedMessage(found);
+                                // mark as read in UI
+                                setStatusMap(prev => ({ ...prev, [found.id]: 'read' }));
+                                setMessages(prev => (prev || []).map((m: any) => m.id === found.id ? { ...m, is_read: true } : m));
+                            }
+                        }
+                    }
                 }
                 else setError(res.message || 'Erreur de chargement');
             })
@@ -59,6 +75,16 @@ export default function DashboardMessagesPage() {
         const current = getStatusForMessage(msg);
         if (current === 'new') {
             updateStatus(msg.id, 'read');
+        }
+        // update URL to include ?id=... so deep links work
+        if (typeof window !== 'undefined') {
+            try {
+                const url = new URL(window.location.href);
+                url.searchParams.set('id', String(msg.id));
+                window.history.replaceState({}, '', url.toString());
+            } catch (e) {
+                // ignore
+            }
         }
     };
 

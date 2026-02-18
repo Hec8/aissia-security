@@ -14,6 +14,7 @@ export default function DashboardPage() {
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [recentQuotes, setRecentQuotes] = useState<Quote[]>([]);
     const [recentMessages, setRecentMessages] = useState<ContactMessage[]>([]);
+    const [applicationsCount, setApplicationsCount] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -37,6 +38,13 @@ export default function DashboardPage() {
                 setStats(statsRes.data);
                 setRecentQuotes((quotesRes.data || []).slice(0, 3));
                 setRecentMessages((messagesRes.data || []).slice(0, 3));
+                // Count contact messages that include an attachment => candidatures
+                try {
+                    const apps = (messagesRes.data || []).filter((m: any) => !!m.attachment_path);
+                    setApplicationsCount(apps.length);
+                } catch (e) {
+                    setApplicationsCount(null);
+                }
             } catch (err: unknown) {
                 setError('Erreur de chargement des données');
             } finally {
@@ -61,7 +69,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Stats cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {/*<Link href={`/${locale}/dashboard/services`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
                     <div className="flex items-center justify-between mb-3">
                         <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white">
@@ -138,6 +146,20 @@ export default function DashboardPage() {
                     </div>
                     <div className="text-2xl font-bold text-gray-900">{stats?.newsletter_subscribers ?? '-'}</div>
                     <div className="text-sm text-gray-500 mt-0.5">Abonnés newsletter</div>
+                </Link>
+                <Link href={`/${locale}/dashboard/applications`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center text-white">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
+                            </svg>
+                        </div>
+                        <svg className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <div className="text-2xl font-bold text-gray-900">{applicationsCount ?? '-'}</div>
+                    <div className="text-sm text-gray-500 mt-0.5">Candidatures reçues</div>
                 </Link>
                 <Link href={`/${locale}/dashboard/job-offers`} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
                     <div className="flex items-center justify-between mb-3">

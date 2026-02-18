@@ -280,6 +280,21 @@ export const api = {
         return handleResponse<ContactMessage>(response);
     },
 
+    // Send contact form with file (multipart/form-data)
+    sendContactFormMultipart: async (formData: FormData): Promise<ApiResponse<ContactMessage>> => {
+        const response = await fetch(`${API_BASE_URL}/contact`, {
+            method: 'POST',
+            // NOTE: Do not set Content-Type; browser will set multipart boundary
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: formData,
+        });
+
+        return handleResponse<ContactMessage>(response);
+    },
+
     // Jobs / Recruitment
     getJobs: async (): Promise<ApiResponse<JobOffer[]>> => {
         const response = await fetch(`${API_BASE_URL}/jobs`);
@@ -504,6 +519,13 @@ export const api = {
                 headers: { 'Accept': 'application/json', ...getAuthHeaders() },
             });
             return handleResponse(response);
+        },
+        // Applications (contact messages with attachments)
+        getApplications: async (): Promise<ApiResponse<ContactMessage[]>> => {
+            const response = await fetch(`${API_BASE_URL}/admin/applications`, {
+                headers: { 'Accept': 'application/json', ...getAuthHeaders() },
+            });
+            return handleResponse<ContactMessage[]>(response);
         },
         markMessageAsRead: async (id: number): Promise<ApiResponse<ContactMessage>> => {
             const response = await fetch(`${API_BASE_URL}/admin/contact-messages/${id}/read`, {
