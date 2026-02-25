@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Footer } from '@/components/layout';
 import { Container, AnimatedSection } from '@/components/ui';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { PageHeader } from '@/components/sections';
 import { useTranslation } from '@/lib/hooks/useTranslation';
 import { api, JobOffer } from '@/lib/api';
@@ -54,65 +55,125 @@ export default function RecruitmentPage() {
     const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
     useEffect(() => {
-    let mounted = true;
-    api.getJobs()
-        .then((res) => {
-            if (!mounted) return;
-            const formattedOffers: Offer[] = (res.data || []).map((job: JobOffer) => ({
-                ...job,
-                profiles: job.profiles ?? undefined, // null → undefined
-                conditions: job.conditions ?? undefined, // null → undefined for Offer.conditions
-            }));
-            setOffers(formattedOffers);
-        })
-        .catch(() => setOffers([]))
-        .finally(() => mounted && setLoading(false));
-    return () => { mounted = false };
-}, []);
+        let mounted = true;
+
+        const demoOffers: Offer[] = [
+            {
+                id: 'demo-1',
+                title: 'Agent de sécurité (CDI)',
+                location: 'Abidjan',
+                description: '<p>Mission de surveillance sur site commercial. Horaires de jour et de nuit selon planning.</p>',
+                profiles: '- Expérience souhaitée\n- Sens des responsabilités\n- Formation sécurité appréciée',
+                conditions: '- Salaire compétitif\n- Mutuelle\n- Formation assurée'
+            },
+            {
+                id: 'demo-2',
+                title: 'Conducteur de chien de défense (CDD)',
+                location: 'Yopougon',
+                description: '<p>Travail en binôme avec chien de défense, interventions ponctuelles.</p>',
+                profiles: '- Maîtrise de la cynotechnie\n- Permis de conduire B',
+                conditions: '- Rémunération selon profil\n- Hébergement possible'
+            }
+        ];
+
+        api.getJobs()
+            .then((res) => {
+                if (!mounted) return;
+                const formattedOffers: Offer[] = (res.data || []).map((job: JobOffer) => ({
+                    ...job,
+                    profiles: job.profiles ?? undefined,
+                    conditions: job.conditions ?? undefined,
+                }));
+                if (formattedOffers.length === 0) setOffers(demoOffers);
+                else setOffers(formattedOffers);
+            })
+            .catch(() => {
+                if (mounted) setOffers(demoOffers);
+            })
+            .finally(() => mounted && setLoading(false));
+
+        return () => { mounted = false };
+    }, []);
 
     return (
         <>
             <Header />
+            <ParticleNetwork />
             <main>
                 <AnimatedSection>
                     <PageHeader
-                            title={tt.recruitment?.title || 'Recrutement'}
-                            subtitle={tt.recruitment?.subtitle || ''}
-                            image="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg"
-                            breadcrumbs={[
-                                { name: tt.nav?.home || '', href: `/${locale}` },
-                                { name: tt.nav?.recruitment || 'Recrutement' },
-                            ]}
-                        />
+                        title={tt.recruitment?.title || 'Recrutement'}
+                        subtitle={tt.recruitment?.subtitle || 'Rejoignez notre équipe'}
+                        image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
+                        breadcrumbs={[
+                            { name: tt.nav?.home || '', href: `/${locale}` },
+                            { name: tt.nav?.recruitment || 'Recrutement' },
+                        ]}
+                    />
                 </AnimatedSection>
 
                 <section className="py-20 bg-gray-50">
                     <Container>
                         <AnimatedSection>
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">{tt.recruitment?.heading || 'Offres d\u2019emploi'}</h2>
+                            <div className="text-center mb-6">
+                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">{tt.recruitment?.heading || 'Offres d\u2019emploi'}</h2>
+                                <div className="w-20 h-1 bg-[var(--secondary)] rounded-full mx-auto mt-3" aria-hidden />
+                            </div>
 
-                            <div className="bg-white rounded-2xl p-6 border border-gray-100 mb-6">
-                                <h3 className="text-lg font-semibold mb-3">Pièces à fournir (regrouper dans un dossier puis compresser en .zip)</h3>
-                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-sm text-[var(--text-secondary)]">
-                                    <li>Lettre de motivation manuscrite</li>
-                                    <li>Curriculum vitae</li>
-                                    <li>Copie de la carte nationale d’identité</li>
-                                    <li>Copie permis de conduire</li>
-                                    <li>Copie diplômes obtenus</li>
-                                    <li>Copie certificat de travail ancien employeur</li>
-                                    <li>Copie attestation de stage ancien employeur</li>
-                                    <li>Certificat de nationalité</li>
-                                    <li>Casier judiciaire</li>
-                                    <li>Extrait de naissance</li>
-                                    <li>Extrait de naissance du conjoint(e)</li>
-                                    <li>Extrait de naissance des enfants</li>
-                                    <li>Extrait ou acte de mariage</li>
-                                    <li>4 photos d’identité</li>
-                                    <li>Numéro ou relevé d’identité bancaire (RIB)</li>
-                                    <li>Numéro CNPS</li>
-                                    <li>Plan de localisation géographique du domicile</li>
-                                    <li>Facture CIE ou SODECI</li>
-                                </ul>
+                            <div className="mb-12">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                                    <div className="md:col-span-1 flex items-start md:items-center">
+                                        <div className="transform md:translate-y-10">
+                                            <h3 className="bg-[var(--secondary)] p-2 rounded-xl text-2xl md:text-3xl text-center font-extrabold text-[var(--text-primary)] leading-tight mb-2">Pièces à fournir</h3>
+                                            <p className="text-sm mt-20 text-[var(--text-secondary)]">Regrouper dans un dossier puis compresser en .zip</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="md:col-span-2">
+                                        <div className="bg-[#071826] rounded-3xl p-6 border border-[#12313b] shadow-inner">
+                                            <div className="max-h-40 overflow-y-auto">
+                                                <ul className="space-y-3 text-sm text-white/90">
+                                                    {[
+                                                        'Lettre de motivation manuscrite',
+                                                        'Curriculum vitae',
+                                                        'Copie de la carte nationale d’identité',
+                                                        'Copie permis de conduire',
+                                                        'Copie diplômes obtenus',
+                                                        'Copie certificat de travail ancien employeur',
+                                                        'Copie attestation de stage ancien employeur',
+                                                        'Certificat de nationalité',
+                                                        'Casier judiciaire',
+                                                        'Extrait de naissance',
+                                                        'Extrait de naissance du conjoint(e)',
+                                                        'Extrait de naissance des enfants',
+                                                        'Extrait ou acte de mariage',
+                                                        '4 photos d’identité',
+                                                        'Numéro ou relevé d’identité bancaire (RIB)',
+                                                        'Numéro CNPS',
+                                                        'Plan de localisation géographique du domicile',
+                                                        'Facture CIE ou SODECI',
+                                                    ].map((it, idx) => (
+                                                        <li key={idx} className="flex items-start gap-3">
+                                                            <span className="flex-none w-5 h-5 rounded-full bg-[var(--secondary)]/90 text-[var(--secondary)] flex items-center justify-center mt-1"> 
+                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                            <span className="text-sm leading-relaxed">{it}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div className="mt-4 flex justify-end">
+                                                <div className="w-12 h-12 bg-[var(--secondary)] rounded-full flex items-center justify-center shadow-md">
+                                                    <svg className="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h10M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             {loading ? (

@@ -6,6 +6,7 @@ import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AdminDocsModal } from '@/components/ui/AdminDocsModal';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 
 export default async function TrainingPage({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -135,12 +136,40 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                             </li>
 
                                             <li className="flex items-start gap-3">
-                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                <div className="flex-1 flex items-center gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </span>
-                                                <span>Dossier administratif complet (pièces d&apos;identité, photos, justificatifs demandés)</span>
+                                                    <span>{t.training.requirementsList.adminFile}</span>
+                                                    <AdminDocsModal
+                                                        title={t.training.requirementsList.adminFile}
+                                                        items={[
+                                                            "Lettre de motivation manuscrite",
+                                                            "Curriculum vitae",
+                                                            "Copie de la carte nationale d’identité",
+                                                            "Copie permis de conduire",
+                                                            "Copie diplômes obtenus",
+                                                            "Copie certificat de travail ancien employeur",
+                                                            "Copie attestation de stage ancien employeur",
+                                                            "Certificat de nationalité",
+                                                            "Casier judiciaire",
+                                                            "Extrait de naissance",
+                                                            "Extrait de naissance du conjoint(e)",
+                                                            "Extrait de naissance des enfants",
+                                                            "Extrait ou acte de mariage",
+                                                            "4 photos d’identité",
+                                                            "Numéro ou relevé d’identité bancaire (RIB)",
+                                                            "Numéro CNPS",
+                                                            "Plan de localisation géographique du domicile",
+                                                            "Facture CIE ou SODECI",
+                                                        ]}
+                                                        triggerElement={(
+                                                            <button type="button" className="ml-2 inline-flex items-center px-3 py-1.5 bg-[var(--secondary)] text-[var(--primary)] rounded-md text-sm font-medium hover:opacity-90">Voir</button>
+                                                        )}
+                                                    />
+                                                </div>
                                             </li>
 
                                             <li className="flex items-start gap-3">

@@ -60,7 +60,7 @@ export default function ContactPage() {
                 <PageHeader
                     title={t.contact.title}
                     subtitle={t.contact.subtitle}
-                    image="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg"
+                    image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.contact },
@@ -181,8 +181,9 @@ export default function ContactPage() {
                                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-semibold text-white">+225 0758737473</h3>
-                                    <h3 className="text-lg font-semibold text-white mb-2">+225 0717508264</h3>
+                                    <h3 className="text-lg font-medium text-white">+225 2722261326</h3>
+                                    <h3 className="text-lg font-medium text-white">+225 0758737473</h3>
+                                    <h3 className="text-lg font-medium text-white mb-2">+225 0717508264</h3>
                                 </div>
                             </ScaleAnimation>
 
@@ -228,7 +229,7 @@ export default function ContactPage() {
                         <ScaleAnimation delay={0.2}>
                             <div className="rounded-2xl overflow-hidden shadow-lg">
                                 <iframe
-                                    src="https://maps.google.com/maps?q=5.370120,-3.977597&z=15&output=embed"
+                                    src={`https://www.google.com/maps?q=${encodeURIComponent(t.contact.addressFull)}&output=embed`}
                                     width="100%"
                                     height="450"
                                     style={{ border: 0 }}
@@ -238,6 +239,17 @@ export default function ContactPage() {
                                     title="Carte de localisation AISSIA Sécurité"
                                     className="w-full"
                                 ></iframe>
+                            </div>
+
+                            <div className="mt-3 text-sm">
+                                <a
+                                    href="https://maps.app.goo.gl/qFSwme5te5Ntkgsf9"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[var(--primary)] font-semibold hover:underline"
+                                >
+                                    {t.contact.openInMaps}
+                                </a>
                             </div>
                         </ScaleAnimation>
                     </Container>

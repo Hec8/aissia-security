@@ -106,8 +106,8 @@ export const translations = {
                     description: 'Notre centre de formation assure la qualification et la certification de tous nos agents de sécurité.',
                 },
                 escorte: {
-                    title: 'Transport de valeurs',
-                    description: 'Transport sécurisé de valeurs et d\'équipements sensibles (convoyage de fonds et biens de valeur), assuré par des équipes spécialisées et des véhicules adaptés.',
+                    title: 'Escorte Sécurisée',
+                    description: 'Service d’escorte moto ou auto pour vos déplacements professionnels et le transport de vos équipements.',
                 },
             },
             solutions: {
@@ -518,8 +518,8 @@ export const translations = {
                     description: 'Our training center ensures the qualification and certification of all our security agents.',
                 },
                 escorte: {
-                    title: 'Transport of valuables',
-                    description: 'Secure transport of valuables and sensitive equipment (cash-in-transit and high-value items), carried out by specialized teams using adapted vehicles.',
+                    title: 'Secure escort',
+                    description: 'Motorcycle or car escort service for your business trips and the transport of your equipment.',
                 },
             },
             solutions: {
@@ -577,7 +577,7 @@ export const translations = {
                 phone: '2722261328',
                 cta: 'Contact us',
                 formTitle: 'Contact us',
-                directorsPhones: ['+225 0758737473', '+225 0717508264'],
+                directorsPhones: ['+225 2722261326', '+225 0758737473', '+225 0717508264'],
                 firstName: 'First name',
                 lastName: 'Last name',
                 email: 'Email',

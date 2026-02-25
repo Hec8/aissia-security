@@ -82,11 +82,38 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
         return () => { document.body.style.overflow = ''; };
     }, [isOpen]);
 
+    const validateForm = () => {
+        const missing: string[] = [];
+        if (!firstName.trim()) missing.push(t.firstName || 'Prénom');
+        if (!lastName.trim()) missing.push(t.lastName || 'Nom');
+        if (!email.trim()) missing.push(t.email || 'Email');
+        if (!phone.trim()) missing.push(t.phone || 'Téléphone');
+        if (!company.trim()) missing.push(t.company || 'Société');
+        const serviceValue = service || preselectedService;
+        if (!serviceValue.trim()) missing.push(t.service || 'Service');
+        if (!message.trim()) missing.push(t.message || 'Message');
+        if (!status) missing.push('Statut');
+        if (status === 'personne_morale') {
+            if (!ncc.trim()) missing.push('NCC');
+            if (!rccm.trim()) missing.push('RCCM');
+        }
+        return missing;
+    };
+
+    const isFormValid = () => validateForm().length === 0 && (message || '').trim().length >= MIN_DESCRIPTION_LENGTH;
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSubmitError(null);
         setIsSubmitting(true);
         // client-side validation
+        const missing = validateForm();
+        if (missing.length > 0) {
+            setSubmitError(`Veuillez remplir : ${missing.join(', ')}.`);
+            setIsSubmitting(false);
+            return;
+        }
+
         if ((message || '').trim().length < MIN_DESCRIPTION_LENGTH) {
             setSubmitError(`Le message doit contenir au moins ${MIN_DESCRIPTION_LENGTH} caractères.`);
             setIsSubmitting(false);
@@ -220,6 +247,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.phone}</label>
                                         <input
                                             type="tel"
+                                            required
                                             value={phone}
                                             onChange={e => setPhone(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
@@ -230,6 +258,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t.company}</label>
                                         <input
                                             type="text"
+                                            required
                                             value={company}
                                             onChange={e => setCompany(e.target.value)}
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
@@ -241,6 +270,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <select
                                             value={service || preselectedService}
                                             onChange={e => setService(e.target.value)}
+                                            required
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 bg-white"
                                         >
                                             <option value="">{t.service}</option>
@@ -259,6 +289,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                         <select
                                             value={status}
                                             onChange={handleStatusChange}
+                                            required
                                             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900 bg-white"
                                         >
                                             <option value="personne_physique">Personne Physique</option>
@@ -272,6 +303,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Numéro de Compte Contribuable (NCC)</label>
                                                 <input
                                                     type="text"
+                                                    required
                                                     value={ncc}
                                                     onChange={e => setNcc(e.target.value)}
                                                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
@@ -281,6 +313,7 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Régistre de Commerce (RCCM)</label>
                                                 <input
                                                     type="text"
+                                                    required
                                                     value={rccm}
                                                     onChange={e => setRccm(e.target.value)}
                                                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent text-gray-900"
@@ -310,8 +343,8 @@ export function QuoteModal({ translations: t }: QuoteModalProps) {
 
                                     <button
                                         type="submit"
-                                        disabled={isSubmitting || (message || '').trim().length < MIN_DESCRIPTION_LENGTH}
-                                        className={`w-full bg-[var(--primary)] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg ${isSubmitting || (message || '').trim().length < MIN_DESCRIPTION_LENGTH ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]'}`}
+                                        disabled={isSubmitting || !isFormValid()}
+                                        className={`w-full bg-[var(--primary)] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg ${isSubmitting || !isFormValid() ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]'}`}
                                     >
                                         {isSubmitting ? 'Envoi...' : t.submit}
                                     </button>

@@ -350,7 +350,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 
 
                 {/* Section Qu'est-ce qui nous distingue */}
-                <section className="py-20 bg-[var(--primary)] text-white border-t-4 border-white">
+                <section className="py-20 bg-[var(--primary)] text-white">
                     <Container>
                         <div>
                             <AnimatedSection direction="up">
