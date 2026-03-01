@@ -6,75 +6,28 @@ import { translations } from '@/lib/translations';
 import { Locale } from '@/lib/i18n';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AdminDocsModal } from '@/components/ui/AdminDocsModal';
+import DocsExpandable from '@/components/ui/DocsExpandable';
 import { AnimatedSection, ScaleAnimation, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection';
 
 export default async function TrainingPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
     const t = translations[locale];
 
-    const trainingModules = [
-        {
-            title: 'Sport',
-            description: 'Entraînement physique intensif pour garantir la forme et l\'endurance nécessaires aux missions de sécurité sur le terrain.',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
-        },
-        {
-            title: 'Parcours du combattant',
-            description: 'Exercices pratiques sur parcours d\'obstacles pour développer l\'agilité, la résistance et les réflexes en situation de stress.',
-            image: '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
-        },
-        {
-            title: 'Formation théorique',
-            description: 'Cours magistraux couvrant le cadre juridique, la déontologie et les fondamentaux du métier d\'agent de sécurité.',
-            image: '/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg',
-        },
-        {
-            title: 'Sécurité privée',
-            description: 'Module complet sur les techniques de surveillance, le contrôle d\'accès et la gestion de la sécurité des sites.',
-            image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-        },
-        {
-            title: 'Consignes générales',
-            description: 'Apprentissage des consignes et protocoles fondamentaux régissant l\'exercice de la profession de sécurité privée.',
-            image: '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
-        },
-        {
-            title: 'Armes non-létales',
-            description: 'Formation à la manipulation et à l\'usage réglementaire des équipements de défense non-létaux.',
-            image: '/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
-        },
-        {
-            title: 'Communication et Technologie',
-            description: 'AISSIA GUARD, application de tracking développée par l\'entreprise, optimise les techniques de communication verbale et non-verbale pour la gestion des conflits et l\'accueil du public.',
-            image: '/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
-        },
-        {
-            title: 'Formation cyno',
-            description: 'Initiation au travail avec les chiens de sécurité : obéissance, détection et intervention canine.',
-            image: '/images site/Whisk_de2cf0006a6e0838ea9477dbb5ba68cedr.jpeg',
-        },
-        {
-            title: 'Assistance & Intervention',
-            description: 'Protocoles d\'intervention rapide, premiers secours et coordination avec les forces de l\'ordre.',
-            image: '/images site/Whisk_47b0b5038e58a95a87042a6fd0231c05dr.jpeg',
-        },
-        {
-            title: 'Self défense',
-            description: 'Techniques de défense personnelle adaptées au métier d\'agent de sécurité pour les situations à risque.',
-            image: '/images site/Whisk_b45eac5d7cb2009b2e648461d62d93e9dr.jpeg',
-        },
-        {
-            title: 'Protection rapprochée',
-            description: 'Formation spécialisée en escorte et protection de personnalités : analyse de risques, itinéraires et réactivité.',
-            image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-        },
-        {
-            title: 'Rédaction de rapports',
-            description: 'Méthodologie de rédaction des rapports d\'incident, mains courantes et comptes rendus professionnels.',
-            image: '/images site/Whisk_e6308d781c51042a7cf4162c4757b890dr.jpeg',
-        },
+    const moduleImages = [
+        '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
+        '/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg',
+        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
+        '/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
+        '/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
+        '/images site/Whisk_de2cf0006a6e0838ea9477dbb5ba68cedr.jpeg',
+        '/images site/Whisk_47b0b5038e58a95a87042a6fd0231c05dr.jpeg',
+        '/images site/Whisk_b45eac5d7cb2009b2e648461d62d93e9dr.jpeg',
+        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images site/Whisk_e6308d781c51042a7cf4162c4757b890dr.jpeg',
     ];
+    const trainingModules = t.training.modules.map((m, i) => ({ ...m, image: moduleImages[i] }));
 
     return (
         <>
@@ -98,32 +51,32 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                     <section className="py-20 bg-white">
                         <Container>
                             <ScaleAnimation>
-                                <div className="bg-[var(--primary)] text-white rounded-2xl p-12 text-center">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                                        PROGRAMME DE PREPARATION DES
+                                <div className="bg-[var(--primary)] text-white rounded-2xl p-8 sm:p-12 text-center">
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white">
+                                        {t.training.programTitle}
                                     </h2>
-                                    <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                                        AGENTS DE SÉCURITE
+                                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-white">
+                                        {t.training.programSubtitle}
                                     </h3>
-                                    <p className="text-xl mb-8">Voir les modules</p>
+                                    <p className="text-xl mb-8">{t.training.viewModules}</p>
                                     
                                     <div className="max-w-3xl mx-auto text-sm md:text-base">
                                         <p className="font-semibold">
-                                            DURÉE DU STAGE 2 À 5 SEMAINES, EXAMEN FINAL ÉLIMINATOIRE
+                                            {t.training.durationFull}
                                         </p>
 
                                         <p className="font-semibold text-[var(--secondary)] mt-4 mb-6">
-                                            CRITÈRES MINIMUM D&apos;ADMISSION
+                                            {t.training.admissionCriteria}
                                         </p>
 
-                                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <li className="flex items-start gap-3">
                                                 <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </span>
-                                                <span>Taille minimale — <span className="font-medium">1,70 m</span> (hommes), <span className="font-medium">1,65 m</span> (femmes)</span>
+                                                <span>{t.training.heightReq}</span>
                                             </li>
 
                                             <li className="flex items-start gap-3">
@@ -132,20 +85,24 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </span>
-                                                <span>Lire et écrire correctement — compétences de base en communication écrite</span>
+                                                <span>{t.training.literacyReq}</span>
                                             </li>
 
                                             <li className="flex items-start gap-3">
-                                                <div className="flex-1 flex items-center gap-3">
-                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </span>
-                                                    <span>{t.training.requirementsList.adminFile}</span>
-                                                    <AdminDocsModal
-                                                        title={t.training.requirementsList.adminFile}
-                                                        items={[
+                                                <div className="flex items-start gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center mt-1"> 
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                    </span>
+
+                                                    <div className="flex-1">
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-sm text-white">{t.training.requirementsList.adminFile}</span>
+                                                        </div>
+
+                                                        <div className="mt-3">
+                                                            <DocsExpandable items={[
                                                             "Lettre de motivation manuscrite",
                                                             "Curriculum vitae",
                                                             "Copie de la carte nationale d’identité",
@@ -164,11 +121,9 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                                             "Numéro CNPS",
                                                             "Plan de localisation géographique du domicile",
                                                             "Facture CIE ou SODECI",
-                                                        ]}
-                                                        triggerElement={(
-                                                            <button type="button" className="ml-2 inline-flex items-center px-3 py-1.5 bg-[var(--secondary)] text-[var(--primary)] rounded-md text-sm font-medium hover:opacity-90">Voir</button>
-                                                        )}
-                                                    />
+                                                        ]} />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
 
@@ -178,12 +133,12 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </span>
-                                                <span>Certificat médical d&apos;aptitude récent attestant l&apos;aptitude au service</span>
+                                                <span>{t.training.medicalCertReq}</span>
                                             </li>
                                         </ul>
 
                                         <p className="text-[var(--secondary)] mt-4">
-                                            Ces critères sont les minimums requis. Des tests supplémentaires (physiques et théoriques) sont effectués lors de la sélection.
+                                            {t.training.criteriaNote}
                                         </p>
                                     </div>
                                 </div>
@@ -233,7 +188,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                                     href={`/${locale}/contact`}
                                                     className="inline-flex items-center gap-1.5 text-[var(--secondary)] font-semibold text-sm hover:text-[var(--primary)] transition-colors group/link"
                                                 >
-                                                    En savoir plus
+                                                    {t.common.learnMore}
                                                     <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                                     </svg>
@@ -257,7 +212,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                         href={`/${locale}/contact`}
                                         className="inline-block px-12 py-4 bg-[var(--secondary)] text-[var(--primary)] font-bold text-lg rounded-lg hover:opacity-90 transition-opacity shadow-lg hover:scale-110 transform duration-300"
                                     >
-                                        Contactez-nous
+                                        {t.training.cta}
                                     </Link>
                                 </ScaleAnimation>
                             </div>

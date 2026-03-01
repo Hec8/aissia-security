@@ -70,13 +70,13 @@ export function AdminDocsModal({ title, items, triggerElement }: { title: string
                                 <div className="max-h-[60vh] overflow-y-auto">
                                     <ul className="space-y-3">
                                         {items.map((it, idx) => (
-                                            <li key={idx} className="flex items-start gap-3">
+                                            <li key={idx} className="flex items-center gap-3">
                                                 <span className="flex-none w-7 h-7 rounded-full bg-[var(--primary)] text-[var(--secondary)] flex items-center justify-center"> 
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </span>
-                                                <span className="text-sm text-[var(--text-primary)]">{it}</span>
+                                                <span className="text-sm text-[var(--text-primary)] leading-relaxed flex-1 min-w-0">{it}</span>
                                             </li>
                                         ))}
                                     </ul>

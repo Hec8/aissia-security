@@ -127,13 +127,20 @@ export const ParticleNetwork = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const PARTICLE_COUNT = 80;
+        const PARTICLE_COUNT = 60;
         const CONNECTION_DISTANCE = 150;
+        const CONNECTION_DISTANCE_SQ = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
         const MOUSE_RADIUS = 200;
+        const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
         const DRIFT_RANGE = 120;
+        const DRIFT_RANGE_SQ = DRIFT_RANGE * DRIFT_RANGE;
         const PARTICLE_SPEED = 0.3;
+        const PARTICLE_SPEED_SQ = PARTICLE_SPEED * PARTICLE_SPEED;
+        const TARGET_FPS = 30;
+        const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
         let animationId = 0;
+        let lastFrameTime = 0;
         const mouse = { x: -1000, y: -1000 };
         let particles: Particle[] = [];
 
@@ -165,7 +172,11 @@ export const ParticleNetwork = () => {
             }
         };
 
-        const animate = () => {
+        const animate = (timestamp: number) => {
+            animationId = requestAnimationFrame(animate);
+            if (timestamp - lastFrameTime < FRAME_INTERVAL) return;
+            lastFrameTime = timestamp;
+
             const { width, height } = canvas;
             ctx.clearRect(0, 0, width, height);
 
@@ -174,9 +185,10 @@ export const ParticleNetwork = () => {
                 const p = particles[i];
                 const dx = p.x - p.originX;
                 const dy = p.y - p.originY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                const distSq = dx * dx + dy * dy;
 
-                if (dist > DRIFT_RANGE) {
+                if (distSq > DRIFT_RANGE_SQ) {
+                    const dist = Math.sqrt(distSq);
                     p.vx -= (dx / dist) * 0.02;
                     p.vy -= (dy / dist) * 0.02;
                 }
@@ -184,8 +196,9 @@ export const ParticleNetwork = () => {
                 p.vx += (Math.random() - 0.5) * 0.01;
                 p.vy += (Math.random() - 0.5) * 0.01;
 
-                const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                if (speed > PARTICLE_SPEED) {
+                const speedSq = p.vx * p.vx + p.vy * p.vy;
+                if (speedSq > PARTICLE_SPEED_SQ) {
+                    const speed = Math.sqrt(speedSq);
                     p.vx = (p.vx / speed) * PARTICLE_SPEED;
                     p.vy = (p.vy / speed) * PARTICLE_SPEED;
                 }
@@ -205,9 +218,10 @@ export const ParticleNetwork = () => {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const distSq = dx * dx + dy * dy;
 
-                    if (dist < CONNECTION_DISTANCE) {
+                    if (distSq < CONNECTION_DISTANCE_SQ) {
+                        const dist = Math.sqrt(distSq);
                         const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.25;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
@@ -224,9 +238,10 @@ export const ParticleNetwork = () => {
                 const p = particles[i];
                 const mdx = p.x - mouse.x;
                 const mdy = p.y - mouse.y;
-                const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+                const mDistSq = mdx * mdx + mdy * mdy;
 
-                if (mDist < MOUSE_RADIUS) {
+                if (mDistSq < MOUSE_RADIUS_SQ) {
+                    const mDist = Math.sqrt(mDistSq);
                     const opacity = (1 - mDist / MOUSE_RADIUS) * 0.35;
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
@@ -246,8 +261,6 @@ export const ParticleNetwork = () => {
                 ctx.fillStyle = 'rgba(249, 198, 11, 0.08)';
                 ctx.fill();
             }
-
-            animationId = requestAnimationFrame(animate);
         };
 
         const handleMouseMove = (e: MouseEvent) => {
@@ -260,16 +273,27 @@ export const ParticleNetwork = () => {
             mouse.y = -1000;
         };
 
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                // resume animation when tab becomes visible
+                animationId = requestAnimationFrame(animate);
+            }
+        };
+
         resize();
         window.addEventListener('resize', resize);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
         animationId = requestAnimationFrame(animate);
 
         return () => {
             window.removeEventListener('resize', resize);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
             cancelAnimationFrame(animationId);
         };
     }, []);

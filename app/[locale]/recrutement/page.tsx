@@ -35,20 +35,7 @@ export default function RecruitmentPage() {
         conditions?: string;
     };
 
-    type Translations = {
-        recruitment?: {
-            title?: string;
-            subtitle?: string;
-            heading?: string;
-        };
-        nav?: {
-            home?: string;
-            recruitment?: string;
-        };
-    };
-
     const { t, locale } = useTranslation();
-    const tt = t as Translations;
     const [offers, setOffers] = useState<Offer[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [applyOpen, setApplyOpen] = useState(false);
@@ -102,87 +89,53 @@ export default function RecruitmentPage() {
             <main>
                 <AnimatedSection>
                     <PageHeader
-                        title={tt.recruitment?.title || 'Recrutement'}
-                        subtitle={tt.recruitment?.subtitle || 'Rejoignez notre équipe'}
+                        title={t.recruitment.title}
+                        subtitle={t.recruitment.subtitle}
                         image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                         breadcrumbs={[
-                            { name: tt.nav?.home || '', href: `/${locale}` },
-                            { name: tt.nav?.recruitment || 'Recrutement' },
+                            { name: t.nav.home, href: `/${locale}` },
+                            { name: t.nav.recruitment },
                         ]}
                     />
                 </AnimatedSection>
 
-                <section className="py-20 bg-gray-50">
+                <section className="py-12 md:py-20 bg-gray-50">
                     <Container>
                         <AnimatedSection>
-                            <div className="text-center mb-6">
-                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">{tt.recruitment?.heading || 'Offres d\u2019emploi'}</h2>
-                                <div className="w-20 h-1 bg-[var(--secondary)] rounded-full mx-auto mt-3" aria-hidden />
-                            </div>
+                            <div className="mb-8">
+                                <div className="mb-6 justify-center text-center">
+                                    <h3 className="text-2xl md:text-3xl font-extrabold text-[var(--text-primary)] leading-tight">{t.recruitment.pieces.title}</h3>
+                                    <div className="mt-3 mb-4 w-36 h-1 rounded-full bg-[var(--secondary)] mx-auto" />
+                                    <p className="text-sm text-[var(--text-secondary)]">{t.recruitment.pieces.subtitle}</p>
+                                </div>
 
-                            <div className="mb-12">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                                    <div className="md:col-span-1 flex items-start md:items-center">
-                                        <div className="transform md:translate-y-10">
-                                            <h3 className="bg-[var(--secondary)] p-2 rounded-xl text-2xl md:text-3xl text-center font-extrabold text-[var(--text-primary)] leading-tight mb-2">Pièces à fournir</h3>
-                                            <p className="text-sm mt-20 text-[var(--text-secondary)]">Regrouper dans un dossier puis compresser en .zip</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="md:col-span-2">
-                                        <div className="bg-[#071826] rounded-3xl p-6 border border-[#12313b] shadow-inner">
-                                            <div className="max-h-40 overflow-y-auto">
-                                                <ul className="space-y-3 text-sm text-white/90">
-                                                    {[
-                                                        'Lettre de motivation manuscrite',
-                                                        'Curriculum vitae',
-                                                        'Copie de la carte nationale d’identité',
-                                                        'Copie permis de conduire',
-                                                        'Copie diplômes obtenus',
-                                                        'Copie certificat de travail ancien employeur',
-                                                        'Copie attestation de stage ancien employeur',
-                                                        'Certificat de nationalité',
-                                                        'Casier judiciaire',
-                                                        'Extrait de naissance',
-                                                        'Extrait de naissance du conjoint(e)',
-                                                        'Extrait de naissance des enfants',
-                                                        'Extrait ou acte de mariage',
-                                                        '4 photos d’identité',
-                                                        'Numéro ou relevé d’identité bancaire (RIB)',
-                                                        'Numéro CNPS',
-                                                        'Plan de localisation géographique du domicile',
-                                                        'Facture CIE ou SODECI',
-                                                    ].map((it, idx) => (
-                                                        <li key={idx} className="flex items-start gap-3">
-                                                            <span className="flex-none w-5 h-5 rounded-full bg-[var(--secondary)]/90 text-[var(--secondary)] flex items-center justify-center mt-1"> 
-                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <circle cx="12" cy="12" r="3" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
-                                                            <span className="text-sm leading-relaxed">{it}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                            <div className="mt-4 flex justify-end">
-                                                <div className="w-12 h-12 bg-[var(--secondary)] rounded-full flex items-center justify-center shadow-md">
-                                                    <svg className="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h10M12 5l7 7-7 7" />
-                                                    </svg>
-                                                </div>
-                                            </div>
+                                <div>
+                                    <div className="bg-[#071826] rounded-3xl p-6 md:p-8 border border-[#12313b] shadow-inner">
+                                        <div className="max-h-56 md:max-h-48 overflow-y-auto">
+                                            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm text-white/90">
+                                                {t.recruitment.pieces.items.map((it, idx) => (
+                                                    <li key={idx} className="flex items-start gap-3">
+                                                        <span className="flex-none w-4 h-4 rounded-full bg-[var(--secondary)]/90 text-[var(--secondary)] flex items-center justify-center mt-1"> 
+                                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                                            </svg>
+                                                        </span>
+                                                        <span className="text-sm leading-relaxed break-words">{it}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {loading ? (
-                                <p>Chargement...</p>
+                                <p>{t.common.loading}</p>
                             ) : offers.length === 0 ? (
                                 <div className="bg-white rounded-2xl p-8 border border-gray-200">
-                                    <h3 className="text-lg font-semibold mb-2">Aucun poste n’est à pourvoir actuellement.</h3>
+                                    <h3 className="text-lg font-semibold mb-2">{t.recruitment.noOffers}</h3>
                                     <p className="text-gray-600 leading-relaxed">
-                                        Nous ne recrutons pas pour le moment, mais nous vous invitons à consulter régulièrement cette page pour découvrir nos futures opportunités ou suivez-nous sur nos réseaux pour rester informé(e)
+                                        {t.recruitment.noOffersDesc}
                                     </p>
                                 </div>
                             ) : (
@@ -195,7 +148,7 @@ export default function RecruitmentPage() {
                                                     <div className="flex items-start justify-between">
                                                         <div>
                                                             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{offer.title}</h3>
-                                                            {offer.location && <span className="inline-block text-sm text-[var(--secondary)] bg-[var(--secondary)]/10 px-2 py-0.5 rounded-full">{offer.location}</span>}
+                                                            {offer.location && <span className="inline-block text-lg text-[var(--secondary)] bg-[var(--primary)] px-2 py-0.5 rounded-full">{offer.location}</span>}
                                                         </div>
                                                     </div>
 
@@ -203,20 +156,20 @@ export default function RecruitmentPage() {
 
                                                     {offer.profiles && (
                                                         <div className="mb-3">
-                                                            <h4 className="font-semibold text-[var(--text-primary)]">Profils recherchés</h4>
+                                                            <h4 className="font-semibold text-[var(--text-primary)]">{t.recruitment.profilesLabel}</h4>
                                                             <div className="text-gray-700 text-sm" dangerouslySetInnerHTML={{ __html: normalizeToHtmlList(offer.profiles) }} />
                                                         </div>
                                                     )}
 
                                                     {offer.conditions && (
                                                         <div>
-                                                            <h4 className="font-semibold text-[var(--text-primary)]">Conditions</h4>
+                                                            <h4 className="font-semibold text-[var(--text-primary)]">{t.recruitment.conditionsLabel}</h4>
                                                             <div className="text-gray-700 text-sm" dangerouslySetInnerHTML={{ __html: normalizeToHtmlList(offer.conditions) }} />
                                                         </div>
                                                     )}
 
                                                     <div className="mt-4 flex items-center gap-3">
-                                                        <button onClick={() => { setSelectedOffer(offer); setApplyOpen(true); }} className="px-4 py-2 bg-[var(--primary)] text-white rounded-xl shadow-sm hover:opacity-95 hover:scale-105 transition">Postuler ici</button>
+                                                        <button onClick={() => { setSelectedOffer(offer); setApplyOpen(true); }} className="px-4 py-2 bg-[var(--primary)] text-white rounded-xl shadow-sm hover:opacity-95 hover:scale-105 transition">{t.recruitment.applyButton}</button>
                                                     </div>
                                                 </div>
                                             </div>

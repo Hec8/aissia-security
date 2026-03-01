@@ -12,52 +12,19 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
     const { locale } = await params;
     const t = translations[locale];
 
-    const services = [
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            ),
-            title: 'Surveillance de site et Gardiennage',
-            description: 'Nous mettons à disposition des agents de sécurité formés pour surveiller vos sites, entreprises, commerces et habitations. Nos équipes veillent à la protection de vos biens, assurant une présence proactive et dissuasive 24h/24.',
-            image: '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
-            badge: 'Gardiennage',
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-            ),
-            title: 'Protection rapprochée',
-            description: 'Nos agents spécialisés en protection rapprochée vous accompagnent de manière discrète et efficace 24h/24. Que ce soit pour vos déplacements ou pour votre sécurité quotidienne, nous veillons à votre intégrité avec un service sur mesure.',
-            image: '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-            badge: 'Protection',
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-            ),
-            title: 'Gestion de risque',
-            description: 'Tous nos agents sont formés dans notre centre de formation. Ils sont agréés pour assurer un service de qualité supérieure.',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
-            badge: 'Analyse',
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            ),
-            title: 'Assistance',
-            description: 'AISSIA-SÉCURITÉ assure une assistance rapide et efficace en cas de situation d\'urgence. Nos équipes sont formées pour intervenir avec professionnalisme et rapidité, garantissant une résolution optimale de tout incident.',
-            image: '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
-            badge: 'Urgence',
-        },
+    const serviceImages = [
+        '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
+        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
     ];
+    const serviceIcons = [
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
+    ];
+    const services = t.services.servicesList.map((s, i) => ({ ...s, icon: serviceIcons[i], image: serviceImages[i] }));
 
     return (
         <>
@@ -153,11 +120,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                 <section className="py-16 bg-[var(--primary)]">
                     <Container>
                         <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-6" staggerDelay={0.1}>
-                            {[
-                                { number: '+100', label: 'Sites sécurisés' },
-                                { number: '+400', label: 'Agents formés' },
-                                { number: '24/7', label: 'Disponibilité' },
-                            ].map((stat, index) => (
+                            {t.services.stats.map((stat, index) => (
                                 <StaggerItem key={index} direction="scale">
                                     <div className="text-center">
                                         <div className="text-3xl md:text-4xl font-black text-[var(--secondary)] mb-2">{stat.number}</div>
@@ -187,20 +150,20 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                         <AnimatedSection>
                             <div className="max-w-4xl mx-auto text-center">
                             <div className="inline-block px-6 py-2 bg-[var(--secondary)] text-[var(--primary)] rounded-full text-sm font-bold mb-6 uppercase tracking-wide">
-                                Rejoignez-nous
+                                {t.services.joinUs.badge}
                             </div>
                             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                                Formation en sécurité privée
+                                {t.services.joinUs.title}
                             </h2>
                             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                                Nous offrons des formations complètes en sécurité privée pour les agents, leur permettant d&apos;acquérir les compétences nécessaires pour protéger efficacement les personnes et les biens.
+                                {t.services.joinUs.fullDescription}
                             </p>
                             <ScaleAnimation delay={0.3}>
                                 <Link 
                                     href={`/${locale}/training`}
                                     className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-[var(--primary)] transition-all duration-300 hover:scale-110 transform"
                                 >
-                                    Voir plus
+                                    {t.services.joinUs.button}
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>

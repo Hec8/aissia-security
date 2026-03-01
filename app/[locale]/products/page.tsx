@@ -13,153 +13,34 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
     const { locale } = await params;
     const t = translations[locale];
 
-    const securityServices = [
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            ),
-            title: 'Agent de Sécurité (ADS J/N)',
-            badge: 'PLUS DEMANDÉ',
-            features: [
-                'Surveillance jour et nuit',
-                'Protection des sites et des personnes',
-                'Option disponible : Agent de protection armé (ADP J/N)',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm0 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3zm-3 3v4m6-4v4M5.5 21h13" />
-                </svg>
-            ),
-            title: 'Conducteur-Chien',
-            features: [
-                'Surveillance renforcée avec chien de défense',
-                'Disponible de jour ou de nuit',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-            ),
-            title: 'Garde du Corps (GDC)',
-            features: [
-                'Protection rapprochée personnalisée',
-                'Contrats adaptés à vos besoins',
-            ],
-        },
-        {
-            icon: (
-               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
-            ),
-                title: 'Accompagnement voyage sécurisé',
-            features: [
-                'Garantir votre sécurité tout au long de vos déplacements professionnels.',
-            ],
-        },
+    const securityServiceIcons = [
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm0 0c0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3-3 1.343-3 3zm-3 3v4m6-4v4M5.5 21h13" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
     ];
+    const securityServices = t.products.securityServices.map((s, i) => ({ ...s, icon: securityServiceIcons[i] }));
 
-    const additionalServices = [
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-            ),
-            title: 'Sécurité avancée',
-            features: [
-                'Responsable sécurité corporate',
-                'Inspecteur de magasin',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-            ),
-            title: 'Audit & études de sécurité',
-            features: [
-                'Identification et évaluation des risques',
-                'Plan de gestion des crises et évacuation',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-            ),
-            title: 'Services d\'intervention & escorte sécurisé',
-            features: [
-                'Escorte moto ou auto',
-                'Ramassage de clés sécurisés',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11v1a7 7 0 01-14 0v-1" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17v4" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 21h8" />
-                </svg>
-            ),
-            title: 'Sécurité évènementielle',
-            features: [
-                'Sécurisation d\'événements publics et privés',
-                'Gestion des accès et contrôle des entrées',
-                'Coordination avec les organisateurs et interventions rapides',
-            ],
-        },
+    const additionalServiceIcons = [
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>),
+        (<svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11v1a7 7 0 01-14 0v-1" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17v4" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 21h8" /></svg>),
     ];
+    const additionalServices = t.products.additionalServices.map((s, i) => ({ ...s, icon: additionalServiceIcons[i] }));
 
-    const strategicServices = [
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-            ),
-            title: 'Veille et Intelligence Économique',
-            features: [
-                'Rapports d\'analyses des risques',
-                'Notes et fiches pays',
-            ],
-        },
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                </svg>
-            ),
-            title: 'Abonnement au Bulletin d\'Information',
-            features: [
-                'Mises à jour régulières sur la sécurité globale',
-            ],
-        },
+    const strategicServiceIcons = [
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>),
+        (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>),
     ];
+    const strategicServices = t.products.strategicServices.map((s, i) => ({ ...s, icon: strategicServiceIcons[i] }));
 
-    const annexServices = [
-        {
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            ),
-            title: 'Sport',
-            image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
-            description: "Entrainement physique intensif pour garantir la forme et l'endurance nécessaires aux missions de sécurité sur le terrain.",
-            features: [],
-        },
-    ];
+    const annexServices = t.products.annexServices.map(s => ({
+        ...s,
+        image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        icon: (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
+        features: [] as string[],
+    }));
 
     return (
         <>
@@ -185,18 +66,18 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                             {/* Left sidebar */}
                             <AnimatedSection className="lg:col-span-1 lg:self-center">
                                 <span className="inline-block px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                                    Nos Offres
+                                    {t.products.badgeLabel}
                                 </span>
                                 <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-6 leading-tight">
-                                    Sécurité et surveillance
+                                    {t.products.security.sectionTitle}
                                 </h2>
                                 <p className="text-gray-600 mb-8 leading-relaxed">
-                                    Des solutions de sécurité complètes et adaptées à chaque besoin, assurées par des professionnels qualifiés et certifiés.
+                                    {t.products.security.description}
                                 </p>
                                 <QuoteButton
                                     className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-all shadow-lg"
                                 >
-                                    Demander un devis →
+                                    {t.products.quoteArrow}
                                 </QuoteButton>
                             </AnimatedSection>
 
@@ -265,11 +146,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         {/* Centered header */}
                         <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
                             <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">
-                                Prestations supplémentaires
+                                {t.products.additional.sectionTitle}
                             </h2>
                             <div className="w-12 h-1 bg-[var(--secondary)] mx-auto mb-4" />
                             <p className="text-gray-500">
-                                Des prestations complémentaires pour renforcer votre dispositif de sécurité globale.
+                                {t.products.additional.description}
                             </p>
                         </AnimatedSection>
 
@@ -315,13 +196,13 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                             {/* Left sidebar */}
                             <AnimatedSection className="lg:col-span-1">
                                 <span className="inline-block px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                                    Stratégie
+                                    {t.products.strategic.badge}
                                 </span>
                                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                                    Analyses & Notes Stratégiques
+                                    {t.products.strategic.sectionTitle}
                                 </h2>
                                 <p className="text-white/70 mb-8 leading-relaxed">
-                                    Des analyses approfondies et une veille stratégique pour anticiper les risques et prendre des décisions éclairées.
+                                    {t.products.strategic.description}
                                 </p>
                                 <QuoteButton
                                     className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--secondary)] text-[var(--primary)] font-semibold rounded-lg hover:opacity-90 transition-all shadow-lg"
@@ -361,10 +242,10 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     <Container>
                         <AnimatedSection className="text-center max-w-2xl mx-auto mb-12">
                             <span className="inline-block px-4 py-1.5 bg-[var(--primary)]/10 text-[var(--primary)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                                Complémentaire
+                                {t.products.annex.badge}
                             </span>
                             <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">
-                                Prestations annexes
+                                {t.products.annex.sectionTitle}
                             </h2>
                             <div className="w-12 h-1 bg-[var(--secondary)] mx-auto" />
                         </AnimatedSection>
@@ -379,11 +260,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                             </div>
                                             <div className="flex-1 px-0 sm:px-4 py-2">
                                                 <h3 className="text-xl font-bold text-[var(--primary)] md:mt-10">{service.title}</h3>
-                                                <p className="text-gray-700 mt-6">{service.description || service.features?.[0] || ''}</p>
+                                                <p className="text-gray-700 mt-6">{service.description || ''}</p>
                                                 <div>
                                                     <QuoteButton className="inline-flex items-center gap-1 bg-[var(--secondary)] p-3 mt-2 rounded-lg text-[var(--primary)] hover:scale-105 font-semibold text-sm hover:gap-2 transition-all">
-                                                        Demander un devis <span>→</span>
-                                                    </QuoteButton>
+                                                    {t.products.quoteArrow}
+                                                </QuoteButton>
                                                 </div>
                                             </div>
                                         </div>
@@ -411,17 +292,17 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                         <AnimatedSection delay={0.2}>
                         <div className="max-w-3xl mx-auto text-center px-4">
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                                Besoin d&apos;une solution personnalisée ?
+                                {t.products.cta.title}
                             </h2>
                             <p className="text-lg mb-8 text-white/90">
-                                Contactez-nous pour discuter de vos besoins spécifiques en matière de sécurité.
+                                {t.products.cta.description}
                             </p>
                             <ScaleAnimation delay={0.3}>
                             <Link
                                 href={`/${locale}/contact`}
                                 className="inline-block px-12 py-4 bg-[var(--secondary)] text-[var(--primary)] font-bold text-lg rounded-lg hover:scale-105 hover:opacity-90 transition-all shadow-lg"
                             >
-                                Contactez-nous
+                                {t.products.cta.button}
                             </Link>
                             </ScaleAnimation>
                         </div>

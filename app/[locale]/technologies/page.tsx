@@ -104,7 +104,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                                         <div className="w-12 h-1 bg-[var(--secondary)] rounded-full mb-6" />
 
                                         <p className="text-gray-600 leading-relaxed mb-8">
-                                            Aissia Guard est notre solution propriétaire qui offre un suivi continu et des alertes instantanées pour assurer la sécurité de vos équipes sur le terrain.
+                                            {tech.description}
                                         </p>
 
                                         {/* Features */}
