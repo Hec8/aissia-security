@@ -8,7 +8,7 @@ export default function DocsExpandable({
     moreLabel = 'Plus',
     lessLabel = 'Moins',
 }: {
-    items: string[];
+    items: readonly string[];
     initialVisible?: number;
     moreLabel?: string;
     lessLabel?: string;
