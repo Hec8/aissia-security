@@ -69,73 +69,56 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                                             {t.training.admissionCriteria}
                                         </p>
 
-                                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <li className="flex items-start gap-3">
-                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </span>
-                                                <span>{t.training.heightReq}</span>
-                                            </li>
-
-                                            <li className="flex items-start gap-3">
-                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </span>
-                                                <span>{t.training.literacyReq}</span>
-                                            </li>
-
-                                            <li className="flex items-start gap-3">
-                                                <div className="flex items-start gap-3">
-                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center mt-1"> 
+                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6 text-left items-start">
+                                            {/* Colonne gauche : 3 critères */}
+                                            <ul className="space-y-4">
+                                                <li className="flex items-start gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
                                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                         </svg>
                                                     </span>
+                                                    <span>{t.training.heightReq}</span>
+                                                </li>
 
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center justify-between">
-                                                            <span className="text-sm text-white">{t.training.requirementsList.adminFile}</span>
-                                                        </div>
+                                                <li className="flex items-start gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                    </span>
+                                                    <span>{t.training.literacyReq}</span>
+                                                </li>
 
-                                                        <div className="mt-3">
-                                                            <DocsExpandable items={[
-                                                            "Lettre de motivation manuscrite",
-                                                            "Curriculum vitae",
-                                                            "Copie de la carte nationale d’identité",
-                                                            "Copie permis de conduire",
-                                                            "Copie diplômes obtenus",
-                                                            "Copie certificat de travail ancien employeur",
-                                                            "Copie attestation de stage ancien employeur",
-                                                            "Certificat de nationalité",
-                                                            "Casier judiciaire",
-                                                            "Extrait de naissance",
-                                                            "Extrait de naissance du conjoint(e)",
-                                                            "Extrait de naissance des enfants",
-                                                            "Extrait ou acte de mariage",
-                                                            "4 photos d’identité",
-                                                            "Numéro ou relevé d’identité bancaire (RIB)",
-                                                            "Numéro CNPS",
-                                                            "Plan de localisation géographique du domicile",
-                                                            "Facture CIE ou SODECI",
-                                                        ]} />
-                                                        </div>
-                                                    </div>
+                                                <li className="flex items-start gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                    </span>
+                                                    <span>{t.training.medicalCertReq}</span>
+                                                </li>
+                                            </ul>
+
+                                            {/* Colonne droite : titre du dossier + rectangle liste */}
+                                            <div className="flex flex-col gap-3">
+                                                <div className="flex items-start gap-3">
+                                                    <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                    </span>
+                                                    <span>{t.training.requirementsList.adminFile}</span>
                                                 </div>
-                                            </li>
-
-                                            <li className="flex items-start gap-3">
-                                                <span className="flex-none w-7 h-7 rounded-full bg-white/10 text-[var(--secondary)] flex items-center justify-center"> 
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </span>
-                                                <span>{t.training.medicalCertReq}</span>
-                                            </li>
-                                        </ul>
+                                                <div className="rounded-xl bg-white/5 border border-white/10 p-4 sm:p-5">
+                                                    <DocsExpandable
+                                                        items={t.training.adminDocuments}
+                                                        moreLabel={locale === 'en' ? 'More' : 'Plus'}
+                                                        lessLabel={locale === 'en' ? 'Less' : 'Moins'}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <p className="text-[var(--secondary)] mt-4">
                                             {t.training.criteriaNote}

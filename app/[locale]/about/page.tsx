@@ -91,7 +91,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         <AnimatedSection>
                             <div className="text-center mb-16">
                                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                                    Pour <span className="text-[var(--secondary)]">AISSIA SECURITE</span>,
+                                    {locale === 'en' ? 'For' : 'Pour'} <span className="text-[var(--secondary)]">AISSIA SECURITE</span>,
                                 </h2>
                                 <p className="text-3xl md:text-4xl font-normal text-white">
                                     {t.about.securitySectionTitle}
