@@ -13,10 +13,10 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
     const t = translations[locale];
 
     const serviceImages = [
-        '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
-        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-        '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
-        '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
+        '/images/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
+        '/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        '/images/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
     ];
     const serviceIcons = [
         (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>),
@@ -35,7 +35,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.services.title}
                     subtitle={t.services.subtitle}
-                    image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
+                    image="/images/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.services },
@@ -137,7 +137,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                     {/* Background Image */}
                     <div className="absolute inset-0">
                         <Image 
-                            src="/images site/Whisk_48cad00aca33977a38c4b336d234e7f3dr.jpeg"
+                            src="/images/Whisk_48cad00aca33977a38c4b336d234e7f3dr.jpeg"
                             alt="Formation en sécurité"
                             fill
                             className="object-cover object-top"

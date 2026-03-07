@@ -14,18 +14,18 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
     const t = translations[locale];
 
     const moduleImages = [
-        '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
-        '/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
-        '/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg',
-        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-        '/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
-        '/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
-        '/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
-        '/images site/Whisk_de2cf0006a6e0838ea9477dbb5ba68cedr.jpeg',
-        '/images site/Whisk_47b0b5038e58a95a87042a6fd0231c05dr.jpeg',
-        '/images site/Whisk_b45eac5d7cb2009b2e648461d62d93e9dr.jpeg',
-        '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
-        '/images site/Whisk_e6308d781c51042a7cf4162c4757b890dr.jpeg',
+        '/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        '/images/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg',
+        '/images/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg',
+        '/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg',
+        '/images/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg',
+        '/images/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg',
+        '/images/Whisk_de2cf0006a6e0838ea9477dbb5ba68cedr.jpeg',
+        '/images/Whisk_47b0b5038e58a95a87042a6fd0231c05dr.jpeg',
+        '/images/Whisk_b45eac5d7cb2009b2e648461d62d93e9dr.jpeg',
+        '/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg',
+        '/images/Whisk_e6308d781c51042a7cf4162c4757b890dr.jpeg',
     ];
     const trainingModules = t.training.modules.map((m, i) => ({ ...m, image: moduleImages[i] }));
 
@@ -38,7 +38,7 @@ export default async function TrainingPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.training.title}
                     subtitle={t.training.subtitle}
-                    image="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
+                    image="/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.training },

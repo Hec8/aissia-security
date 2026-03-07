@@ -60,7 +60,7 @@ export default function ContactPage() {
                 <PageHeader
                     title={t.contact.title}
                     subtitle={t.contact.subtitle}
-                    image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
+                    image="/images/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.contact },
@@ -146,7 +146,7 @@ export default function ContactPage() {
                                 <div className="bg-white rounded-2xl border-2 border-gray-200 w-full h-full overflow-hidden">
                                     <div className="relative h-64 md:h-80 w-full">
                                         <Image
-                                            src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
+                                            src="/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
                                             alt={t.home.newsletter.title}
                                             fill
                                             className="object-cover object-center"
@@ -181,9 +181,10 @@ export default function ContactPage() {
                                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-lg font-medium text-white">+225 2722261326</h3>
-                                    <h3 className="text-lg font-medium text-white">+225 0758737473</h3>
-                                    <h3 className="text-lg font-medium text-white mb-2">+225 0717508264</h3>
+                                    <h3 className="text-lg font-medium text-white">+225 2722261328</h3>
+                                    <h3 className="text-lg font-medium text-white">+225 0717512692</h3>
+                                    <h3 className="text-lg font-medium text-white">+225 0717508264</h3>
+                                    <h3 className="text-lg font-medium text-white mb-2">+225 0717509044</h3>
                                 </div>
                             </ScaleAnimation>
 

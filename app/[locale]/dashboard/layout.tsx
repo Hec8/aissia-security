@@ -95,7 +95,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
                         <Link href={`/${locale}`} className="relative h-10 w-32">
                             <Image
-                                src="/logo AISSIA /Variantes logo-03.png"
+                                src="/logo/Variantes logo-03.png"
                                 alt="AISSIA"
                                 fill
                                 className="object-contain object-left"

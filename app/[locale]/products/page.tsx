@@ -37,7 +37,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
     const annexServices = t.products.annexServices.map(s => ({
         ...s,
-        image: '/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
+        image: '/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg',
         icon: (<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
         features: [] as string[],
     }));
@@ -51,7 +51,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 <PageHeader
                     title={t.products.title}
                     subtitle={t.products.subtitle}
-                    image="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
+                    image="/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.products },
@@ -256,7 +256,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                                     <div className="bg-white rounded-2xl border-2 border-[var(--secondary)] hover:shadow-xl transition-all duration-300">
                                         <div className="flex flex-col sm:flex-row items-start gap-4 p-4 sm:p-6">
                                             <div className="w-full sm:w-56 h-60 rounded-lg overflow-hidden flex-shrink-0">
-                                                <Image src={service.image ?? '/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg'} alt={service.title} width={400} height={280} className="object-cover w-full h-full" />
+                                                <Image src={service.image ?? '/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg'} alt={service.title} width={400} height={280} className="object-cover w-full h-full" />
                                             </div>
                                             <div className="flex-1 px-0 sm:px-4 py-2">
                                                 <h3 className="text-xl font-bold text-[var(--primary)] md:mt-10">{service.title}</h3>
@@ -280,7 +280,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                     {/* Background image */}
                     <div className="absolute inset-0">
                         <Image
-                            src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
+                            src="/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg"
                             alt=""
                             fill
                             className="object-cover object-[center_20%]"

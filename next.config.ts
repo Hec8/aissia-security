@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
+  images: {
+    unoptimized: true, // obligatoire avec output: 'export' (pas d'API /_next/image)
+  },
   reactCompiler: true,
 };
 

@@ -125,7 +125,7 @@ export const Header = () => {
                     <Link href={`/${locale}`} className="flex items-center group">
                         <div className="relative h-12 w-32 sm:h-14 sm:w-40">
                             <Image 
-                                src={isScrolled ? "/logo AISSIA /Variantes logo-02.png" : "/logo AISSIA /Variantes logo-03.png"}
+                                src={isScrolled ? "/logo/Variantes logo-02.png" : "/logo/Variantes logo-03.png"}
                                 alt="AISSIA SÉCURITÉ"
                                 fill
                                 className="object-contain transition-all duration-300"

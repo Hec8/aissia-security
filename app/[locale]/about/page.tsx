@@ -31,7 +31,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <PageHeader
                     title={t.about.title}
                     subtitle={t.about.subtitle}
-                    image="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg"
+                    image="/images/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg"
                     breadcrumbs={[
                         { name: t.nav.home, href: `/${locale}` },
                         { name: t.nav.about },
@@ -48,7 +48,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                 <ScaleAnimation>
                                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                                         <Image 
-                                            src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
+                                            src="/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg"
                                             alt="Agent de sécurité Aissia Sécurité"
                                             fill
                                             className="object-cover object-top"

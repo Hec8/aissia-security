@@ -141,7 +141,7 @@ export default function DashboardJobOffersPage() {
                                     </td>
                                     <td className="px-6 py-3.5 text-right">
                                         <div className="flex items-center justify-end gap-2">
-                                            <Link href={`/${locale}/dashboard/job-offers/${o.id}/edit`} className="p-1.5 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">Modifier</Link>
+                                            <Link href={`/${locale}/dashboard/job-offers/edit?id=${o.id}`} className="p-1.5 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">Modifier</Link>
                                             <button onClick={() => handleDelete(o.id)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Supprimer</button>
                                         </div>
                                     </td>

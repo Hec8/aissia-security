@@ -32,7 +32,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <source src="/video-hero.mp4" type="video/mp4" />
                             {/* Fallback image si la vidéo ne charge pas */}
                             <Image 
-                                src="/images site/Whisk_01d70897174239db91a4cbdb45a0eb4bdr.jpeg"
+                                src="/images/Whisk_01d70897174239db91a4cbdb45a0eb4bdr.jpeg"
                                 alt="Hero background"
                                 fill
                                 className="object-cover object-center"
@@ -218,7 +218,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.surveillance.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.surveillance.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt={t.home.servicesDetail.surveillance.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_5b6a220cce09155b41b4433c57706c64dr.jpeg" alt={t.home.servicesDetail.surveillance.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
@@ -234,7 +234,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-white mb-2">{t.home.servicesDetail.audit.title}</h3>
                                     <p className="text-sm text-white/80 mb-4 leading-relaxed">{t.home.servicesDetail.audit.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt={t.home.servicesDetail.audit.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg" alt={t.home.servicesDetail.audit.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--secondary)] bg-[var(--secondary)] flex items-center justify-center text-[var(--primary)] hover:opacity-90 transition-all">
@@ -250,7 +250,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.risk.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.risk.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.risk.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.risk.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
@@ -266,7 +266,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.protection.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.protection.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.protection.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.protection.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/services`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
@@ -282,7 +282,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-white mb-2">{t.home.servicesDetail.formation.title}</h3>
                                     <p className="text-sm text-white/80 mb-4 leading-relaxed">{t.home.servicesDetail.formation.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.formation.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_935eee3760f5b579dc6493b3f649dd4cdr.jpeg" alt={t.home.servicesDetail.formation.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/training`} className="w-10 h-10 rounded-full border-2 border-[var(--secondary)] bg-[var(--secondary)] flex items-center justify-center text-[var(--primary)] hover:opacity-90 transition-all">
@@ -298,7 +298,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                                     <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{t.home.servicesDetail.escorte.title}</h3>
                                     <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">{t.home.servicesDetail.escorte.description}</p>
                                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden mt-auto">
-                                        <Image src="/images site/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.escorte.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <Image src="/images/Whisk_b3295edd22f0c9aaef84b8a0cb61a288dr.jpeg" alt={t.home.servicesDetail.escorte.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <Link href={`/${locale}/products`} className="w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all">
@@ -338,7 +338,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <ScaleAnimation delay={0.3}>
                                 <div className="relative">
                                     <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative">
-                                        <Image src="/images site/Whisk_16ddc33bdfa1e1186704be1a6413cf96dr.jpeg" alt="Solutions de sécurité AISSIA" fill className="object-cover object-top" />
+                                        <Image src="/images/Whisk_16ddc33bdfa1e1186704be1a6413cf96dr.jpeg" alt="Solutions de sécurité AISSIA" fill className="object-cover object-top" />
                                     </div>
                                 </div>
                             </ScaleAnimation>
@@ -464,7 +464,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                             <AnimatedSection direction="left">
                                 <div className="relative">
                                     <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative">
-                                        <Image src="/images site/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg" alt="Expertise AISSIA Sécurité" fill className="object-cover object-top" />
+                                        <Image src="/images/Whisk_4c173eda2ddccc68af54a6bd0f0abda5dr.jpeg" alt="Expertise AISSIA Sécurité" fill className="object-cover object-top" />
                                     </div>
                                 </div>
                             </AnimatedSection>

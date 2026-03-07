@@ -44,26 +44,7 @@ export default function RecruitmentPage() {
     useEffect(() => {
         let mounted = true;
 
-        const demoOffers: Offer[] = [
-            {
-                id: 'demo-1',
-                title: 'Agent de sécurité (CDI)',
-                location: 'Abidjan',
-                description: '<p>Mission de surveillance sur site commercial. Horaires de jour et de nuit selon planning.</p>',
-                profiles: '- Expérience souhaitée\n- Sens des responsabilités\n- Formation sécurité appréciée',
-                conditions: '- Salaire compétitif\n- Mutuelle\n- Formation assurée'
-            },
-            {
-                id: 'demo-2',
-                title: 'Conducteur de chien de défense (CDD)',
-                location: 'Yopougon',
-                description: '<p>Travail en binôme avec chien de défense, interventions ponctuelles.</p>',
-                profiles: '- Maîtrise de la cynotechnie\n- Permis de conduire B',
-                conditions: '- Rémunération selon profil\n- Hébergement possible'
-            }
-        ];
-
-        api.getJobs()
+            api.getJobs()
             .then((res) => {
                 if (!mounted) return;
                 const formattedOffers: Offer[] = (res.data || []).map((job: JobOffer) => ({
@@ -71,11 +52,10 @@ export default function RecruitmentPage() {
                     profiles: job.profiles ?? undefined,
                     conditions: job.conditions ?? undefined,
                 }));
-                if (formattedOffers.length === 0) setOffers(demoOffers);
-                else setOffers(formattedOffers);
+                setOffers(formattedOffers);
             })
             .catch(() => {
-                if (mounted) setOffers(demoOffers);
+                if (mounted) setOffers([]);
             })
             .finally(() => mounted && setLoading(false));
 
@@ -91,7 +71,7 @@ export default function RecruitmentPage() {
                     <PageHeader
                         title={t.recruitment.title}
                         subtitle={t.recruitment.subtitle}
-                        image="/images site/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
+                        image="/images/Whisk_6e32ef6726784ffaef04ff7fe96685e3dr.jpeg"
                         breadcrumbs={[
                             { name: t.nav.home, href: `/${locale}` },
                             { name: t.nav.recruitment },

@@ -50,7 +50,7 @@ export const Footer = () => {
                     <div>
                         <div className="relative h-16 w-44 mb-4">
                             <Image 
-                                src="/logo AISSIA /Variantes logo-03.png"
+                                src="/logo/Variantes logo-03.png"
                                 alt="AISSIA SÉCURITÉ"
                                 fill
                                 className="object-contain object-left"

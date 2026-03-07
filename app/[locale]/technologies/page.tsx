@@ -38,7 +38,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                     <PageHeader
                         title={t.technologies.title}
                         subtitle={t.technologies.subtitle}
-                        image="/images site/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg"
+                        image="/images/Whisk_e3e1cdf449f884b8f5b406bdbe966519dr.jpeg"
                         breadcrumbs={[
                             { name: t.nav.home, href: `/${locale}` },
                             { name: t.nav.technologies },
@@ -164,7 +164,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                 <section className="relative py-32 overflow-hidden">
                     <div className="absolute inset-0">
                         <Image
-                            src="/images site/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg"
+                            src="/images/Whisk_cf25d71bd9128dfb22141568e15d04a3dr.jpeg"
                             alt="Technologies"
                             fill
                             className="object-cover object-top"
