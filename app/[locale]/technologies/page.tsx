@@ -18,8 +18,8 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
             category: t.technologies.alertguard.category,
             title: t.technologies.alertguard.title,
             description: t.technologies.alertguard.description,
-            image: '/mobile/WhatsApp-Image-2024-12-20-a-12.35.00_b22f59d4-scaled-qyseak0dp271df222mk2b71pjbbtouc52vjj06m5ps.jpg-removebg-preview.png',
-            features: t.technologies.alertguard.features,
+            image: '/mobile/Design sans titre-3.jpg.jpeg',
+            features: t.technologies.alertguard.features, 
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -77,7 +77,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                                             src={tech.image}
                                             alt={tech.name}
                                             fill
-                                            className="object-cover object-top"
+                                            className="object-contain"
                                         />
                                         {/* Category badge */}
                                         <div className="absolute top-4 left-4">
@@ -147,7 +147,7 @@ export default async function TechnologiesPage({ params }: { params: Promise<{ l
                         <AnimatedSection>
                             <div className="relative w-full max-w-6xl mx-auto px-4">
                                 <Image
-                                    src="/mobile/WhatsApp-Image-2024-10-08-a-00.27.24_f5b45fed.jpg.jpeg"
+                                    src="/mobile/Design sans titre.jpg.jpeg"
                                     alt="Aissia Guard System Diagram"
                                     width={1920}
                                     height={800}
